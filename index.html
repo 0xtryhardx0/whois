@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>0xOS — @0xtryhardx0 Cyberpunk Systems Console</title>
-  <meta name="description" content="0xOS: High-Throughput Solana Smart Contracts, Subsurface Wave Equation Physics, and Autonomous Agent Systems.">
+  <title>0xOS v4.2 — @0xtryhardx0 Systems Workstation</title>
+  <meta name="description" content="0xOS: High-Throughput Solana Smart Contracts, Subsurface Wave Equation Physics, and Low-Latency Concurrency Engine for @0xtryhardx0.">
   
   <!-- Tailwind CSS -->
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
 
-  <!-- Typography -->
+  <!-- JetBrains Mono Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
@@ -17,11 +17,22 @@
   <style>
     :root {
       --bg: #030508;
-      --term-green: #14f195;
-      --term-cyan: #00f2fe;
-      --term-purple: #9945ff;
-      --term-amber: #f59e0b;
+      --theme-color: #14f195;
+      --theme-rgb: 20, 241, 149;
+      --theme-alt: #00f2fe;
       --term-border: #162032;
+    }
+
+    body.theme-amber {
+      --theme-color: #f59e0b;
+      --theme-rgb: 245, 158, 11;
+      --theme-alt: #fbbf24;
+    }
+
+    body.theme-cyan {
+      --theme-color: #00f2fe;
+      --theme-rgb: 0, 242, 254;
+      --theme-alt: #38bdf8;
     }
 
     * {
@@ -41,30 +52,27 @@
       justify-content: space-between;
     }
 
-    /* Authentic Phosphor Glow */
-    .text-glow-green {
-      text-shadow: 0 0 8px rgba(20, 241, 149, 0.6);
+    /* Authentic Dynamic Glow */
+    .theme-glow-text {
+      text-shadow: 0 0 10px rgba(var(--theme-rgb), 0.7);
     }
-    .text-glow-cyan {
-      text-shadow: 0 0 8px rgba(0, 242, 254, 0.6);
-    }
-    .border-glow-green {
-      box-shadow: 0 0 15px -3px rgba(20, 241, 149, 0.25);
+    .theme-glow-border {
+      box-shadow: 0 0 20px -3px rgba(var(--theme-rgb), 0.25);
     }
 
-    /* Retro Scanlines */
+    /* Retro Scanlines (Toggleable) */
     .crt-scanlines {
-      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.28) 50%), 
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%), 
                   linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
       background-size: 100% 3px, 6px 100%;
       pointer-events: none;
     }
 
-    /* Custom Terminal Scrollbar */
+    /* Terminal Scrollbar */
     ::-webkit-scrollbar { width: 5px; height: 5px; }
     ::-webkit-scrollbar-track { background: #030508; }
     ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 2px; }
-    ::-webkit-scrollbar-thumb:hover { background: #14f195; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--theme-color); }
 
     /* Blinking Caret */
     @keyframes termBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
@@ -78,33 +86,42 @@
       opacity: 0.12;
       z-index: 0;
     }
+
+    /* Smooth Pulse */
+    @keyframes subtlePulse {
+      0%, 100% { opacity: 0.9; }
+      50% { opacity: 0.5; }
+    }
+    .live-pulse {
+      animation: subtlePulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
   </style>
 </head>
-<body class="selection:bg-[#14f195] selection:text-black antialiased text-xs md:text-sm">
+<body class="selection:bg-white selection:text-black antialiased text-xs md:text-sm">
 
   <!-- CRT Scanline Shader Overlay -->
   <div id="crt-overlay" class="crt-scanlines fixed inset-0 z-50 pointer-events-none opacity-40"></div>
 
   <!-- ======================================================== -->
-  <!-- TMUX HEADER & REAL-TIME SENSORS                          -->
+  <!-- TMUX HEADER & SYSTEM TELEMETRY                           -->
   <!-- ======================================================== -->
   <header class="bg-[#050811] border-b border-slate-800 text-[11px] px-3 md:px-5 py-2 flex flex-wrap items-center justify-between gap-2 select-none sticky top-0 z-40">
     
-    <!-- Left: Identity Badge (100% Anon) -->
+    <!-- Left: Identity Badge (100% Anonymous Persona) -->
     <div class="flex items-center gap-3">
       <div class="flex items-center gap-1.5 font-bold text-white">
-        <span class="w-2.5 h-2.5 rounded-sm bg-[#14f195] inline-block animate-pulse"></span>
-        <span class="text-[#14f195] text-glow-green">0xOS</span><span>:</span><span class="text-slate-300">workstation-01</span>
+        <span class="w-2.5 h-2.5 rounded-sm inline-block live-pulse" style="background-color: var(--theme-color);"></span>
+        <span class="theme-glow-text font-black tracking-wide" style="color: var(--theme-color);">0xOS v4.2</span>
+        <span class="text-slate-600">::</span>
+        <span class="text-slate-300 font-bold">@0xtryhardx0</span>
       </div>
-      <span class="text-slate-600">|</span>
-      <span class="text-slate-400 font-mono">user: <span class="text-white font-bold">@0xtryhardx0</span></span>
-      <span class="text-slate-600 hidden sm:inline">|</span>
-      <span class="text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20 text-[10px] hidden sm:inline">SVM-MAINNET</span>
+      <span class="text-slate-700 hidden sm:inline">|</span>
+      <span class="text-slate-400 font-mono hidden md:inline">SVM-SEALEVEL // TOKIO // FDTD</span>
     </div>
 
-    <!-- Center: TMUX WORKSPACE TABS -->
+    <!-- Center: TMUX WINDOW TABS -->
     <nav class="flex items-center bg-black/60 p-0.5 rounded border border-slate-800 text-[11px] font-mono overflow-x-auto">
-      <button id="tab-0" onclick="switchTab(0)" class="px-2.5 py-1 rounded bg-[#14f195] text-black font-bold transition flex items-center gap-1">
+      <button id="tab-0" onclick="switchTab(0)" class="px-2.5 py-1 rounded font-bold transition flex items-center gap-1 bg-white text-black">
         <span>0:dossier*</span>
       </button>
       <button id="tab-1" onclick="switchTab(1)" class="px-2.5 py-1 rounded text-slate-400 hover:text-white transition flex items-center gap-1">
@@ -121,20 +138,31 @@
       </button>
     </nav>
 
-    <!-- Right: Telemetry & Controls -->
-    <div class="flex items-center gap-3 text-[10px] text-slate-400">
-      <div class="hidden lg:flex items-center gap-2.5">
-        <span>RTT:<span class="text-[#00f2fe] font-bold">18ms</span></span>
-        <span>LOAD:<span class="text-[#14f195] font-bold">0.14</span></span>
-        <span id="utc-clock" class="text-slate-300 font-bold tabular-nums">16:15:00 UTC</span>
+    <!-- Right: Telemetry & Workstation Controls -->
+    <div class="flex items-center gap-2 text-[10px] text-slate-400">
+      <div class="hidden xl:flex items-center gap-2.5 pr-2 border-r border-slate-800">
+        <span>RTT:<span class="text-emerald-400 font-bold">14ms</span></span>
+        <span>CFL:<span class="text-cyan-400 font-bold">&lt;1.0</span></span>
+        <span id="utc-clock" class="text-slate-300 font-bold tabular-nums">16:20:00 UTC</span>
       </div>
-      <button onclick="toggleAudio()" id="btn-audio" class="px-1.5 py-0.5 rounded bg-slate-900 border border-slate-700 hover:text-white" title="Toggle Mechanical Typing SFX">
+
+      <!-- Color Theme Switcher -->
+      <button onclick="cycleTheme()" id="btn-theme" class="px-2 py-0.5 rounded bg-slate-900 border border-slate-700 hover:text-white" title="Cycle Phosphor Color Theme">
+        [COLOR: MINT]
+      </button>
+      
+      <!-- Audio Switcher -->
+      <button onclick="toggleAudio()" id="btn-audio" class="px-1.5 py-0.5 rounded bg-slate-900 border border-slate-700 hover:text-white" title="Toggle Mechanical Typing Audio">
         [SFX: ON]
       </button>
-      <button onclick="toggleCRT()" id="btn-crt" class="px-1.5 py-0.5 rounded bg-slate-900 border border-slate-700 hover:text-white" title="Toggle CRT Scanlines">
+
+      <!-- CRT Shader Switcher -->
+      <button onclick="toggleCRT()" id="btn-crt" class="px-1.5 py-0.5 rounded bg-slate-900 border border-slate-700 hover:text-white" title="Toggle Scanline Simulation">
         [CRT: ON]
       </button>
-      <a href="https://x.com/0xtryhardx0" target="_blank" class="px-2.5 py-0.5 rounded bg-[#14f195] text-black font-bold hover:bg-[#12d683] transition">
+
+      <!-- Contact Dispatch -->
+      <a href="https://x.com/0xtryhardx0" target="_blank" class="px-2.5 py-0.5 rounded font-bold transition text-black" style="background-color: var(--theme-color);">
         𝕏 DM
       </a>
     </div>
@@ -142,20 +170,50 @@
   </header>
 
   <!-- ======================================================== -->
-  <!-- DUAL-PANE CONSOLE SPLIT WORKSTATION                      -->
+  <!-- ROLE PERSPECTIVE SWITCHER BAR (THE 3 SPECIALIZED CVs)    -->
   <!-- ======================================================== -->
-  <main class="max-w-[1500px] mx-auto w-full p-2.5 md:p-5 flex-1 flex flex-col justify-start relative z-10">
+  <div class="bg-[#04060d] border-b border-slate-800/80 px-3 md:px-5 py-2 flex flex-wrap items-center justify-between gap-3 text-xs z-30 select-none">
+    <div class="flex items-center gap-2">
+      <span class="text-slate-500 font-bold uppercase tracking-wider text-[10px]">CV Perspective:</span>
+      <div class="inline-flex rounded p-0.5 bg-black/80 border border-slate-800 text-[11px]">
+        <button id="cv-mode-all" onclick="setCVMode('all')" class="px-2.5 py-1 rounded font-bold transition text-white bg-slate-800">
+          SYS ARCHITECT (ALL)
+        </button>
+        <button id="cv-mode-web3" onclick="setCVMode('web3')" class="px-2.5 py-1 rounded text-slate-400 hover:text-white transition">
+          WEB3 &amp; SOLANA
+        </button>
+        <button id="cv-mode-petro" onclick="setCVMode('petro')" class="px-2.5 py-1 rounded text-slate-400 hover:text-white transition">
+          PETROLEUM &amp; WAVE PHYSICS
+        </button>
+      </div>
+    </div>
+
+    <!-- Quick Export / Resume Generator Action -->
+    <div class="flex items-center gap-2">
+      <button onclick="exportCleanCV()" class="px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 hover:text-white text-[11px] flex items-center gap-1.5 transition">
+        <span>📄</span> <span>Export Anonymous Resume (.txt)</span>
+      </button>
+      <a href="https://github.com/0xtryhardx0" target="_blank" class="px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 hover:text-white text-[11px] flex items-center gap-1.5 transition">
+        <span>⌥</span> <span>GitHub Org</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- MAIN WORKSTATION CONTAINER                               -->
+  <!-- ======================================================== -->
+  <main class="max-w-[1550px] mx-auto w-full p-2.5 md:p-5 flex-1 flex flex-col justify-start relative z-10">
     
-    <div class="rounded-lg overflow-hidden border border-slate-800 bg-[#040711] shadow-2xl flex-1 flex flex-col min-h-[680px]">
+    <div class="rounded-lg overflow-hidden border border-slate-800 bg-[#040711] shadow-2xl flex-1 flex flex-col min-h-[700px]">
       
-      <!-- Top Pane Banner -->
+      <!-- Pane Sub-header Banner -->
       <div class="bg-[#070b16] px-4 py-2 border-b border-slate-800 flex items-center justify-between text-xs text-slate-400 select-none">
         <div class="flex items-center gap-2">
-          <span class="text-[#14f195] animate-pulse">●</span>
+          <span class="inline-block w-2 h-2 rounded-full" style="background-color: var(--theme-color);"></span>
           <span id="pane-title" class="text-white font-bold">0xOS // WINDOW 0: NEOFETCH SYSTEMS DOSSIER</span>
         </div>
         <div class="text-[11px] text-slate-500 font-mono hidden sm:inline">
-          Hotkeys: <kbd class="px-1 rounded bg-slate-800 text-slate-300">0</kbd>–<kbd class="px-1 rounded bg-slate-800 text-slate-300">4</kbd> Switch Tabs • <kbd class="px-1 rounded bg-slate-800 text-slate-300">TAB</kbd> Autocomplete
+          Shortcuts: <kbd class="px-1 rounded bg-slate-800 text-slate-300">0</kbd>–<kbd class="px-1 rounded bg-slate-800 text-slate-300">4</kbd> Windows • <kbd class="px-1 rounded bg-slate-800 text-slate-300">M</kbd> Switch Profile • <kbd class="px-1 rounded bg-slate-800 text-slate-300">C</kbd> CRT
         </div>
       </div>
 
@@ -165,9 +223,9 @@
       <div id="tab-view-0" class="p-4 md:p-8 overflow-y-auto space-y-6 flex-1">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          <!-- ASCII Art Avatar (100% Pseudonymous) -->
-          <div class="lg:col-span-4 text-[#14f195] font-bold select-none leading-tight font-mono text-[10px] md:text-xs">
-            <pre class="text-[#14f195] text-glow-green">
+          <!-- ASCII Art Avatar & Identity -->
+          <div class="lg:col-span-4 select-none leading-tight font-mono text-[10px] md:text-xs">
+            <pre class="theme-glow-text font-black" style="color: var(--theme-color);">
    ██████╗ ██╗  ██╗ ██████╗ ███████╗
   ██╔═████╗╚██╗██╔╝██╔═══██╗██╔════╝
   ██║██╔██║ ╚███╔╝ ██║   ██║███████╗
@@ -176,65 +234,86 @@
    ╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚══════╝
             </pre>
             <div class="text-slate-400 mt-3 space-y-1 text-xs">
-              <div><span class="text-white font-bold">@0xtryhardx0</span>@solana-sbf</div>
+              <div><span class="text-white font-bold">@0xtryhardx0</span>@solana-sbf-kernel</div>
               <div class="text-slate-600">----------------------------------</div>
-              <div><span class="text-[#14f195] font-bold">Title:</span> Systems Architect &amp; Web3 Runtime Dev</div>
+              <div id="dossier-headline" class="text-slate-200 font-bold">Systems Architect &amp; Web3 Runtime Dev</div>
               <div><span class="text-[#00f2fe] font-bold">Degree:</span> B.Eng. Petroleum Systems Engineering</div>
               <div><span class="text-purple-400 font-bold">Honors:</span> First Class / Upper Division Honors</div>
               <div><span class="text-amber-400 font-bold">Status:</span> Open for High-Velocity Remote Roles</div>
+            </div>
+
+            <!-- Real-Time Hardware & Concurrency Monitors -->
+            <div class="mt-5 p-3 rounded bg-black/60 border border-slate-800 space-y-2 text-[11px]">
+              <div class="text-slate-500 font-bold uppercase tracking-wider text-[10px] flex items-center justify-between">
+                <span>Active Runtime Threads:</span>
+                <span class="text-emerald-400">3/3 ONLINE</span>
+              </div>
+              <div class="space-y-1.5">
+                <div>
+                  <div class="flex justify-between text-[10px] text-slate-400">
+                    <span>SVM Sealevel Instruction Scheduler</span>
+                    <span class="text-[#14f195]">98.2%</span>
+                  </div>
+                  <div class="w-full bg-slate-800 h-1 rounded overflow-hidden">
+                    <div class="bg-[#14f195] h-full w-[98%]"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-[10px] text-slate-400">
+                    <span>1D Wave FDTD Hyperbolic PDE Solver</span>
+                    <span class="text-cyan-400">92.4%</span>
+                  </div>
+                  <div class="w-full bg-slate-800 h-1 rounded overflow-hidden">
+                    <div class="bg-cyan-400 h-full w-[92%]"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-[10px] text-slate-400">
+                    <span>Tokio Async Orderbook Ingestion</span>
+                    <span class="text-amber-400">95.8%</span>
+                  </div>
+                  <div class="w-full bg-slate-800 h-1 rounded overflow-hidden">
+                    <div class="bg-amber-400 h-full w-[96%]"></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
           <!-- Specs Table & High-Impact Metrics -->
           <div class="lg:col-span-8 space-y-4 font-mono text-xs md:text-sm">
-            <div class="p-4 rounded bg-black/60 border border-slate-800 space-y-2.5 leading-relaxed">
-              <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
-                <span class="text-[#14f195] font-bold w-40 shrink-0">Kernel &amp; Engine:</span>
-                <span class="text-white">0xOS v3.8.4 (Rust SBF / Tokio Concurrency / Sealevel VM)</span>
-              </div>
-              <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
-                <span class="text-[#00f2fe] font-bold w-40 shrink-0">Engineering Rigor:</span>
-                <span class="text-slate-200">Top-Tier Institute — B.Eng. Petroleum Systems (First Class / Upper Division Honors)</span>
-              </div>
-              <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
-                <span class="text-purple-400 font-bold w-40 shrink-0">Web3 Core Stack:</span>
-                <span class="text-slate-200">Solana Anchor Smart Contracts, Non-Custodial PDAs, Deterministic PBKDF2 Keypairs, Blinks, cNFTs</span>
-              </div>
-              <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
-                <span class="text-amber-400 font-bold w-40 shrink-0">Applied Physics:</span>
-                <span class="text-slate-200">1D Hyperbolic Wave Equation Drillstring Modeling, witsml_parser_rs, Aspen HYSYS Risk Reviews</span>
-              </div>
-              <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
-                <span class="text-emerald-400 font-bold w-40 shrink-0">Escrow Benchmark:</span>
-                <span class="text-[#14f195] font-bold text-glow-green">&lt;400ms finality with zero reentrancy risks (SolPlay, SolWork)</span>
-              </div>
-              <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
-                <span class="text-cyan-400 font-bold w-40 shrink-0">Market Routing:</span>
-                <span class="text-[#00f2fe] font-bold text-glow-cyan">&lt;18ms WebSocket DEX ingestion (Raydium, Pump.fun)</span>
-              </div>
-              <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
-                <span class="text-amber-300 font-bold w-40 shrink-0">Industrial Value:</span>
-                <span class="text-amber-300 font-bold">$250,000+ rig downtime (NPT) prevented (Omesham AI)</span>
+            <div id="dossier-specs-box" class="p-4 rounded bg-black/60 border border-slate-800 space-y-3 leading-relaxed">
+              <!-- Dynamically populated by setCVMode() -->
+            </div>
+
+            <!-- Direct Jump Console Controls -->
+            <div class="p-4 rounded bg-black/40 border border-slate-800 space-y-2.5">
+              <div class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">Immediate Workstation Operations:</div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                <button onclick="switchTab(1)" class="p-2.5 rounded bg-slate-900 hover:bg-slate-800 text-emerald-400 border border-slate-700 transition flex items-center justify-between">
+                  <span>[1] Inspect 24+ Codebases Tree</span> <span>➔</span>
+                </button>
+                <button onclick="switchTab(2)" class="p-2.5 rounded bg-slate-900 hover:bg-slate-800 text-cyan-400 border border-slate-700 transition flex items-center justify-between">
+                  <span>[2] Query TryHard Candidate REPL</span> <span>➔</span>
+                </button>
+                <button onclick="switchTab(3)" class="p-2.5 rounded bg-slate-900 hover:bg-slate-800 text-amber-300 border border-slate-700 transition flex items-center justify-between">
+                  <span>[3] Simulate 1D Wave Oscilloscope</span> <span>➔</span>
+                </button>
+                <button onclick="switchTab(4)" class="p-2.5 rounded bg-slate-900 hover:bg-slate-800 text-purple-300 border border-slate-700 transition flex items-center justify-between">
+                  <span>[4] Open Kernel Zsh Terminal</span> <span>➔</span>
+                </button>
               </div>
             </div>
 
-            <!-- Fast Tab Jumps -->
-            <div class="p-3.5 rounded bg-black/40 border border-slate-800 space-y-2">
-              <div class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">Direct Console Actions:</div>
-              <div class="flex flex-wrap gap-2 text-xs">
-                <button onclick="switchTab(1)" class="px-3 py-1.5 rounded bg-slate-900 hover:bg-slate-800 text-[#14f195] border border-slate-700 transition">
-                  [1] Inspect 24+ Repositories Tree ➔
-                </button>
-                <button onclick="switchTab(2)" class="px-3 py-1.5 rounded bg-slate-900 hover:bg-slate-800 text-[#00f2fe] border border-slate-700 transition">
-                  [2] Run Candidate REPL Agent ➔
-                </button>
-                <button onclick="switchTab(3)" class="px-3 py-1.5 rounded bg-slate-900 hover:bg-slate-800 text-amber-300 border border-slate-700 transition">
-                  [3] Launch Wave Oscilloscope ➔
-                </button>
-                <button onclick="switchTab(4)" class="px-3 py-1.5 rounded bg-slate-900 hover:bg-slate-800 text-purple-300 border border-slate-700 transition">
-                  [4] Kernel Zsh Terminal ➔
-                </button>
+            <!-- Verified Engineering Background Dossier -->
+            <div class="p-4 rounded bg-black/30 border border-slate-800/80 space-y-2 text-slate-300 text-xs">
+              <div class="text-white font-bold text-xs flex items-center gap-1.5">
+                <span class="text-[#14f195]">✦</span>
+                <span>The Engineering Philosophy of @0xtryhardx0:</span>
               </div>
+              <p class="leading-relaxed text-slate-400">
+                Bridging rigorous physical sciences (subsurface continuum mechanics, acoustic wave PDEs, fluid transport) with low-latency software engineering (Rust, Solana native SBF, Tokio async, and deterministic cryptographic state machines). Proven capability to ship high-stakes systems where failure is intolerable—whether mitigating a $250k drilling stall or securing non-custodial financial liquidity.
+              </p>
             </div>
           </div>
 
@@ -247,84 +326,87 @@
       <div id="tab-view-1" class="hidden p-4 md:p-6 overflow-y-auto space-y-4 flex-1">
         <div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-slate-800 text-xs">
           <div class="text-slate-400">
-            <span class="text-[#14f195] font-bold">TREE /var/git/</span> — 24+ Verified Production Repositories (Org: @0xtryhardx0)
+            <span class="font-bold text-white">/var/git/</span> — 24+ Verified Production Repositories (Org: <span class="text-[#00f2fe]">@0xtryhardx0</span>)
           </div>
-          <div class="text-[11px] text-slate-500">Click any file to inspect verified source architecture &amp; contract manifest</div>
+          <div class="text-[11px] text-slate-500">Select any repository to review architectural design &amp; code snippet</div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           
           <!-- Tree Navigation Pane -->
-          <div class="lg:col-span-5 bg-black/70 p-4 rounded border border-slate-800 font-mono text-xs space-y-3 max-h-[540px] overflow-y-auto">
+          <div class="lg:col-span-5 bg-black/70 p-4 rounded border border-slate-800 font-mono text-xs space-y-4 max-h-[580px] overflow-y-auto">
             
             <!-- Solana Stack -->
-            <div class="space-y-1">
-              <div class="text-[#14f195] font-bold flex items-center gap-1.5">
-                <span>📁</span> <span>solana_svm/</span>
+            <div id="repo-sec-web3" class="space-y-1">
+              <div class="text-[#14f195] font-bold flex items-center justify-between">
+                <span class="flex items-center gap-1.5">📁 solana_svm/</span>
+                <span class="text-[10px] text-slate-500">Rust / Anchor</span>
               </div>
-              <div class="pl-4 space-y-1 text-slate-400 border-l border-slate-800">
-                <div onclick="selectRepo('solplay')" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1 rounded transition flex items-center justify-between">
-                  <span>├── solplay_escrow.rs</span> <span class="text-[10px] text-emerald-400">Anchor</span>
+              <div class="pl-3 space-y-1 text-slate-400 border-l border-slate-800">
+                <div onclick="selectRepo('solplay')" id="repo-btn-solplay" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1.5 rounded transition flex items-center justify-between">
+                  <span>├── solplay_escrow.rs</span> <span class="text-[10px] text-emerald-400">Anchor PDA</span>
                 </div>
-                <div onclick="selectRepo('solwork')" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1 rounded transition flex items-center justify-between">
-                  <span>├── solwork_pbkdf2.ts</span> <span class="text-[10px] text-amber-400">Escrow</span>
+                <div onclick="selectRepo('solwork')" id="repo-btn-solwork" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1.5 rounded transition flex items-center justify-between">
+                  <span>├── solwork_pbkdf2.ts</span> <span class="text-[10px] text-amber-400">Microtasking</span>
                 </div>
-                <div onclick="selectRepo('geoclearance')" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1 rounded transition flex items-center justify-between">
-                  <span>├── geoclearance_nysc.rs</span> <span class="text-[10px] text-cyan-400">GPS</span>
+                <div onclick="selectRepo('geoclearance')" id="repo-btn-geoclearance" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1.5 rounded transition flex items-center justify-between">
+                  <span>├── geoclearance_nysc.rs</span> <span class="text-[10px] text-cyan-400">GPS Escrow</span>
                 </div>
-                <div onclick="selectRepo('lagos')" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1 rounded transition flex items-center justify-between">
-                  <span>├── lagos_on_chain.ts</span> <span class="text-[10px] text-slate-400">Blinks</span>
+                <div onclick="selectRepo('lagos')" id="repo-btn-lagos" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1.5 rounded transition flex items-center justify-between">
+                  <span>├── lagos_on_chain.ts</span> <span class="text-[10px] text-slate-400">Blinks/Actions</span>
                 </div>
-                <div onclick="selectRepo('cookiepay')" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1 rounded transition flex items-center justify-between">
-                  <span>├── cookiepay_svm.rs</span> <span class="text-[10px] text-slate-400">Tips</span>
+                <div onclick="selectRepo('cookiepay')" id="repo-btn-cookiepay" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1.5 rounded transition flex items-center justify-between">
+                  <span>├── cookiepay_svm.rs</span> <span class="text-[10px] text-slate-400">Solana Pay</span>
                 </div>
-                <div onclick="selectRepo('aether')" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1 rounded transition flex items-center justify-between">
-                  <span>└── aether_dex_router.rs</span> <span class="text-[10px] text-purple-400">&lt;18ms</span>
+                <div onclick="selectRepo('aether')" id="repo-btn-aether" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1.5 rounded transition flex items-center justify-between">
+                  <span>└── aether_dex_router.rs</span> <span class="text-[10px] text-purple-400">&lt;18ms Tokio</span>
                 </div>
               </div>
             </div>
 
             <!-- Subsurface Physics Stack -->
-            <div class="space-y-1 pt-2">
-              <div class="text-[#00f2fe] font-bold flex items-center gap-1.5">
-                <span>📁</span> <span>subsurface_physics/</span>
+            <div id="repo-sec-petro" class="space-y-1 pt-1">
+              <div class="text-[#00f2fe] font-bold flex items-center justify-between">
+                <span class="flex items-center gap-1.5">📁 subsurface_physics/</span>
+                <span class="text-[10px] text-slate-500">NumPy / SciPy / Aspen</span>
               </div>
-              <div class="pl-4 space-y-1 text-slate-400 border-l border-slate-800">
-                <div onclick="selectRepo('omesham')" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1 rounded transition flex items-center justify-between">
+              <div class="pl-3 space-y-1 text-slate-400 border-l border-slate-800">
+                <div onclick="selectRepo('omesham')" id="repo-btn-omesham" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1.5 rounded transition flex items-center justify-between">
                   <span>├── omesham_wave_solver.py</span> <span class="text-[10px] text-cyan-400">Wave PDE</span>
                 </div>
-                <div onclick="selectRepo('witsml')" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1 rounded transition flex items-center justify-between">
-                  <span>├── witsml_parser_rs.rs</span> <span class="text-[10px] text-emerald-400">Fast LAS</span>
+                <div onclick="selectRepo('witsml')" id="repo-btn-witsml" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1.5 rounded transition flex items-center justify-between">
+                  <span>├── witsml_parser_rs.rs</span> <span class="text-[10px] text-emerald-400">Fast Stream</span>
                 </div>
-                <div onclick="selectRepo('petro')" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1 rounded transition flex items-center justify-between">
+                <div onclick="selectRepo('petro')" id="repo-btn-petro" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1.5 rounded transition flex items-center justify-between">
                   <span>├── petro_one_valuation.py</span> <span class="text-[10px] text-amber-400">DCF+GIS</span>
                 </div>
-                <div onclick="selectRepo('petroshield')" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1 rounded transition flex items-center justify-between">
-                  <span>├── petroshield_hazard.py</span> <span class="text-[10px] text-red-400">Safety</span>
+                <div onclick="selectRepo('petroshield')" id="repo-btn-petroshield" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1.5 rounded transition flex items-center justify-between">
+                  <span>├── petroshield_hazard.py</span> <span class="text-[10px] text-red-400">Rig Safety</span>
                 </div>
-                <div onclick="selectRepo('netco')" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1 rounded transition flex items-center justify-between">
-                  <span>└── netco_aspen_hysys.hsc</span> <span class="text-[10px] text-purple-400">P&amp;ID</span>
+                <div onclick="selectRepo('netco')" id="repo-btn-netco" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1.5 rounded transition flex items-center justify-between">
+                  <span>└── netco_aspen_hysys.hsc</span> <span class="text-[10px] text-purple-400">HAZOP P&amp;ID</span>
                 </div>
               </div>
             </div>
 
             <!-- Autonomous Agents Stack -->
-            <div class="space-y-1 pt-2">
-              <div class="text-purple-400 font-bold flex items-center gap-1.5">
-                <span>📁</span> <span>autonomous_agents/</span>
+            <div id="repo-sec-agents" class="space-y-1 pt-1">
+              <div class="text-purple-400 font-bold flex items-center justify-between">
+                <span class="flex items-center gap-1.5">📁 autonomous_agents/</span>
+                <span class="text-[10px] text-slate-500">MCP SDK / Swarms</span>
               </div>
-              <div class="pl-4 space-y-1 text-slate-400 border-l border-slate-800">
-                <div onclick="selectRepo('sovereign')" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1 rounded transition flex items-center justify-between">
+              <div class="pl-3 space-y-1 text-slate-400 border-l border-slate-800">
+                <div onclick="selectRepo('sovereign')" id="repo-btn-sovereign" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1.5 rounded transition flex items-center justify-between">
                   <span>├── sovereign_sentinel.py</span> <span class="text-[10px] text-purple-400">Argus</span>
                 </div>
-                <div onclick="selectRepo('mermail')" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1 rounded transition flex items-center justify-between">
-                  <span>├── mermail_mcp_server.ts</span> <span class="text-[10px] text-cyan-400">MCP SDK</span>
+                <div onclick="selectRepo('mermail')" id="repo-btn-mermail" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1.5 rounded transition flex items-center justify-between">
+                  <span>├── mermail_mcp_server.ts</span> <span class="text-[10px] text-cyan-400">Anthropic MCP</span>
                 </div>
-                <div onclick="selectRepo('animus')" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1 rounded transition flex items-center justify-between">
-                  <span>├── animus_engine_v2.py</span> <span class="text-[10px] text-emerald-400">Swarm</span>
+                <div onclick="selectRepo('animus')" id="repo-btn-animus" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1.5 rounded transition flex items-center justify-between">
+                  <span>├── animus_engine_v2.py</span> <span class="text-[10px] text-emerald-400">Swarm Sync</span>
                 </div>
-                <div onclick="selectRepo('opencode')" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1 rounded transition flex items-center justify-between">
-                  <span>└── opencode_memory_rag.py</span> <span class="text-[10px] text-slate-400">Vector</span>
+                <div onclick="selectRepo('opencode')" id="repo-btn-opencode" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1.5 rounded transition flex items-center justify-between">
+                  <span>└── opencode_memory_rag.py</span> <span class="text-[10px] text-slate-400">Vector RAG</span>
                 </div>
               </div>
             </div>
@@ -332,17 +414,20 @@
           </div>
 
           <!-- File Inspect Pane -->
-          <div class="lg:col-span-7 bg-[#020408] p-5 rounded border border-slate-800 font-mono text-xs space-y-3 min-h-[480px]">
+          <div class="lg:col-span-7 bg-[#020408] p-5 rounded border border-slate-800 font-mono text-xs space-y-4 min-h-[520px]">
             <div class="flex items-center justify-between pb-2 border-b border-slate-800 text-slate-400">
               <span id="repo-inspect-file" class="text-[#14f195] font-bold">cat /var/git/solana_svm/solplay_escrow.rs</span>
-              <span id="repo-inspect-meta" class="text-[10px] text-slate-500">Anchor PDA Escrow</span>
+              <div class="flex items-center gap-2">
+                <button onclick="copySnippet()" id="btn-copy-code" class="text-[10px] px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300">Copy Code</button>
+                <span id="repo-inspect-meta" class="text-[10px] text-slate-500">Anchor PDA Escrow</span>
+              </div>
             </div>
             
             <div id="repo-inspect-desc" class="text-slate-300 leading-relaxed space-y-2"></div>
 
             <div class="pt-2">
-              <div class="text-slate-500 text-[10px] pb-1 uppercase tracking-wider">Source Architecture Snippet:</div>
-              <pre id="repo-inspect-code" class="p-3.5 bg-black/90 rounded border border-slate-800 text-slate-200 overflow-x-auto text-[11px] leading-relaxed text-[#14f195]"></pre>
+              <div class="text-slate-500 text-[10px] pb-1 uppercase tracking-wider">Production Source Architecture:</div>
+              <pre id="repo-inspect-code" class="p-4 bg-black/95 rounded border border-slate-800 text-slate-200 overflow-x-auto text-[11px] leading-relaxed custom-scroll"></pre>
             </div>
           </div>
 
@@ -355,17 +440,17 @@
       <div id="tab-view-2" class="hidden p-4 md:p-6 overflow-y-auto space-y-4 flex-1">
         <div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-slate-800 text-xs">
           <div class="text-slate-400">
-            <span class="text-[#00f2fe] font-bold">Python 3.12.2 / Rust REPL</span> — TryHard Autonomous Candidate Reasoning Engine
+            <span class="text-[#00f2fe] font-bold">Python 3.12.2 / Rust REPL</span> — TryHard Autonomous Technical Evaluation Engine
           </div>
           <div class="text-[11px] text-[#14f195]">READY • 24 CODEBASES INDEXED</div>
         </div>
 
         <!-- REPL Output Stream -->
-        <div id="repl-stream" class="bg-black/80 p-4 md:p-5 rounded border border-slate-800 font-mono text-xs md:text-sm space-y-4 min-h-[420px] max-h-[500px] overflow-y-auto custom-scroll">
+        <div id="repl-stream" class="bg-black/80 p-4 md:p-5 rounded border border-slate-800 font-mono text-xs md:text-sm space-y-4 min-h-[440px] max-h-[520px] overflow-y-auto custom-scroll">
           <div class="text-slate-500 leading-relaxed">
             &gt;&gt;&gt; import tryhard_candidate as tc<br>
-            &gt;&gt;&gt; tc.mount_repositories(["SOLPLAY", "OMESHAM_AI", "SOVEREIGN_AGENT", "SOLWORK", "GEOCLEARANCE", "PETRO_ONE"])<br>
-            [OK] Ingested 24 repositories. REPL is live. Type queries below or tap prompt invocations:
+            &gt;&gt;&gt; tc.mount_verified_repositories(["SOLPLAY", "OMESHAM_AI", "SOVEREIGN_AGENT", "SOLWORK", "GEOCLEARANCE", "PETRO_ONE"])<br>
+            [OK] 24 repositories initialized into evaluation runtime. Run functions below or submit arbitrary technical prompts:
           </div>
           <div id="repl-history" class="space-y-4"></div>
         </div>
@@ -383,9 +468,9 @@
         <!-- REPL Interactive Input -->
         <form onsubmit="handleReplSubmit(event)" class="bg-[#03060c] p-3 rounded border border-slate-800 flex items-center gap-2">
           <span class="text-[#00f2fe] font-bold">&gt;&gt;&gt;</span>
-          <input id="repl-input" type="text" placeholder="Type a function or query (e.g. 'explain geoclearance', 'why hire for rust')..." 
+          <input id="repl-input" type="text" placeholder="Type a function or query (e.g. 'why hire for rust', 'explain geoclearance', 'cfl condition')..." 
             class="flex-1 bg-transparent text-white font-mono text-xs md:text-sm outline-none placeholder:text-slate-600" autocomplete="off" />
-          <button type="submit" class="px-4 py-1.5 bg-[#00f2fe] text-black font-bold text-xs rounded hover:bg-cyan-300 transition">RUN</button>
+          <button type="submit" class="px-4 py-1.5 bg-[#00f2fe] text-black font-bold text-xs rounded hover:bg-cyan-300 transition">EXECUTE</button>
         </form>
       </div>
 
@@ -395,7 +480,7 @@
       <div id="tab-view-3" class="hidden p-4 md:p-6 overflow-y-auto space-y-4 flex-1">
         <div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-slate-800 text-xs">
           <div class="text-slate-400">
-            <span class="text-[#14f195] font-bold">1D HYPERBOLIC WAVE EQUATION SOLVER</span> — Drillstring Torsional Vibration Telemetry
+            <span class="text-[#14f195] font-bold">1D HYPERBOLIC WAVE EQUATION SOLVER</span> — Drillstring Torsional Stick-Slip Telemetry
           </div>
           <div class="text-[11px] text-slate-500">∂²u/∂t² = c² (∂²u/∂x²) • CFL: c·Δt/Δx &lt; 1</div>
         </div>
@@ -422,7 +507,7 @@
 
         <!-- Rigor Dossier -->
         <div class="p-4 rounded bg-black/60 border border-slate-800 font-mono text-xs space-y-2 text-slate-300 leading-relaxed">
-          <div class="text-[#14f195] font-bold uppercase tracking-wider text-[11px]">Subsurface Physics to High-Performance Rust Systems:</div>
+          <div class="text-[#14f195] font-bold uppercase tracking-wider text-[11px]">Subsurface Wave Physics to Low-Latency Systems:</div>
           <p>
             Omesham AI models drillstring torsional stick-slip oscillations that cause fatal drill-pipe washouts and bit destruction in deep offshore drilling. 
             By solving the hyperbolic wave equation at sub-second discretizations and coupling it with real-time WITSML streaming mud telemetry (<code class="text-cyan-300">witsml_parser_rs</code>), it predicts catastrophic stalls 30 minutes before occurrence, saving operators over $250k in rig spread costs per incident.
@@ -447,7 +532,7 @@
           <div id="zsh-output" class="space-y-3 relative z-10"></div>
         </div>
 
-        <!-- Fast Tap Buttons -->
+        <!-- Fast Command Shortcuts -->
         <div class="flex flex-wrap gap-1.5 items-center text-xs">
           <span class="text-slate-500 mr-1 text-[11px]">Command:</span>
           <button onclick="execZsh('whois')" class="px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-[#14f195] border border-slate-800">whois</button>
@@ -484,9 +569,9 @@
       <span>1D Wave Mechanics</span>
     </div>
     <div class="flex items-center gap-3">
-      <a href="https://x.com/0xtryhardx0" target="_blank" class="text-[#14f195] hover:underline font-bold">𝕏 @0xtryhardx0</a>
+      <a href="https://x.com/0xtryhardx0" target="_blank" class="hover:underline font-bold" style="color: var(--theme-color);">𝕏 @0xtryhardx0</a>
       <span>•</span>
-      <a href="https://github.com/0xtryhardx0" target="_blank" class="text-[#00f2fe] hover:underline">github.com/0xtryhardx0</a>
+      <a href="https://github.com/0xtryhardx0" target="_blank" class="text-[#00f2fe] hover:underline font-mono">github.com/0xtryhardx0</a>
     </div>
   </footer>
 
@@ -494,7 +579,7 @@
   <!-- JAVASCRIPT: WORKSTATION CORE & PHYSICS ENGINE            -->
   <!-- ======================================================== -->
   <script>
-    // 1. Audio Synthesizer
+    // 1. Audio Synthesizer (Web Audio API)
     let audioOn = true, aCtx = null;
     function playClick(freq = 750, dur = 0.035) {
       if (!audioOn) return;
@@ -515,7 +600,19 @@
       if (audioOn) playClick(900);
     }
 
-    // 2. CRT Scanlines
+    // 2. Phosphor Theme Cycling
+    const themes = ['mint', 'amber', 'cyan'];
+    let currentThemeIdx = 0;
+    function cycleTheme() {
+      currentThemeIdx = (currentThemeIdx + 1) % themes.length;
+      const theme = themes[currentThemeIdx];
+      document.body.className = document.body.className.replace(/theme-\w+/g, '').trim();
+      if (theme !== 'mint') document.body.classList.add('theme-' + theme);
+      document.getElementById('btn-theme').textContent = `[COLOR: ${theme.toUpperCase()}]`;
+      playClick(850);
+    }
+
+    // 3. CRT Scanline Toggle
     let crtOn = true;
     function toggleCRT() {
       crtOn = !crtOn;
@@ -524,14 +621,14 @@
       playClick(500);
     }
 
-    // 3. UTC Clock
+    // 4. Live UTC Clock
     function updateClock() {
       const now = new Date();
       document.getElementById('utc-clock').textContent = now.toUTCString().split(' ')[4] + ' UTC';
     }
     setInterval(updateClock, 1000); updateClock();
 
-    // 4. Tab Switching
+    // 5. Tab Switching
     const titles = [
       "0xOS // WINDOW 0: NEOFETCH SYSTEMS DOSSIER",
       "0xOS // WINDOW 1: 24+ REPOSITORIES FILESYSTEM TREE EXPLORER",
@@ -547,324 +644,579 @@
         const tab = document.getElementById('tab-' + i);
         if (i === index) {
           view.classList.remove('hidden');
-          tab.className = "px-2.5 py-1 rounded bg-[#14f195] text-black font-bold transition flex items-center gap-1";
-          document.getElementById('pane-title').textContent = titles[i];
-          if (i === 3) initScope();
-          if (i === 4) initMatrix();
+          tab.className = "px-2.5 py-1 rounded bg-white text-black font-bold transition flex items-center gap-1";
+          tab.innerHTML = `<span>${i}:${['dossier*', 'repos.tree*', 'agent.repl*', 'wave_scope*', 'shell.zsh*'][i]}</span>`;
         } else {
           view.classList.add('hidden');
           tab.className = "px-2.5 py-1 rounded text-slate-400 hover:text-white transition flex items-center gap-1";
+          tab.innerHTML = `<span>${i}:${['dossier', 'repos.tree', 'agent.repl', 'wave_scope', 'shell.zsh'][i]}</span>`;
         }
       }
+      document.getElementById('pane-title').textContent = titles[index];
+      if (index === 3 && typeof initScope === 'function') setTimeout(initScope, 50);
     }
 
-    window.addEventListener('keydown', (e) => {
-      if (e.target.tagName === 'INPUT') return;
-      if (['0', '1', '2', '3', '4'].includes(e.key)) switchTab(parseInt(e.key));
-    });
+    // 6. CV Perspective Mode Switching
+    let currentCVMode = 'all';
+    const cvSpecs = {
+      'all': `
+        <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+          <span class="text-[#14f195] font-bold w-44 shrink-0">Kernel &amp; Engine:</span>
+          <span class="text-white">0xOS v4.2 (Rust SBF / Tokio Concurrency / Sealevel VM)</span>
+        </div>
+        <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+          <span class="text-[#00f2fe] font-bold w-44 shrink-0">Engineering Rigor:</span>
+          <span class="text-slate-200">Top-Tier Institute — B.Eng. Petroleum Systems (First Class / Upper Division Honors)</span>
+        </div>
+        <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+          <span class="text-purple-400 font-bold w-44 shrink-0">Web3 Core Stack:</span>
+          <span class="text-slate-200">Solana Anchor Smart Contracts, Non-Custodial PDAs, Deterministic PBKDF2 Keypairs, Blinks, cNFTs</span>
+        </div>
+        <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+          <span class="text-amber-400 font-bold w-44 shrink-0">Applied Physics:</span>
+          <span class="text-slate-200">1D Hyperbolic Wave Equation Drillstring Modeling, witsml_parser_rs, Aspen HYSYS HAZOP Reviews</span>
+        </div>
+        <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+          <span class="text-emerald-400 font-bold w-44 shrink-0">Escrow Benchmark:</span>
+          <span class="text-[#14f195] font-bold">&lt;400ms finality with zero reentrancy risks (SolPlay, SolWork)</span>
+        </div>
+        <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+          <span class="text-cyan-400 font-bold w-44 shrink-0">Market Routing:</span>
+          <span class="text-[#00f2fe] font-bold">&lt;18ms WebSocket DEX ingestion (Raydium, Pump.fun)</span>
+        </div>
+        <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+          <span class="text-amber-300 font-bold w-44 shrink-0">Industrial Impact:</span>
+          <span class="text-amber-300 font-bold">$250,000+ rig downtime (NPT) prevented (Omesham AI)</span>
+        </div>
+      `,
+      'web3': `
+        <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+          <span class="text-[#14f195] font-bold w-44 shrink-0">Target Discipline:</span>
+          <span class="text-white font-bold">Solana Smart Contracts &amp; SVM High-Throughput Runtime Engineer</span>
+        </div>
+        <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+          <span class="text-[#00f2fe] font-bold w-44 shrink-0">SVM Technologies:</span>
+          <span class="text-slate-200">Anchor Framework, Native SBF Bytecode, Pinocchio zero-copy, Ed25519, Cross-Program Invocations (CPI)</span>
+        </div>
+        <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+          <span class="text-purple-400 font-bold w-44 shrink-0">Flagship Protocols:</span>
+          <span class="text-slate-200">SOLPLAY (P2P Escrow Sportsbook), SOLWORK (Microtasking Bounty), AETHER DEX (&lt;18ms Tokio Orderbook)</span>
+        </div>
+        <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+          <span class="text-emerald-400 font-bold w-44 shrink-0">Deterministic Security:</span>
+          <span class="text-[#14f195] font-bold">PBKDF2 keypair derivation (100,000 iterations), zero custodial attack surface, PDA seed bumping</span>
+        </div>
+        <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+          <span class="text-amber-400 font-bold w-44 shrink-0">Frontend / Client:</span>
+          <span class="text-slate-200">Solana Pay, Dialect Blinks / Actions, @solana/web3.js v2, Next.js App Router, Tailwind PWA</span>
+        </div>
+      `,
+      'petro': `
+        <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+          <span class="text-[#00f2fe] font-bold w-44 shrink-0">Target Discipline:</span>
+          <span class="text-white font-bold">Petroleum Systems &amp; Scientific Computing Software Engineer</span>
+        </div>
+        <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+          <span class="text-[#14f195] font-bold w-44 shrink-0">Academic Rigor:</span>
+          <span class="text-slate-200">B.Eng. Petroleum Systems Engineering (First Class / Upper Division Honors, SPE Member)</span>
+        </div>
+        <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+          <span class="text-cyan-400 font-bold w-44 shrink-0">PDE Modeling:</span>
+          <span class="text-slate-200">1D Hyperbolic Wave Equation (∂²u/∂t² = c² ∂²u/∂x²) Finite-Difference Time-Domain (FDTD)</span>
+        </div>
+        <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+          <span class="text-amber-400 font-bold w-44 shrink-0">Telemetry Streaming:</span>
+          <span class="text-amber-300 font-bold">witsml_parser_rs (Fast streaming LAS / XML mud logging parser in Rust)</span>
+        </div>
+        <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+          <span class="text-purple-400 font-bold w-44 shrink-0">Process Simulation:</span>
+          <span class="text-slate-200">Aspen HYSYS Steady-State &amp; Dynamic Process Flowsheets, P&amp;ID Hazard Analysis, Gas Processing</span>
+        </div>
+        <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+          <span class="text-emerald-400 font-bold w-44 shrink-0">Financial Valuation:</span>
+          <span class="text-[#14f195] font-bold">Petro.One (DCF, Decline Curve Analysis DCA, GIS mapping for upstream asset acquisitions)</span>
+        </div>
+      `
+    };
 
-    // 5. Repositories Data
-    const repoDetails = {
-      solplay: {
-        file: "cat /var/git/solana_svm/solplay_escrow.rs",
-        meta: "Anchor PDA Escrow • Sub-1.2s Settlement",
-        desc: "Non-custodial sports wagering & copy-trading escrow programs in Rust (Anchor). User collateral locked in isolated Program Derived Addresses (PDAs) with zero reentrancy risks.<br><br>Features a multi-source consensus oracle verifying DraftKings, ESPN, and TheSportsDB SHA-256 state proofs within 1.2 seconds of official match termination, plus a 2.0% creator commission split redistribution on-chain.",
+    function setCVMode(mode) {
+      currentCVMode = mode;
+      playClick(700);
+
+      // Update mode buttons
+      ['all', 'web3', 'petro'].forEach(m => {
+        const btn = document.getElementById('cv-mode-' + m);
+        if (m === mode) {
+          btn.className = "px-2.5 py-1 rounded font-bold transition text-white bg-slate-800";
+        } else {
+          btn.className = "px-2.5 py-1 rounded text-slate-400 hover:text-white transition";
+        }
+      });
+
+      // Update Dossier Specs
+      document.getElementById('dossier-specs-box').innerHTML = cvSpecs[mode];
+      
+      const headline = document.getElementById('dossier-headline');
+      if (mode === 'web3') {
+        headline.textContent = 'Solana Core & SVM Smart Contract Engineer';
+        document.getElementById('repo-sec-web3').style.opacity = '1';
+        document.getElementById('repo-sec-petro').style.opacity = '0.35';
+        document.getElementById('repo-sec-agents').style.opacity = '0.35';
+      } else if (mode === 'petro') {
+        headline.textContent = 'Petroleum Systems & Scientific Computing Engineer';
+        document.getElementById('repo-sec-web3').style.opacity = '0.35';
+        document.getElementById('repo-sec-petro').style.opacity = '1';
+        document.getElementById('repo-sec-agents').style.opacity = '0.35';
+      } else {
+        headline.textContent = 'Systems Architect & Web3 Runtime Dev';
+        document.getElementById('repo-sec-web3').style.opacity = '1';
+        document.getElementById('repo-sec-petro').style.opacity = '1';
+        document.getElementById('repo-sec-agents').style.opacity = '1';
+      }
+    }
+    // Initialize default specs
+    setCVMode('all');
+
+    // Export Clean Anonymous Text CV
+    function exportCleanCV() {
+      playClick(950);
+      const content = `================================================================================
+CANDIDATE DOSSIER: @0xtryhardx0
+Role Discipline: ${currentCVMode.toUpperCase()}
+Online Workstation: https://0xtryhardx0.github.io/whois/
+Direct Message: https://x.com/0xtryhardx0
+GitHub Organization: https://github.com/0xtryhardx0
+================================================================================
+
+SUMMARY:
+Systems Architect, Solana Smart Contract Developer, and Petroleum Systems Engineer (First Class / Upper Division Honors).
+Architect of 24+ verified production codebases spanning low-latency asynchronous concurrency (Tokio, Rust), non-custodial escrow protocols, and numerical subsurface wave equation simulations.
+
+CORE CAPABILITIES:
+- Languages: Rust, TypeScript/JavaScript, Python, C++, Go, SQL.
+- Blockchain: Solana Native SBF, Anchor Framework, Non-Custodial PDAs, Deterministic PBKDF2 Keypairs, Blinks/Actions, cNFTs.
+- Scientific Computing: 1D Hyperbolic Wave Equation (FDTD), witsml_parser_rs, Aspen HYSYS, NumPy, SciPy.
+- Concurrency: Tokio async runtime, sub-18ms WebSocket orderbook routing, zero-copy buffer parsing.
+
+VERIFIED PRODUCTION CODEBASES:
+1. SOLPLAY (Solana SVM): P2P escrow sports betting protocol with Anchor and non-custodial settlement (<400ms finality).
+2. OMESHAM AI (Subsurface Physics): Real-time 1D wave equation solver for drillstring torsional stick-slip vibrations; mitigated $250k+ rig downtime.
+3. SOLWORK (Web3 Microtasking): Decentralized bounty escrow with deterministic client-side PBKDF2 keypair derivation.
+4. MERMAIL SECURITY DESK (Autonomous Agents): Zero-trust security triage platform powered by Anthropic MCP servers.
+5. AETHER DEX (Low-Latency Concurrency): Sub-18ms concurrent WebSocket orderbook routing engine in Tokio.
+6. GEOCLEARANCE NYSC (Solana SVM): Proof-of-Location attendance validation utilizing verifiable cryptographic GPS anchors.
+7. PETRO.ONE (Scientific Valuation): Upstream oil & gas asset DCF valuation and Decline Curve Analysis (DCA).
+
+EDUCATION & CREDENTIALS:
+- Degree: Bachelor of Engineering (B.Eng.), Petroleum Systems Engineering.
+- Classification: First Class / Upper Division Honors.
+- Leadership: SPE Membership Committee & Technical Symposium Lead.
+================================================================================`;
+
+      const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `0xtryhardx0_CV_${currentCVMode}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    // 7. Repositories Database & Inspection Pane
+    const reposData = {
+      'solplay': {
+        file: 'cat /var/git/solana_svm/solplay_escrow.rs',
+        meta: 'Anchor PDA Escrow Protocol',
+        desc: `
+          <p><strong class="text-white">SOLPLAY</strong> is a high-throughput peer-to-peer escrow sports betting protocol built on the Solana Sealevel runtime.</p>
+          <p>Features non-custodial Program Derived Address (PDA) state accounts, programmatic odds verification, and sub-400ms instant settlement without counterparty custody risk.</p>
+        `,
         code: `#[program]
 pub mod solplay_escrow {
     use super::*;
 
-    pub fn initialize_wager(ctx: Context<InitializeWager>, amount: u64, match_id: String) -> Result<()> {
-        let wager = &mut ctx.accounts.wager;
-        wager.bettor = ctx.accounts.user.key();
+    pub fn initialize_wager(ctx: Context<InitializeWager>, wager_id: u64, amount: u64) -> Result<()> {
+        let wager = &mut ctx.accounts.wager_account;
+        wager.creator = ctx.accounts.creator.key();
         wager.amount = amount;
-        wager.match_id = match_id;
-        wager.bump = ctx.bumps.wager;
-
-        // Non-custodial transfer into PDA vault with zero reentrancy risks
-        token::transfer(
-            ctx.accounts.into_transfer_to_pda_context(),
-            amount,
+        wager.bump = ctx.bumps.wager_account;
+        
+        // Transfer SOL to escrow PDA
+        anchor_lang::solana_program::program::invoke(
+            &anchor_lang::solana_program::system_instruction::transfer(
+                &ctx.accounts.creator.key(),
+                &wager.key(),
+                amount,
+            ),
+            &[ctx.accounts.creator.to_account_info(), wager.to_account_info()],
         )?;
         Ok(())
     }
 }`
       },
-      solwork: {
-        file: "cat /var/git/solana_svm/solwork_pbkdf2.ts",
-        meta: "Decentralized AI Microtasking • PBKDF2 Keys",
-        desc: "Trustless workforce protocol enabling African talent to bypass traditional banking rail failures (20-35% dropout). Workers authenticate with standard email while the client derives deterministic non-custodial Solana keypairs via PBKDF2/SHA-256 (150,000 iterations). Includes on-chain worker credential tier validation in Rust Anchor.",
-        code: `export async function deriveWorkerKeypair(email: string, salt: string): Promise<Keypair> {
-  const enc = new TextEncoder();
-  const keyMaterial = await crypto.subtle.importKey(
-    "raw", enc.encode(email.toLowerCase().trim()), "PBKDF2", false, ["deriveBits"]
-  );
-  const derivedBits = await crypto.subtle.deriveBits(
-    { name: "PBKDF2", salt: enc.encode(salt), iterations: 150_000, hash: "SHA-256" },
-    keyMaterial,
-    256
-  );
-  return Keypair.fromSeed(new Uint8Array(derivedBits));
+      'solwork': {
+        file: 'cat /var/git/solana_svm/solwork_pbkdf2.ts',
+        meta: 'Deterministic Non-Custodial Keypairs',
+        desc: `
+          <p><strong class="text-white">SOLWORK</strong> is a decentralized microtasking and bounty escrow platform on Solana.</p>
+          <p>Integrates deterministic PBKDF2 client-side key derivation (100,000 SHA-256 iterations) to ensure zero-custody key generation across decentralized contributors.</p>
+        `,
+        code: `import { pbkdf2Sync } from 'crypto';
+import { Keypair } from '@solana/web3.js';
+
+export function deriveDeterministicKeypair(secretSalt: string, userPin: string): Keypair {
+  const seed = pbkdf2Sync(userPin, \`solwork:\${secretSalt}\`, 100_000, 32, 'sha256');
+  return Keypair.fromSeed(seed);
 }`
       },
-      geoclearance: {
-        file: "cat /var/git/solana_svm/geoclearance_nysc.rs",
-        meta: "Decentralized Biometrics • Anti-Spoofing GPS",
-        desc: "Next-gen decentralized clearance system for the Nigerian National Youth Service Corps (NYSC). Replaces manual queues and ghost-worker roll calls with cryptographic GPS anti-spoofing signatures, biometric hashing, and immutable on-chain clearance attestations on Solana.",
-        code: `pub fn verify_clearance_geofence(
-    ctx: Context<VerifyGeofence>, 
-    lat_e6: i32, 
-    lon_e6: i32, 
-    biometric_sig: [u8; 64]
-) -> Result<()> {
-    require!(is_within_camp_boundary(lat_e6, lon_e6), ClearanceError::OutOfBounds);
-    require!(verify_ed25519_biometric_attestation(&biometric_sig), ClearanceError::InvalidBiometric);
-    emit!(CorpsMemberClearedEvent { corps_id: ctx.accounts.corps.key(), timestamp: Clock::get()?.unix_timestamp });
-    Ok(())
+      'geoclearance': {
+        file: 'cat /var/git/solana_svm/geoclearance_nysc.rs',
+        meta: 'Proof-of-Location GPS Attestation',
+        desc: `
+          <p><strong class="text-white">GEOCLEARANCE NYSC</strong> eliminates biometric line fraud for corps members by issuing verifiable GPS clearance attestations directly onto Solana.</p>
+        `,
+        code: `#[account]
+pub struct ClearanceRecord {
+    pub member: Pubkey,
+    pub lga_center_id: u32,
+    pub lat_cord: i32,     // Micro-degrees
+    pub long_cord: i32,    // Micro-degrees
+    pub timestamp: i64,
+    pub signature_proof: [u8; 64],
 }`
       },
-      lagos: {
-        file: "cat /var/git/solana_svm/lagos_on_chain.ts",
-        meta: "Dialect Solana Blinks • cNFTs",
-        desc: "Lagos On Chain (LOC) solves event POS payment failures in nightlife and underground events. Embeds 1-click Solana ticket purchasing inside Twitter/X feeds via Dialect Actions & Blinks, and issues Proof-of-Physical-Vibe compressed NFTs (cNFTs) for gate check-ins.",
-        code: `export const ticketingBlinkAction = {
-  icon: "https://lagosonchain.com/banner.png",
-  label: "Mint Underground Pass (1-Click)",
-  title: "Lagos On Chain — Boiler Room Access",
-  description: "Bypass venue card terminal decline. Instant cNFT issuance.",
-  links: { actions: [{ label: "Pay 0.2 SOL", href: "/api/actions/mint?tier=ga" }] }
+      'lagos': {
+        file: 'cat /var/git/solana_svm/lagos_on_chain.ts',
+        meta: 'Blinks & Solana Pay Infrastructure',
+        desc: `
+          <p><strong class="text-white">LAGOS ON CHAIN</strong> connects real-world merchants in emerging markets to on-chain liquidity via Dialect Blinks and Solana Pay.</p>
+        `,
+        code: `export const GET = async (req: Request) => {
+  const payload: ActionGetResponse = {
+    icon: new URL('/loc-hero.png', req.url).toString(),
+    title: 'Lagos On Chain — Instant Merchant Settlement',
+    description: 'Settle invoices with 0.000005 SOL fee and <400ms finality.',
+    label: 'Pay Merchant'
+  };
+  return Response.json(payload);
 };`
       },
-      cookiepay: {
-        file: "cat /var/git/solana_svm/cookiepay_svm.rs",
-        meta: "SVM Fast Micro-Tipping & Invoicing",
-        desc: "High-speed social micro-tipping and invoicing protocol on Cookie Chain (SVM). Features sub-cent transfer routing in SOL and SPL USDC with deterministic 3D fortune cookie claim receipts.",
-        code: `pub fn tip_creator(ctx: Context<TipCreator>, tip_amount: u64) -> Result<()> {
-    token::transfer(ctx.accounts.transfer_ctx(), tip_amount)?;
-    msg!("Tip routed. Fortune unlocked on-chain.");
+      'cookiepay': {
+        file: 'cat /var/git/solana_svm/cookiepay_svm.rs',
+        meta: 'Lightweight Micro-Tipping Runtime',
+        desc: `
+          <p><strong class="text-white">COOKIEPAY</strong> powers zero-friction creator tipping and recurring subscriptions with compressed account state trees.</p>
+        `,
+        code: `pub fn process_microtip(ctx: Context<Microtip>, tip_lamports: u64) -> Result<()> {
+    require!(tip_lamports >= 100_000, CustomError::BelowMinimumTip);
+    // Direct zero-fee transfer to creator ATA
+    token::transfer(ctx.accounts.into_transfer_context(), tip_lamports)
+}`
+      },
+      'aether': {
+        file: 'cat /var/git/solana_svm/aether_dex_router.rs',
+        meta: '<18ms Tokio Async WebSocket Orderbook',
+        desc: `
+          <p><strong class="text-white">AETHER DEX ROUTER</strong> processes live WebSocket orderbooks across Raydium, Orca, and Pump.fun with sub-18ms message routing.</p>
+        `,
+        code: `use tokio::net::TcpStream;
+use tokio_tungstenite::WebSocketStream;
+
+pub async fn stream_orderbook(pool_address: &str) -> Result<()> {
+    let mut ws = connect_fast_rpc(pool_address).await?;
+    while let Some(msg) = ws.next().await {
+        let frame = msg?;
+        tokio::spawn(async move {
+            match_orderbook_arb(frame).await;
+        });
+    }
     Ok(())
 }`
       },
-      aether: {
-        file: "cat /var/git/solana_svm/aether_dex_router.rs",
-        meta: "Sub-18ms Concurrent WebSocket Orderbook",
-        desc: "Concurrent multi-agent execution pipeline in Python and Rust Tokio. Listens to raw sub-second WebSocket streams across Raydium and Pump.fun DEX pools, cutting market data ingestion latency to <18ms with automated anti-rug exits.",
-        code: `async fn route_dex_pool_stream(mut stream: SplitStream<WebSocketStream<MaybeTlsStream<TcpStream>>>) {
-    while let Some(msg) = stream.next().await {
-        let update = parse_bonding_curve_packet(&msg.unwrap());
-        if update.slippage_exceeded() {
-            trigger_atomic_exit(update.pool_id).await;
-        }
-    }
-}`
-      },
-      omesham: {
-        file: "cat /var/git/subsurface_physics/omesham_wave_solver.py",
-        meta: "1D Wave Equation • $250k+ NPT Mitigated",
-        desc: "Models drillstring torsional vibrations using the 1D hyperbolic wave equation: ∂²u/∂t² = c² (∂²u/∂x²). Detects stick-slip resonance and bit stalls 30 minutes in advance, saving offshore operators $250k+ in non-productive rig downtime per campaign.",
-        code: `class DrillstringWaveSolver:
-    """1D Hyperbolic wave equation solver for drillstring torsional vibration."""
-    def __init__(self, length_m=3500, c_sound=3200.0, dt=0.001):
-        self.c, self.dx, self.dt = c_sound, 10.0, dt
-        self.u = np.zeros(int(length_m / self.dx))
-        self.u_prev = np.zeros_like(self.u)
+      'omesham': {
+        file: 'cat /var/git/subsurface_physics/omesham_wave_solver.py',
+        meta: '1D Hyperbolic Wave Equation (FDTD)',
+        desc: `
+          <p><strong class="text-white">OMESHAM AI</strong> is a subsurface predictive engine for drillstring torsional stick-slip vibration forecasting.</p>
+          <p>Discretizes the 1D acoustic wave PDE ∂²u/∂t² = c² (∂²u/∂x²) over 3,500m drillstrings to forecast catastrophic stalls 30 minutes ahead of occurrence.</p>
+        `,
+        code: `import numpy as np
 
-    def step_forward(self, bit_torque):
-        cfl = (self.c * self.dt / self.dx) ** 2
-        u_next = 2*self.u - self.u_prev + cfl * (np.roll(self.u, -1) - 2*self.u + np.roll(self.u, 1))
-        u_next[-1] += bit_torque
-        self.u_prev, self.u = self.u, u_next
-        return self.u`
+def solve_torsional_wave(c=3200.0, L=3500.0, nx=350, nt=1000, dt=0.001):
+    dx = L / (nx - 1)
+    CFL = c * dt / dx
+    assert CFL < 1.0, f"Unstable CFL: {CFL}"
+    
+    u = np.zeros((3, nx)) # u_prev, u_curr, u_next
+    for t in range(nt):
+        # Interior points 2nd order finite difference
+        u[2, 1:-1] = (2 * u[1, 1:-1] - u[0, 1:-1] 
+                      + (CFL**2) * (u[1, 2:] - 2 * u[1, 1:-1] + u[1, :-2]))
+        u[0] = u[1]
+        u[1] = u[2]
+    return u[1]`
       },
-      witsml: {
-        file: "cat /var/git/subsurface_physics/witsml_parser_rs.rs",
-        meta: "Rust Streaming Mud-Logging Parser",
-        desc: "High-performance streaming parser written in native Rust processing real-time WITSML XML and LAS mud-logging wellbore telemetry feeds at sub-millisecond rates with zero memory allocations.",
-        code: `pub fn stream_witsml_telemetry<R: BufRead>(reader: R) -> Result<Receiver<WellLogFrame>> {
-    let mut quick_xml = Reader::from_reader(reader);
-    let (tx, rx) = mpsc::channel(1000);
-    tokio::spawn(async move {
-        while let Ok(Event::Start(e)) = quick_xml.read_event() {
-            if e.name().as_ref() == b"logData" {
-                tx.send(parse_curve_points(&mut quick_xml)).await.unwrap();
-            }
-        }
-    });
-    Ok(rx)
+      'witsml': {
+        file: 'cat /var/git/subsurface_physics/witsml_parser_rs.rs',
+        meta: 'Zero-Copy Rust Streaming Parser',
+        desc: `
+          <p><strong class="text-white">WITSML PARSER RS</strong> parses high-frequency mud telemetry and LAS well logs in real time with zero heap allocations.</p>
+        `,
+        code: `pub struct MudLogFrame<'a> {
+    pub depth_md: f64,
+    pub torque_nm: f32,
+    pub rop_m_hr: f32,
+    pub gamma_ray: &'a [u8],
+}
+
+pub fn parse_witsml_stream<'a>(buffer: &'a [u8]) -> IResult<&'a [u8], MudLogFrame<'a>> {
+    // Zero-copy SIMD tag parsing
+    tag_parser(buffer)
 }`
       },
-      petro: {
-        file: "cat /var/git/subsurface_physics/petro_one_valuation.py",
-        meta: "DCF Modeling & Satellite Orbital GIS",
-        desc: "Petroleum asset valuation engine pairing discounted cash flow (DCF) models with satellite orbital spectral imagery for hydrocarbon seepage detection, backed by an interactive 37-state Nigerian mineral GIS database.",
-        code: `def calculate_asset_npv(production_profile, discount_rate=0.10, opex_per_bbl=18.5):
-    cash_flows = [bbl * (oil_price - opex_per_bbl) - capex for bbl in production_profile]
-    return np.npv(discount_rate, cash_flows)`
+      'petro': {
+        file: 'cat /var/git/subsurface_physics/petro_one_valuation.py',
+        meta: 'Upstream DCF & Decline Curve Analysis',
+        desc: `
+          <p><strong class="text-white">PETRO.ONE</strong> computes Net Present Value (NPV10) and hyperbolic decline curve forecasts (Arps) for oil & gas asset acquisitions.</p>
+        `,
+        code: `def arps_hyperbolic_decline(qi, di, b, t):
+    """Calculates production rate q(t) using hyperbolic Arps relation."""
+    return qi / ((1.0 + b * di * t) ** (1.0 / b))`
       },
-      petroshield: {
-        file: "cat /var/git/subsurface_physics/petroshield_hazard.py",
-        meta: "Wellbore Integrity & Blowout Risk Simulation",
-        desc: "Subsurface well integrity diagnostic system simulating pore pressure, fracture gradients, and gas influx detection to safeguard drilling operations against catastrophic kicks and blowouts.",
-        code: `def evaluate_kick_margin(pore_pressure_psi, mud_weight_ppg, tvd_ft):
-    hydrostatic_psi = mud_weight_ppg * 0.052 * tvd_ft
-    return hydrostatic_psi - pore_pressure_psi`
+      'petroshield': {
+        file: 'cat /var/git/subsurface_physics/petroshield_hazard.py',
+        meta: 'Computer Vision & H2S Sensor Telemetry',
+        desc: `
+          <p><strong class="text-white">PETROSHIELD AI</strong> detects hazardous gas accumulation and worker exclusion zone violations on active drill floors.</p>
+        `,
+        code: `def evaluate_drill_floor_safety(sensors_h2s_ppm, lfl_hydrocarbon):
+    if np.any(sensors_h2s_ppm > 10.0) or lfl_hydrocarbon > 0.20:
+        trigger_esdv_shutdown()`
       },
-      netco: {
-        file: "cat /var/git/subsurface_physics/netco_aspen_hysys.hsc",
-        meta: "Aspen HYSYS Process Simulation • HAZOP",
-        desc: "Steady-state oil & gas separation facility network simulation in Aspen HYSYS conducted during process engineering internship. Optimized gas compressor train throughput by +4.2% while verifying 14 pressure relief bottlenecks during HAZOP/HAZID safety sign-offs.",
-        code: `// Aspen HYSYS Process Simulation Output Summary:
-Stream: 3-Phase High-Pressure Separator V-101
-Operating Pressure: 42.5 bar(g) | Operating Temp: 68.4 °C
-Gas Throughput: +4.2% Optimized within ASME Pressure Vessel Safety Limits
-HAZID Bottlenecks Mitigated: 14 Relief Scenarios Verified.`
+      'netco': {
+        file: 'cat /var/git/subsurface_physics/netco_aspen_hysys.hsc',
+        meta: 'Aspen HYSYS Process Simulation',
+        desc: `
+          <p><strong class="text-white">NETCO ASPEN HYSYS</strong> process models for multi-stage gas separation, amine treating, and dew point control units.</p>
+        `,
+        code: `// Aspen HYSYS Case Specification
+Stream "NaturalGas_Inlet":
+  Temperature: 28.5 C
+  Pressure: 64.0 bar_g
+  Flowrate: 120.0 MMSCFD
+  Composition: C1=0.82, C2=0.08, C3=0.04, CO2=0.03, N2=0.01`
       },
-      sovereign: {
-        file: "cat /var/git/autonomous_agents/sovereign_sentinel.py",
-        meta: "Autonomous Solana Alpha Sentinel",
-        desc: "Autonomous conversational co-pilot for Solana traders and developers. Incorporates the Argus Security Shield to detect malicious drainers, rug pulls, and anomalous liquidity burn events in real-time.",
+      'sovereign': {
+        file: 'cat /var/git/autonomous_agents/sovereign_sentinel.py',
+        meta: 'Alpha Sentinel & BlinkCraft Copilot',
+        desc: `
+          <p><strong class="text-white">SOVEREIGN AGENT v2.0</strong> is an autonomous on-chain sentinel that evaluates mempool risk and executes BlinkCraft workflows.</p>
+        `,
         code: `class SovereignSentinel:
-    async def analyze_pool_safety(self, pool_address):
-        liquidity_locked = await self.check_raydium_vault_lock(pool_address)
-        mint_authority_revoked = await self.verify_mint_disabled(pool_address)
-        return {"safe": liquidity_locked and mint_authority_revoked}`
+    async def monitor_mempool(self):
+        async for tx in self.ws_mempool_stream():
+            if self.argus_threat_model.is_suspicious(tx):
+                await self.frontrun_security_shield(tx)`
       },
-      mermail: {
-        file: "cat /var/git/autonomous_agents/mermail_mcp_server.ts",
-        meta: "Zero-Trust Bug Bounty Remittance (Anthropic MCP)",
-        desc: "Autonomous bug bounty desk implementing Anthropic Model Context Protocol (MCP) servers. Isolates and quarantines adversarial prompt injections in vulnerability submissions before authorizing automated white-hat payouts via PayBox signers.",
-        code: `export const payboxServer = new McpServer({ name: "mermail-paybox", version: "1.0.0" });
-payboxServer.tool("disburse_bounty", { researcher: z.string(), severity: z.enum(["low", "high", "critical"]) }, async ({ researcher, severity }) => {
-    return await executeOnChainRemittance(researcher, severity);
+      'mermail': {
+        file: 'cat /var/git/autonomous_agents/mermail_mcp_server.ts',
+        meta: 'Zero-Trust Anthropic MCP Security Desk',
+        desc: `
+          <p><strong class="text-white">MERMAIL SECURITY DESK</strong> implements Model Context Protocol (MCP) servers for zero-trust vulnerability reporting and instant bug bounties.</p>
+        `,
+        code: `import { Server } from '@modelcontextprotocol/sdk/server/index.js';
+
+const server = new Server({ name: 'mermail-audit', version: '2.0.0' }, {
+  capabilities: { tools: {} }
 });`
       },
-      animus: {
-        file: "cat /var/git/autonomous_agents/animus_engine_v2.py",
-        meta: "Concurrent Multi-Agent Decision Engine",
-        desc: "High-performance concurrent multi-agent execution pipeline orchestrating independent subagents across market telemetry, code review, and automated task execution.",
-        code: `async def run_agent_swarm(tasks):
-    workers = [spawn_worker(t) for t in tasks]
-    return await asyncio.gather(*workers)`
+      'animus': {
+        file: 'cat /var/git/autonomous_agents/animus_engine_v2.py',
+        meta: 'Concurrent Swarm Decision Runtime',
+        desc: `
+          <p><strong class="text-white">ANIMUS ENGINE</strong> orchestrates multi-agent peer swarms with state synchronization and verifiable consensus.</p>
+        `,
+        code: `class AnimusSwarmCoordinator:
+    async def dispatch_consensus(self, agents: list[Agent], task: Task):
+        results = await asyncio.gather(*(a.run(task) for a in agents))
+        return self.resolve_majority_voting(results)`
       },
-      opencode: {
-        file: "cat /var/git/autonomous_agents/opencode_memory_rag.py",
-        meta: "Vector Retrieval & Contextual Agent Memory",
-        desc: "Lightweight, zero-latency vector retrieval memory architecture enabling autonomous agents to persist state, learn codebase idioms, and retrieve past session insights deterministically.",
-        code: `def retrieve_codebase_context(query, top_k=5):
-    query_vector = embed_model.encode(query)
-    return vector_index.search(query_vector, k=top_k)`
+      'opencode': {
+        file: 'cat /var/git/autonomous_agents/opencode_memory_rag.py',
+        meta: 'Semantic Vector Context Engine',
+        desc: `
+          <p><strong class="text-white">OPENCODE MEMORY</strong> stores and retrieves long-horizon developer context through cosine-similarity vector embeddings.</p>
+        `,
+        code: `def query_context(prompt_vector, top_k=5):
+    scores = np.dot(vector_index, prompt_vector)
+    top_indices = np.argsort(scores)[-top_k:]
+    return [documents[i] for i in reversed(top_indices)]`
       }
     };
 
-    function selectRepo(key) {
-      playClick(700);
-      const data = repoDetails[key] || repoDetails['solplay'];
-      document.getElementById('repo-inspect-file').textContent = data.file;
-      document.getElementById('repo-inspect-meta').textContent = data.meta;
-      document.getElementById('repo-inspect-desc').innerHTML = data.desc;
-      document.getElementById('repo-inspect-code').textContent = data.code;
+    function selectRepo(id) {
+      playClick(850);
+      const r = reposData[id];
+      if (!r) return;
+      document.getElementById('repo-inspect-file').textContent = r.file;
+      document.getElementById('repo-inspect-meta').textContent = r.meta;
+      document.getElementById('repo-inspect-desc').innerHTML = r.desc;
+      document.getElementById('repo-inspect-code').textContent = r.code;
     }
+    // Select default repo
     selectRepo('solplay');
 
-    // 6. REPL Answers
-    const replAnswers = {
-      solplay: `>>> tc.explain_solplay_security()
-[SOLPLAY SECURITY AUDIT VERIFICATION]
-• Program: Rust Anchor on Solana Sealevel Virtual Machine (SBF).
-• PDA Collateral Isolation: All wager collateral is routed into seeds [b"escrow", user.key().as_ref(), match_id.as_bytes()].
-• Zero Reentrancy: Solana's Sealevel engine executes instructions atomically; accounts are locked mutably during runtime. Reentrancy is structurally impossible.
-• Sports Oracle: SHA-256 state hashes verified against DraftKings, ESPN, and TheSportsDB APIs; settles in <1.2s.`,
-
-      omesham: `>>> tc.explain_omesham_wave_physics()
-[OMESHAM AI WAVE SOLVER & DOWNHOLE RIG IMPACT]
-• Equation: 1D hyperbolic wave PDE ∂²u/∂t² = c² (∂²u/∂x²) where c = 3,200 m/s (shear wave velocity in drill pipe steel).
-• Discretization: Finite-difference time-domain with Courant-Friedrichs-Lewy stability factor (c·Δt/Δx < 1).
-• Industrial Consequence: Predicts drill bit torsional stick-slip oscillations and drillstring fatigue 30 minutes in advance, saving $250k+ in rig Non-Productive Time (NPT).
-• Rust Engine: Built witsml_parser_rs for zero-allocation streaming of WITSML mud-logging feeds.`,
-
-      solwork: `>>> tc.explain_solwork_pbkdf2()
-[SOLWORK PROTOCOL & AFRICAN CROSS-BORDER REMITTANCE]
-• Banking Rail Friction: African banking cards suffer 20–35% failure rates on international remittances.
-• Client-Side Deterministic Derivation: Uses Web Crypto PBKDF2 with SHA-256 (150,000 iterations) to derive non-custodial Solana keypairs directly from worker emails.
-• On-Chain Worker Vetting: Anchor smart contract enforces skill credentials before unlocking high-value dataset annotation pools.`,
-
-      education: `>>> tc.verify_academic_credentials()
-[ACADEMIC CREDENTIALS & RIGOR]
-• Classification: First Class / Upper Division Honors.
-• Degree: Bachelor of Engineering (B.Eng.), Petroleum Systems Engineering.
-• Positions: Society of Petroleum Engineers (SPE) Assistant Membership Lead, Technical Symposium Presenter.`,
-
-      hire: `>>> tc.get_contract_dispatch()
-[PRIORITY RECRUITING & CONTRACT ENGAGEMENT]
-• Candidate: @0xtryhardx0 (Pseudonymous Systems Architect).
-• Focus: Solana Core / Anchor, Low-Latency Rust (<18ms), Subsurface Physics Simulation.
-• Status: Available for remote contracts, protocol design, and high-throughput systems.
-• Direct Message: https://x.com/0xtryhardx0 (DMs Open).`
-    };
-
-    function runReplQuery(fnCall) {
-      document.getElementById('repl-input').value = fnCall;
-      handleReplSubmit();
+    function copySnippet() {
+      const code = document.getElementById('repo-inspect-code').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        playClick(1000);
+        const btn = document.getElementById('btn-copy-code');
+        btn.textContent = 'COPIED!';
+        setTimeout(() => { btn.textContent = 'Copy Code'; }, 1500);
+      });
     }
 
-    function handleReplSubmit(e) {
-      if (e) e.preventDefault();
-      const input = document.getElementById('repl-input');
-      const val = input.value.trim();
-      if (!val) return;
-      playClick(850);
-      const stream = document.getElementById('repl-history');
-      const lower = val.toLowerCase();
-      let answer = `>>> ${val}\n[REPL OUTPUT] Query evaluated across 24 repositories. Try calling tc.explain_solplay_security(), tc.explain_omesham_wave_physics(), or tc.get_contract_dispatch().`;
-      if (lower.includes('solplay') || lower.includes('security') || lower.includes('reentrancy')) answer = replAnswers.solplay;
-      else if (lower.includes('omesham') || lower.includes('wave') || lower.includes('physics') || lower.includes('drill')) answer = replAnswers.omesham;
-      else if (lower.includes('solwork') || lower.includes('pbkdf2') || lower.includes('payroll') || lower.includes('microtask')) answer = replAnswers.solwork;
-      else if (lower.includes('education') || lower.includes('degree') || lower.includes('grade') || lower.includes('honors')) answer = replAnswers.education;
-      else if (lower.includes('hire') || lower.includes('contact') || lower.includes('dispatch') || lower.includes('rate')) answer = replAnswers.hire;
+    // 8. Candidate REPL Engine
+    const replResponses = {
+      'tc.explain_solplay_security()': `[SOLPLAY SECURITY AUDIT]
+• Non-Custodial Architecture: Funds lock strictly into PDA accounts derived from [b"wager", wager_id.to_le_bytes()].
+• Authority Constraints: Only the protocol authority + winning player signature can trigger withdrawal CPIs.
+• Reentrancy Protection: Anchor account mutability strictly validated prior to lamport balance mutations.
+• Benchmark: <400ms finality with 0 custodial exposure.`,
 
-      const block = document.createElement('div');
-      block.className = 'p-3 bg-black/90 rounded border border-slate-800 text-slate-200 whitespace-pre-wrap leading-relaxed font-mono text-xs';
-      block.innerHTML = `<span class="text-[#00f2fe] font-bold">&gt;&gt;&gt; ${val}</span>\n${answer.replace(/^>>> .*\n/, '')}`;
-      stream.appendChild(block);
-      input.value = '';
+      'tc.explain_omesham_wave_physics()': `[OMESHAM AI 1D WAVE EQUATION ENGINE]
+• Governing PDE: ∂²u/∂t² = c² (∂²u/∂x²) where c = √(G/ρ) = 3,200 m/s in steel drillpipes.
+• Discretization: 2nd-order Finite Difference Time Domain (FDTD) with Courant CFL condition (c·Δt/Δx < 1.0).
+• Field Application: Solves torsional stick-slip resonance over 3,500m well depths, predicting pipe twist-offs 30 min early.
+• Business ROI: $250,000+ per mitigated drillstring failure.`,
+
+      'tc.explain_solwork_pbkdf2()': `[SOLWORK CLIENT KEY DERIVATION]
+• Zero-Trust Custody: Never transmits private keys or mnemonics over network RPCs.
+• Cryptographic Function: PBKDF2(user_pin, salt="solwork:" + user_id, iterations=100,000, 32 bytes, SHA-256).
+• Result: Deterministic Ed25519 keypair for micro-task bounty payout verification.`,
+
+      'tc.verify_academic_credentials()': `[ACADEMIC CREDENTIALS VERIFICATION]
+• Discipline: Bachelor of Engineering (B.Eng.), Petroleum Systems Engineering.
+• Classification: First Class / Upper Division Honors.
+• Academic Rigor: Continuum Mechanics, Fluid Dynamics, Numerical PDE Methods, Hydrocarbon Thermodynamics.
+• Society of Petroleum Engineers (SPE): Member & Technical Presentation Lead.`,
+
+      'tc.get_contract_dispatch()': `[FAST DISPATCH STATUS]
+• Availability: Immediate / High-Velocity Remote Roles.
+• Preferred Scope: Solana Anchor smart contracts, Tokio low-latency async services, scientific numerical engines.
+• Direct Contact: https://x.com/0xtryhardx0 (DMs Open)
+• GitHub Org: https://github.com/0xtryhardx0`
+    };
+
+    function runReplQuery(fn) {
+      playClick(800);
+      const hist = document.getElementById('repl-history');
+      const item = document.createElement('div');
+      item.className = 'space-y-1.5 border-l-2 border-[#00f2fe]/40 pl-3';
+      item.innerHTML = `
+        <div class="text-[#00f2fe] font-bold">&gt;&gt;&gt; ${fn}</div>
+        <pre class="text-xs text-slate-300 leading-relaxed font-mono whitespace-pre-wrap">${replResponses[fn] || 'Execution completed with 0 errors.'}</pre>
+      `;
+      hist.appendChild(item);
+      const stream = document.getElementById('repl-stream');
       stream.scrollTop = stream.scrollHeight;
     }
 
-    // 7. Oscilloscope Simulation
-    const scopeCanvas = document.getElementById('scope-canvas');
-    let scopeCtx = null, sPoints = [], numSPoints = 140, sW, sH, scopeRunning = false;
+    function handleReplSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('repl-input');
+      const val = input.value.trim();
+      if (!val) return;
+      playClick(750);
+      const hist = document.getElementById('repl-history');
+      const item = document.createElement('div');
+      item.className = 'space-y-1.5 border-l-2 border-[#14f195]/40 pl-3';
+      
+      let reply = replResponses[val];
+      if (!reply) {
+        if (val.toLowerCase().includes('hire') || val.toLowerCase().includes('why')) {
+          reply = `[WHY HIRE @0xtryhardx0]:
+1. Dual Hard Science & Software Mastery: Deep understanding of physical systems & low-latency computing.
+2. Production Rust Experience: Shipped Solana smart contracts with sub-second finality.
+3. Proven Ownership: 24+ active repositories independently architected and pushed.
+Contact: https://x.com/0xtryhardx0`;
+        } else if (val.toLowerCase().includes('geoclearance')) {
+          reply = `[GEOCLEARANCE NYSC]:
+Solana-based proof-of-presence engine using GPS micro-degree bounds to verify youth corp members on-chain.`;
+        } else {
+          reply = `Candidate Engine: Evaluated query '${val}'. All systems nominal. For direct inquiries, reach out at https://x.com/0xtryhardx0`;
+        }
+      }
+
+      item.innerHTML = `
+        <div class="text-white font-bold">&gt;&gt;&gt; ${val}</div>
+        <pre class="text-xs text-slate-300 leading-relaxed font-mono whitespace-pre-wrap">${reply}</pre>
+      `;
+      hist.appendChild(item);
+      input.value = '';
+      const stream = document.getElementById('repl-stream');
+      stream.scrollTop = stream.scrollHeight;
+    }
+
+    // 9. Interactive 1D Wave Oscilloscope Engine
+    let scopeCanvas, scopeCtx, sAnim = null;
+    let sPoints = [], numSPoints = 120;
+    let tension = 0.028, damping = 0.985;
+
     function initScope() {
+      scopeCanvas = document.getElementById('scope-canvas');
       if (!scopeCanvas) return;
-      sW = scopeCanvas.parentElement.offsetWidth; sH = scopeCanvas.offsetHeight || 200;
-      scopeCanvas.width = sW; scopeCanvas.height = sH;
       scopeCtx = scopeCanvas.getContext('2d');
+      const rect = scopeCanvas.parentElement.getBoundingClientRect();
+      scopeCanvas.width = rect.width - 32;
+      scopeCanvas.height = 220;
+      
       sPoints = [];
-      for (let i = 0; i < numSPoints; i++) sPoints.push({ y: 0, vy: 0 });
-      if (!scopeRunning) { scopeRunning = true; animateScope(); }
+      for (let i = 0; i < numSPoints; i++) {
+        sPoints.push({ y: 0, vy: 0 });
+      }
+
+      scopeCanvas.onmousemove = function(e) {
+        const bounds = scopeCanvas.getBoundingClientRect();
+        const mouseX = e.clientX - bounds.left;
+        const idx = Math.floor((mouseX / scopeCanvas.width) * numSPoints);
+        if (idx >= 0 && idx < numSPoints) {
+          sPoints[idx].y += (e.movementY || 2) * 1.8;
+          if (Math.random() > 0.7) playClick(500 + Math.random() * 400, 0.02);
+        }
+      };
+
+      if (!sAnim) animateScope();
     }
-    function injectPulse(force = 20) {
-      playClick(600);
+
+    function injectPulse(val = 30) {
+      playClick(800);
       const mid = Math.floor(numSPoints / 2);
-      sPoints[mid].vy += force; sPoints[mid - 1].vy += force * 0.7; sPoints[mid + 1].vy += force * 0.7;
+      if (sPoints[mid]) sPoints[mid].y = val;
     }
+
     function resetWave() {
       playClick(400);
-      for (let i = 0; i < numSPoints; i++) { sPoints[i].y = 0; sPoints[i].vy = 0; }
+      sPoints.forEach(p => { p.y = 0; p.vy = 0; });
     }
-    if (scopeCanvas) {
-      scopeCanvas.addEventListener('mousemove', (e) => {
-        const rect = scopeCanvas.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const idx = Math.floor((x / sW) * numSPoints);
-        if (idx >= 0 && idx < numSPoints) sPoints[idx].vy += 14;
-      });
-    }
+
     function animateScope() {
-      if (!scopeCanvas || !scopeCtx) return;
-      scopeCtx.fillStyle = '#020408'; scopeCtx.fillRect(0, 0, sW, sH);
-      scopeCtx.strokeStyle = 'rgba(20, 241, 149, 0.08)'; scopeCtx.lineWidth = 1;
-      for (let x = 0; x < sW; x += 40) { scopeCtx.beginPath(); scopeCtx.moveTo(x, 0); scopeCtx.lineTo(x, sH); scopeCtx.stroke(); }
-      for (let y = 0; y < sH; y += 30) { scopeCtx.beginPath(); scopeCtx.moveTo(0, y); scopeCtx.lineTo(sW, y); scopeCtx.stroke(); }
-      const tension = 0.038, damping = 0.988, midY = sH / 2;
+      if (!scopeCtx) return;
+      const sW = scopeCanvas.width, sH = scopeCanvas.height;
+      scopeCtx.fillStyle = 'rgba(2, 4, 8, 0.28)';
+      scopeCtx.fillRect(0, 0, sW, sH);
+
+      // Grid Lines
+      scopeCtx.strokeStyle = 'rgba(255, 255, 255, 0.04)';
+      scopeCtx.lineWidth = 1;
+      const midY = sH / 2;
+      scopeCtx.beginPath();
+      scopeCtx.moveTo(0, midY); scopeCtx.lineTo(sW, midY);
+      scopeCtx.stroke();
+
       for (let i = 0; i < numSPoints; i++) {
         const left = i > 0 ? sPoints[i - 1].y : 0;
         const right = i < numSPoints - 1 ? sPoints[i + 1].y : 0;
@@ -872,22 +1224,70 @@ payboxServer.tool("disburse_bounty", { researcher: z.string(), severity: z.enum(
         sPoints[i].vy = (sPoints[i].vy + force) * damping;
         sPoints[i].y += sPoints[i].vy;
       }
-      scopeCtx.beginPath(); scopeCtx.moveTo(0, midY + sPoints[0].y);
-      for (let i = 1; i < numSPoints; i++) scopeCtx.lineTo((i / (numSPoints - 1)) * sW, midY + sPoints[i].y);
-      scopeCtx.strokeStyle = '#14f195'; scopeCtx.lineWidth = 2.5; scopeCtx.shadowColor = '#14f195'; scopeCtx.shadowBlur = 10;
+
+      scopeCtx.beginPath();
+      scopeCtx.moveTo(0, midY + sPoints[0].y);
+      for (let i = 1; i < numSPoints; i++) {
+        const px = (i / (numSPoints - 1)) * sW;
+        scopeCtx.lineTo(px, midY + sPoints[i].y);
+      }
+      scopeCtx.strokeStyle = '#14f195';
+      scopeCtx.lineWidth = 2.5;
+      scopeCtx.shadowColor = '#14f195';
+      scopeCtx.shadowBlur = 10;
       scopeCtx.stroke();
-      requestAnimationFrame(animateScope);
+      scopeCtx.shadowBlur = 0;
+
+      sAnim = requestAnimationFrame(animateScope);
     }
 
-    // 8. Zsh Shell
+    // 10. Zsh Shell
     const zshResponses = {
-      'help': `Commands:\n  • whois\n  • projects --web3\n  • projects --petro\n  • projects --agents\n  • education\n  • matrix\n  • sudo hire\n  • clear`,
-      'whois': `whois @0xtryhardx0: Systems Architect & Web3 Engineer. B.Eng. Petroleum Systems (First Class / Upper Division Honors). Operates 24+ Codebases across Solana Anchor, wave physics, and agent runtimes.`,
-      'projects --web3': `SOLPLAY (Sportsbook) • SOLWORK (Microtasking) • GEOCLEARANCE NYSC • LAGOS ON CHAIN • COOKIEPAY • AETHER DEX`,
-      'projects --petro': `OMESHAM AI (Wave Mechanics) • PETRO.ONE (Valuation) • PETROSHIELD AI • NETCO HYSYS`,
-      'projects --agents': `SOVEREIGN AGENT v2.0 • MERMAIL SECURITY DESK • ANIMUS ENGINE • OPENCODE MEMORY`,
-      'education': `Top-Tier Institute: B.Eng. Petroleum Systems Engineering (First Class / Upper Division Honors)`,
-      'sudo hire': `Dispatch: https://x.com/0xtryhardx0 (DMs Open)`
+      'help': `Available Commands:
+  • whois            - Display systems engineer dossier
+  • projects --web3  - List Solana smart contracts
+  • projects --petro - List subsurface physics & simulation tools
+  • projects --agents- List autonomous agents & MCP servers
+  • education        - Verify university & honors credentials
+  • matrix           - Toggle green matrix digital rain
+  • sudo hire        - Direct dispatch and contract initiation
+  • clear            - Clear terminal buffer`,
+
+      'whois': `whois @0xtryhardx0:
+Systems Architect & Web3 Engineer.
+B.Eng. Petroleum Systems Engineering (First Class / Upper Division Honors).
+Operates 24+ production codebases across Solana Anchor, wave physics, and agent runtimes.`,
+
+      'projects --web3': `Solana SVM Codebases:
+1. SOLPLAY: P2P sports betting PDA escrow (<400ms finality)
+2. SOLWORK: Deterministic PBKDF2 bounty escrow
+3. GEOCLEARANCE NYSC: Cryptographic GPS attendance attestation
+4. LAGOS ON CHAIN: Real-world merchant Blinks / Actions
+5. COOKIEPAY: Lightweight Solana Pay micro-tipping
+6. AETHER DEX: Sub-18ms concurrent WebSocket orderbook in Tokio`,
+
+      'projects --petro': `Subsurface Physics & Simulation:
+1. OMESHAM AI: 1D wave equation solver for stick-slip ($250k+ NPT saved)
+2. WITSML PARSER RS: Zero-copy mud-logging stream parser in Rust
+3. PETRO.ONE: DCF valuation & decline curve analysis
+4. PETROSHIELD AI: Rig floor computer vision safety sentinel
+5. NETCO ASPEN: HYSYS P&ID process hazard models`,
+
+      'projects --agents': `Autonomous Agents & Swarms:
+1. SOVEREIGN AGENT v2.0: Mempool sentinel & BlinkCraft copilot
+2. MERMAIL SECURITY DESK: Zero-trust bug bounty MCP server
+3. ANIMUS ENGINE: Concurrent swarm multi-agent decision runtime
+4. OPENCODE MEMORY: Semantic vector embedding RAG engine`,
+
+      'education': `ACADEMIC HONORS:
+• Degree: Bachelor of Engineering (B.Eng.), Petroleum Systems Engineering
+• Honors: First Class / Upper Division Honors
+• Leadership: SPE (Society of Petroleum Engineers) Membership Lead & Technical Presenter`,
+
+      'sudo hire': `[DISPATCH READY]
+Status: Available for contracts & high-velocity remote systems roles.
+• Direct Message on X: https://x.com/0xtryhardx0
+• GitHub: https://github.com/0xtryhardx0`
     };
 
     function execZsh(cmd) {
@@ -896,11 +1296,13 @@ payboxServer.tool("disburse_bounty", { researcher: z.string(), severity: z.enum(
       const out = document.getElementById('zsh-output');
       if (clean === 'clear') { out.innerHTML = ''; return; }
       if (clean === 'matrix') toggleMatrix();
+
       const userLine = document.createElement('div');
       userLine.innerHTML = `<span class="text-[#14f195] font-bold">0xtryhardx0@node:~$</span> <span class="text-white">${cmd}</span>`;
       out.appendChild(userLine);
+
       const respLine = document.createElement('div');
-      respLine.className = 'text-xs text-slate-300 pl-2 border-l border-white/20 my-1 leading-relaxed';
+      respLine.className = 'text-xs text-slate-300 pl-2 border-l border-white/20 my-1 leading-relaxed whitespace-pre-wrap font-mono';
       respLine.innerHTML = zshResponses[clean] || `<span class="text-red-400">zsh: command not found: ${cmd}</span>. Type <span class="text-[#14f195]">help</span>.`;
       out.appendChild(respLine);
       out.parentElement.scrollTop = out.parentElement.scrollHeight;
@@ -915,17 +1317,22 @@ payboxServer.tool("disburse_bounty", { researcher: z.string(), severity: z.enum(
       input.value = '';
     }
 
+    // 11. Matrix Digital Rain
     let mInterval = null;
     function initMatrix() {
       const mCanvas = document.getElementById('term-matrix-canvas');
       if (!mCanvas) return;
       const mCtx = mCanvas.getContext('2d');
-      mCanvas.width = mCanvas.parentElement.offsetWidth; mCanvas.height = mCanvas.parentElement.offsetHeight;
+      mCanvas.width = mCanvas.parentElement.offsetWidth;
+      mCanvas.height = mCanvas.parentElement.offsetHeight;
       const letters = '01TRYHARDX0SOLANARUSTTOKENANCHORWAVE10';
       const fSize = 13, cols = Math.floor(mCanvas.width / fSize), drops = Array(cols).fill(1);
+
       function draw() {
-        mCtx.fillStyle = 'rgba(3, 5, 9, 0.08)'; mCtx.fillRect(0, 0, mCanvas.width, mCanvas.height);
-        mCtx.fillStyle = '#14f195'; mCtx.font = fSize + 'px monospace';
+        mCtx.fillStyle = 'rgba(3, 5, 9, 0.08)';
+        mCtx.fillRect(0, 0, mCanvas.width, mCanvas.height);
+        mCtx.fillStyle = '#14f195';
+        mCtx.font = fSize + 'px monospace';
         for (let i = 0; i < drops.length; i++) {
           const txt = letters.charAt(Math.floor(Math.random() * letters.length));
           mCtx.fillText(txt, i * fSize, drops[i] * fSize);
@@ -936,12 +1343,33 @@ payboxServer.tool("disburse_bounty", { researcher: z.string(), severity: z.enum(
       if (mInterval) clearInterval(mInterval);
       mInterval = setInterval(draw, 40);
     }
+
     function toggleMatrix() {
       const mCanvas = document.getElementById('term-matrix-canvas');
       mCanvas.style.display = (mCanvas.style.display === 'none') ? 'block' : 'none';
       if (mCanvas.style.display === 'block') initMatrix();
       else if (mInterval) clearInterval(mInterval);
     }
+
+    // 12. Keyboard Hotkey Listeners
+    window.addEventListener('keydown', (e) => {
+      // Ignore if typing in an input
+      if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+      if (e.key >= '0' && e.key <= '4') {
+        switchTab(parseInt(e.key));
+      } else if (e.key.toLowerCase() === 'm') {
+        const modes = ['all', 'web3', 'petro'];
+        const next = modes[(modes.indexOf(currentCVMode) + 1) % modes.length];
+        setCVMode(next);
+      } else if (e.key.toLowerCase() === 'c') {
+        toggleCRT();
+      }
+    });
+
+    // Run scope when ready
+    window.onload = function() {
+      initScope();
+    };
   </script>
 </body>
 </html>
