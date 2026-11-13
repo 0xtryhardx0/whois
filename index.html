@@ -3,26 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>0xOS v3.8 — @0xtryhardx0 Systems Workstation</title>
-  <meta name="description" content="0xOS: Systems Architect & Web3 Runtime Engineer Workstation for @0xtryhardx0. Solana Anchor SBF, Subsurface Wave Equation Physics, and Low-Latency Concurrency.">
+  <title>0xOS — @0xtryhardx0 Cyberpunk Systems Console</title>
+  <meta name="description" content="0xOS: High-Throughput Solana Smart Contracts, Subsurface Wave Equation Physics, and Autonomous Agent Systems.">
   
   <!-- Tailwind CSS -->
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
 
-  <!-- JetBrains Mono & Fira Code Fonts -->
+  <!-- Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #030407;
+      --bg: #030508;
       --term-green: #14f195;
       --term-cyan: #00f2fe;
       --term-purple: #9945ff;
       --term-amber: #f59e0b;
-      --term-dim: #475569;
-      --term-border: #1e293b;
+      --term-border: #162032;
     }
 
     * {
@@ -42,95 +41,100 @@
       justify-content: space-between;
     }
 
-    /* Subtle CRT Scanlines (Toggleable) */
+    /* Authentic Phosphor Glow */
+    .text-glow-green {
+      text-shadow: 0 0 8px rgba(20, 241, 149, 0.6);
+    }
+    .text-glow-cyan {
+      text-shadow: 0 0 8px rgba(0, 242, 254, 0.6);
+    }
+    .border-glow-green {
+      box-shadow: 0 0 15px -3px rgba(20, 241, 149, 0.25);
+    }
+
+    /* Retro Scanlines */
     .crt-scanlines {
-      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.28) 50%), 
+                  linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
       background-size: 100% 3px, 6px 100%;
       pointer-events: none;
     }
 
-    /* Workstation Pane */
-    .workstation-pane {
-      background: rgba(4, 7, 13, 0.95);
-      border: 1px solid #1e293b;
-      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.9);
-    }
-
     /* Custom Terminal Scrollbar */
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #030407; }
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: #030508; }
     ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 2px; }
     ::-webkit-scrollbar-thumb:hover { background: #14f195; }
 
-    /* Blinking Terminal Caret */
+    /* Blinking Caret */
     @keyframes termBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
     .term-caret { animation: termBlink 0.9s infinite; }
 
-    /* Matrix canvas overlay */
+    /* Matrix canvas layer */
     .matrix-layer {
       position: absolute;
       top: 0; left: 0; width: 100%; height: 100%;
       pointer-events: none;
-      opacity: 0.14;
+      opacity: 0.12;
       z-index: 0;
     }
   </style>
 </head>
 <body class="selection:bg-[#14f195] selection:text-black antialiased text-xs md:text-sm">
 
-  <!-- CRT Scanline Overlay -->
+  <!-- CRT Scanline Shader Overlay -->
   <div id="crt-overlay" class="crt-scanlines fixed inset-0 z-50 pointer-events-none opacity-40"></div>
 
   <!-- ======================================================== -->
-  <!-- TMUX TOP STATUS & HARDWARE SENSORS BAR                   -->
+  <!-- TMUX HEADER & REAL-TIME SENSORS                          -->
   <!-- ======================================================== -->
-  <header class="bg-[#05070e] border-b border-slate-800 text-[11px] px-3 md:px-5 py-2 flex flex-wrap items-center justify-between gap-2 select-none sticky top-0 z-40">
+  <header class="bg-[#050811] border-b border-slate-800 text-[11px] px-3 md:px-5 py-2 flex flex-wrap items-center justify-between gap-2 select-none sticky top-0 z-40">
     
-    <!-- Left: Host & Session Badge -->
+    <!-- Left: Identity Badge (100% Anon) -->
     <div class="flex items-center gap-3">
       <div class="flex items-center gap-1.5 font-bold text-white">
         <span class="w-2.5 h-2.5 rounded-sm bg-[#14f195] inline-block animate-pulse"></span>
-        <span class="text-[#14f195]">0xOS</span><span>:</span><span class="text-slate-300">workstation-01</span>
+        <span class="text-[#14f195] text-glow-green">0xOS</span><span>:</span><span class="text-slate-300">workstation-01</span>
       </div>
       <span class="text-slate-600">|</span>
-      <span class="text-slate-400 font-mono hidden sm:inline">user: <span class="text-white font-bold">@0xtryhardx0</span></span>
+      <span class="text-slate-400 font-mono">user: <span class="text-white font-bold">@0xtryhardx0</span></span>
       <span class="text-slate-600 hidden sm:inline">|</span>
-      <span class="text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20 text-[10px]">MAINNET-BETA</span>
+      <span class="text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20 text-[10px] hidden sm:inline">SVM-MAINNET</span>
     </div>
 
-    <!-- Center: TMUX WINDOW TABS (1-Click or Hotkey) -->
+    <!-- Center: TMUX WORKSPACE TABS -->
     <nav class="flex items-center bg-black/60 p-0.5 rounded border border-slate-800 text-[11px] font-mono overflow-x-auto">
-      <button id="tab-0" onclick="gotoWindow(0)" class="px-2.5 py-1 rounded bg-[#14f195] text-black font-bold transition flex items-center gap-1">
-        <span>0:neofetch*</span>
+      <button id="tab-0" onclick="switchTab(0)" class="px-2.5 py-1 rounded bg-[#14f195] text-black font-bold transition flex items-center gap-1">
+        <span>0:dossier*</span>
       </button>
-      <button id="tab-1" onclick="gotoWindow(1)" class="px-2.5 py-1 rounded text-slate-400 hover:text-white transition flex items-center gap-1">
+      <button id="tab-1" onclick="switchTab(1)" class="px-2.5 py-1 rounded text-slate-400 hover:text-white transition flex items-center gap-1">
         <span>1:repos.tree</span>
       </button>
-      <button id="tab-2" onclick="gotoWindow(2)" class="px-2.5 py-1 rounded text-slate-400 hover:text-white transition flex items-center gap-1">
-        <span>2:tryhard.repl</span>
+      <button id="tab-2" onclick="switchTab(2)" class="px-2.5 py-1 rounded text-slate-400 hover:text-white transition flex items-center gap-1">
+        <span>2:agent.repl</span>
       </button>
-      <button id="tab-3" onclick="gotoWindow(3)" class="px-2.5 py-1 rounded text-slate-400 hover:text-white transition flex items-center gap-1">
-        <span>3:wave_solver</span>
+      <button id="tab-3" onclick="switchTab(3)" class="px-2.5 py-1 rounded text-slate-400 hover:text-white transition flex items-center gap-1">
+        <span>3:wave_scope</span>
       </button>
-      <button id="tab-4" onclick="gotoWindow(4)" class="px-2.5 py-1 rounded text-slate-400 hover:text-white transition flex items-center gap-1">
-        <span>4:kernel.zsh</span>
+      <button id="tab-4" onclick="switchTab(4)" class="px-2.5 py-1 rounded text-slate-400 hover:text-white transition flex items-center gap-1">
+        <span>4:shell.zsh</span>
       </button>
     </nav>
 
-    <!-- Right: Telemetry & Toggles -->
+    <!-- Right: Telemetry & Controls -->
     <div class="flex items-center gap-3 text-[10px] text-slate-400">
-      <div class="hidden md:flex items-center gap-2">
+      <div class="hidden lg:flex items-center gap-2.5">
         <span>RTT:<span class="text-[#00f2fe] font-bold">18ms</span></span>
-        <span>LOAD:<span class="text-[#14f195] font-bold">0.12</span></span>
-        <span id="utc-clock" class="text-slate-300 font-bold tabular-nums">14:50:00 UTC</span>
+        <span>LOAD:<span class="text-[#14f195] font-bold">0.14</span></span>
+        <span id="utc-clock" class="text-slate-300 font-bold tabular-nums">16:15:00 UTC</span>
       </div>
       <button onclick="toggleAudio()" id="btn-audio" class="px-1.5 py-0.5 rounded bg-slate-900 border border-slate-700 hover:text-white" title="Toggle Mechanical Typing SFX">
         [SFX: ON]
       </button>
-      <button onclick="toggleCRT()" id="btn-crt" class="px-1.5 py-0.5 rounded bg-slate-900 border border-slate-700 hover:text-white" title="Toggle CRT Scanline Shader">
+      <button onclick="toggleCRT()" id="btn-crt" class="px-1.5 py-0.5 rounded bg-slate-900 border border-slate-700 hover:text-white" title="Toggle CRT Scanlines">
         [CRT: ON]
       </button>
-      <a href="https://x.com/0xtryhardx0" target="_blank" class="px-2 py-0.5 rounded bg-white text-black font-bold hover:bg-slate-200">
+      <a href="https://x.com/0xtryhardx0" target="_blank" class="px-2.5 py-0.5 rounded bg-[#14f195] text-black font-bold hover:bg-[#12d683] transition">
         𝕏 DM
       </a>
     </div>
@@ -138,32 +142,32 @@
   </header>
 
   <!-- ======================================================== -->
-  <!-- WORKSTATION MAIN SCREEN AREA                             -->
+  <!-- DUAL-PANE CONSOLE SPLIT WORKSTATION                      -->
   <!-- ======================================================== -->
-  <main class="max-w-7xl mx-auto w-full p-3 md:p-6 flex-1 flex flex-col justify-start relative z-10">
+  <main class="max-w-[1500px] mx-auto w-full p-2.5 md:p-5 flex-1 flex flex-col justify-start relative z-10">
     
-    <div class="workstation-pane rounded-lg overflow-hidden border border-slate-800 flex-1 flex flex-col min-h-[640px] relative">
+    <div class="rounded-lg overflow-hidden border border-slate-800 bg-[#040711] shadow-2xl flex-1 flex flex-col min-h-[680px]">
       
-      <!-- Window Titlebar -->
-      <div class="bg-[#080c16] px-4 py-2 border-b border-slate-800 flex items-center justify-between text-xs text-slate-400 select-none">
+      <!-- Top Pane Banner -->
+      <div class="bg-[#070b16] px-4 py-2 border-b border-slate-800 flex items-center justify-between text-xs text-slate-400 select-none">
         <div class="flex items-center gap-2">
-          <span class="text-[#14f195]">●</span>
-          <span id="pane-title" class="text-white font-bold">tmux: window [0: neofetch.sh] — Systems Dossier & Hardware Architecture</span>
+          <span class="text-[#14f195] animate-pulse">●</span>
+          <span id="pane-title" class="text-white font-bold">0xOS // WINDOW 0: NEOFETCH SYSTEMS DOSSIER</span>
         </div>
         <div class="text-[11px] text-slate-500 font-mono hidden sm:inline">
-          Press keys <kbd class="px-1 rounded bg-slate-800 text-slate-300">0</kbd>–<kbd class="px-1 rounded bg-slate-800 text-slate-300">4</kbd> to switch windows
+          Hotkeys: <kbd class="px-1 rounded bg-slate-800 text-slate-300">0</kbd>–<kbd class="px-1 rounded bg-slate-800 text-slate-300">4</kbd> Switch Tabs • <kbd class="px-1 rounded bg-slate-800 text-slate-300">TAB</kbd> Autocomplete
         </div>
       </div>
 
       <!-- ==================================================== -->
-      <!-- WINDOW 0: NEOFETCH / SYSTEMS DOSSIER                -->
+      <!-- TAB 0: NEOFETCH SYSTEMS DOSSIER                      -->
       <!-- ==================================================== -->
-      <div id="win-0" class="p-4 md:p-8 overflow-y-auto space-y-6 flex-1">
+      <div id="tab-view-0" class="p-4 md:p-8 overflow-y-auto space-y-6 flex-1">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          <!-- Left: ASCII Art Logo -->
-          <div class="lg:col-span-4 text-emerald-400 font-bold select-none leading-tight font-mono text-[11px] md:text-xs">
-            <pre class="text-[#14f195]">
+          <!-- ASCII Art Avatar (100% Pseudonymous) -->
+          <div class="lg:col-span-4 text-[#14f195] font-bold select-none leading-tight font-mono text-[10px] md:text-xs">
+            <pre class="text-[#14f195] text-glow-green">
    ██████╗ ██╗  ██╗ ██████╗ ███████╗
   ██╔═████╗╚██╗██╔╝██╔═══██╗██╔════╝
   ██║██╔██║ ╚███╔╝ ██║   ██║███████╗
@@ -171,71 +175,64 @@
   ╚██████╔╝██╔╝ ██╗╚██████╔╝███████║
    ╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚══════╝
             </pre>
-            <div class="text-slate-400 mt-2 space-y-1 text-xs">
-              <div><span class="text-white font-bold">0xtryhardx0</span>@solana-node</div>
-              <div class="text-slate-500">--------------------------</div>
-              <div><span class="text-[#14f195] font-bold">Role:</span> Systems &amp; Web3 Architect</div>
-              <div><span class="text-[#00f2fe] font-bold">Degree:</span> B.Eng. Petroleum Systems</div>
-              <div><span class="text-purple-400 font-bold">Honors:</span> First Class / Upper Division</div>
-              <div><span class="text-amber-400 font-bold">Status:</span> Available for Contracts / Remote</div>
-            </div>
-            
-            <div class="mt-4 pt-4 border-t border-slate-800 text-[11px] text-slate-500 space-y-1">
-              <div>• 24+ Production Codebases Index</div>
-              <div>• Non-Custodial Anchor Escrows</div>
-              <div>• Subsurface Wave Mechanics</div>
-              <div>• &lt;18ms Market Data Pipelines</div>
+            <div class="text-slate-400 mt-3 space-y-1 text-xs">
+              <div><span class="text-white font-bold">@0xtryhardx0</span>@solana-sbf</div>
+              <div class="text-slate-600">----------------------------------</div>
+              <div><span class="text-[#14f195] font-bold">Title:</span> Systems Architect &amp; Web3 Runtime Dev</div>
+              <div><span class="text-[#00f2fe] font-bold">Degree:</span> B.Eng. Petroleum Systems Engineering</div>
+              <div><span class="text-purple-400 font-bold">Honors:</span> First Class / Upper Division Honors</div>
+              <div><span class="text-amber-400 font-bold">Status:</span> Open for High-Velocity Remote Roles</div>
             </div>
           </div>
 
-          <!-- Right: Neofetch Specs Table -->
-          <div class="lg:col-span-8 space-y-3 font-mono text-xs md:text-sm">
-            <div class="p-4 rounded bg-black/60 border border-slate-800 space-y-2 leading-relaxed">
+          <!-- Specs Table & High-Impact Metrics -->
+          <div class="lg:col-span-8 space-y-4 font-mono text-xs md:text-sm">
+            <div class="p-4 rounded bg-black/60 border border-slate-800 space-y-2.5 leading-relaxed">
               <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
-                <span class="text-[#14f195] font-bold w-36 shrink-0">OS Architecture:</span>
-                <span class="text-white">0xOS v3.8 (Rust Tokio Async / Solana SBF Runtime)</span>
+                <span class="text-[#14f195] font-bold w-40 shrink-0">Kernel &amp; Engine:</span>
+                <span class="text-white">0xOS v3.8.4 (Rust SBF / Tokio Concurrency / Sealevel VM)</span>
               </div>
               <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
-                <span class="text-[#00f2fe] font-bold w-36 shrink-0">Academic Rigor:</span>
-                <span class="text-slate-200">Covenant University — B.Eng. Petroleum Systems (1st Class / Upper)</span>
+                <span class="text-[#00f2fe] font-bold w-40 shrink-0">Engineering Rigor:</span>
+                <span class="text-slate-200">Top-Tier Institute — B.Eng. Petroleum Systems (First Class / Upper Division Honors)</span>
               </div>
               <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
-                <span class="text-purple-400 font-bold w-36 shrink-0">Web3 Core:</span>
-                <span class="text-slate-200">Solana Anchor Framework, Program Derived Addresses (PDAs), SPL Tokens, Dialect Blinks, cNFTs</span>
+                <span class="text-purple-400 font-bold w-40 shrink-0">Web3 Core Stack:</span>
+                <span class="text-slate-200">Solana Anchor Smart Contracts, Non-Custodial PDAs, Deterministic PBKDF2 Keypairs, Blinks, cNFTs</span>
               </div>
               <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
-                <span class="text-amber-400 font-bold w-36 shrink-0">Industrial Physics:</span>
-                <span class="text-slate-200">1D Wave Equation Drillstring Vibration, witsml_parser_rs, Aspen HYSYS Safety Modeling</span>
+                <span class="text-amber-400 font-bold w-40 shrink-0">Applied Physics:</span>
+                <span class="text-slate-200">1D Hyperbolic Wave Equation Drillstring Modeling, witsml_parser_rs, Aspen HYSYS Risk Reviews</span>
               </div>
               <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
-                <span class="text-emerald-400 font-bold w-36 shrink-0">Escrow Benchmark:</span>
-                <span class="text-[#14f195] font-bold">&lt;400ms settlement with zero reentrancy risks (SolPlay, SolWork)</span>
+                <span class="text-emerald-400 font-bold w-40 shrink-0">Escrow Benchmark:</span>
+                <span class="text-[#14f195] font-bold text-glow-green">&lt;400ms finality with zero reentrancy risks (SolPlay, SolWork)</span>
               </div>
               <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
-                <span class="text-cyan-400 font-bold w-36 shrink-0">Market Routing:</span>
-                <span class="text-[#00f2fe] font-bold">&lt;18ms WebSocket DEX ingestion (Raydium, Pump.fun)</span>
+                <span class="text-cyan-400 font-bold w-40 shrink-0">Market Routing:</span>
+                <span class="text-[#00f2fe] font-bold text-glow-cyan">&lt;18ms WebSocket DEX ingestion (Raydium, Pump.fun)</span>
               </div>
               <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
-                <span class="text-amber-300 font-bold w-36 shrink-0">Industrial Impact:</span>
+                <span class="text-amber-300 font-bold w-40 shrink-0">Industrial Value:</span>
                 <span class="text-amber-300 font-bold">$250,000+ rig downtime (NPT) prevented (Omesham AI)</span>
               </div>
             </div>
 
-            <!-- Fast-Jump Executable Buttons -->
-            <div class="p-4 rounded bg-black/40 border border-slate-800 space-y-2">
-              <div class="text-[11px] uppercase tracking-wider text-slate-500 font-bold">Fast Workstation Commands:</div>
+            <!-- Fast Tab Jumps -->
+            <div class="p-3.5 rounded bg-black/40 border border-slate-800 space-y-2">
+              <div class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">Direct Console Actions:</div>
               <div class="flex flex-wrap gap-2 text-xs">
-                <button onclick="gotoWindow(1)" class="px-3 py-1.5 rounded bg-slate-900 hover:bg-slate-800 text-[#14f195] border border-slate-700 transition">
-                  [1] Browse 24+ Repositories Tree ➔
+                <button onclick="switchTab(1)" class="px-3 py-1.5 rounded bg-slate-900 hover:bg-slate-800 text-[#14f195] border border-slate-700 transition">
+                  [1] Inspect 24+ Repositories Tree ➔
                 </button>
-                <button onclick="gotoWindow(2)" class="px-3 py-1.5 rounded bg-slate-900 hover:bg-slate-800 text-[#00f2fe] border border-slate-700 transition">
-                  [2] Query TryHard REPL Agent ➔
+                <button onclick="switchTab(2)" class="px-3 py-1.5 rounded bg-slate-900 hover:bg-slate-800 text-[#00f2fe] border border-slate-700 transition">
+                  [2] Run Candidate REPL Agent ➔
                 </button>
-                <button onclick="gotoWindow(3)" class="px-3 py-1.5 rounded bg-slate-900 hover:bg-slate-800 text-amber-300 border border-slate-700 transition">
-                  [3] Run Wave Physics Simulator ➔
+                <button onclick="switchTab(3)" class="px-3 py-1.5 rounded bg-slate-900 hover:bg-slate-800 text-amber-300 border border-slate-700 transition">
+                  [3] Launch Wave Oscilloscope ➔
                 </button>
-                <button onclick="gotoWindow(4)" class="px-3 py-1.5 rounded bg-slate-900 hover:bg-slate-800 text-purple-300 border border-slate-700 transition">
-                  [4] Open Kernel Zsh Shell ➔
+                <button onclick="switchTab(4)" class="px-3 py-1.5 rounded bg-slate-900 hover:bg-slate-800 text-purple-300 border border-slate-700 transition">
+                  [4] Kernel Zsh Terminal ➔
                 </button>
               </div>
             </div>
@@ -245,22 +242,22 @@
       </div>
 
       <!-- ==================================================== -->
-      <!-- WINDOW 1: REPOSITORIES FILESYSTEM TREE EXPLORER      -->
+      <!-- TAB 1: 24+ REPOSITORIES FILESYSTEM TREE EXPLORER     -->
       <!-- ==================================================== -->
-      <div id="win-1" class="hidden p-4 md:p-6 overflow-y-auto space-y-4 flex-1">
+      <div id="tab-view-1" class="hidden p-4 md:p-6 overflow-y-auto space-y-4 flex-1">
         <div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-slate-800 text-xs">
           <div class="text-slate-400">
-            <span class="text-[#14f195] font-bold">TREE /var/git/</span> — 24+ Repositories Across Org (@0xtryhardx0) &amp; Core (@ayodejierioluwa)
+            <span class="text-[#14f195] font-bold">TREE /var/git/</span> — 24+ Verified Production Repositories (Org: @0xtryhardx0)
           </div>
-          <div class="text-[11px] text-slate-500">Click any file to inspect verified code &amp; architectural manifest</div>
+          <div class="text-[11px] text-slate-500">Click any file to inspect verified source architecture &amp; contract manifest</div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           
-          <!-- Tree Navigation List -->
-          <div class="lg:col-span-5 bg-black/60 p-4 rounded border border-slate-800 font-mono text-xs space-y-3 max-h-[520px] overflow-y-auto">
+          <!-- Tree Navigation Pane -->
+          <div class="lg:col-span-5 bg-black/70 p-4 rounded border border-slate-800 font-mono text-xs space-y-3 max-h-[540px] overflow-y-auto">
             
-            <!-- Solana Category -->
+            <!-- Solana Stack -->
             <div class="space-y-1">
               <div class="text-[#14f195] font-bold flex items-center gap-1.5">
                 <span>📁</span> <span>solana_svm/</span>
@@ -287,7 +284,7 @@
               </div>
             </div>
 
-            <!-- Petroleum & Physics Category -->
+            <!-- Subsurface Physics Stack -->
             <div class="space-y-1 pt-2">
               <div class="text-[#00f2fe] font-bold flex items-center gap-1.5">
                 <span>📁</span> <span>subsurface_physics/</span>
@@ -311,7 +308,7 @@
               </div>
             </div>
 
-            <!-- Autonomous Agents Category -->
+            <!-- Autonomous Agents Stack -->
             <div class="space-y-1 pt-2">
               <div class="text-purple-400 font-bold flex items-center gap-1.5">
                 <span>📁</span> <span>autonomous_agents/</span>
@@ -324,7 +321,7 @@
                   <span>├── mermail_mcp_server.ts</span> <span class="text-[10px] text-cyan-400">MCP SDK</span>
                 </div>
                 <div onclick="selectRepo('animus')" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1 rounded transition flex items-center justify-between">
-                  <span>├── animus_engine_v2.py</span> <span class="text-[10px] text-emerald-400">Multi-Agent</span>
+                  <span>├── animus_engine_v2.py</span> <span class="text-[10px] text-emerald-400">Swarm</span>
                 </div>
                 <div onclick="selectRepo('opencode')" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1 rounded transition flex items-center justify-between">
                   <span>└── opencode_memory_rag.py</span> <span class="text-[10px] text-slate-400">Vector</span>
@@ -334,26 +331,18 @@
 
           </div>
 
-          <!-- Right File Previewer -->
-          <div class="lg:col-span-7 bg-[#020408] p-5 rounded border border-slate-800 font-mono text-xs space-y-3 min-h-[460px]">
+          <!-- File Inspect Pane -->
+          <div class="lg:col-span-7 bg-[#020408] p-5 rounded border border-slate-800 font-mono text-xs space-y-3 min-h-[480px]">
             <div class="flex items-center justify-between pb-2 border-b border-slate-800 text-slate-400">
               <span id="repo-inspect-file" class="text-[#14f195] font-bold">cat /var/git/solana_svm/solplay_escrow.rs</span>
               <span id="repo-inspect-meta" class="text-[10px] text-slate-500">Anchor PDA Escrow</span>
             </div>
             
-            <!-- Dynamic Content Output -->
-            <div id="repo-inspect-desc" class="text-slate-300 leading-relaxed space-y-2">
-              <p>Non-custodial sports wagering &amp; copy-trading escrow programs authored in Rust (Anchor framework). Wagers and pool collateral are strictly locked in Program Derived Addresses (PDAs) with zero reentrancy risks.</p>
-              <div class="p-3 bg-black/60 rounded border border-slate-800/80 text-emerald-400 space-y-1">
-                <div>• Sub-1.2s settlement oracle ingesting DraftKings, ESPN, and TheSportsDB SHA-256 state proofs.</div>
-                <div>• Automated 2.0% creator commission split redistribution directly on-chain.</div>
-              </div>
-            </div>
+            <div id="repo-inspect-desc" class="text-slate-300 leading-relaxed space-y-2"></div>
 
-            <!-- Code Snippet Display -->
             <div class="pt-2">
               <div class="text-slate-500 text-[10px] pb-1 uppercase tracking-wider">Source Architecture Snippet:</div>
-              <pre id="repo-inspect-code" class="p-3.5 bg-black/80 rounded border border-slate-800 text-slate-200 overflow-x-auto text-[11px] leading-relaxed text-[#14f195]"></pre>
+              <pre id="repo-inspect-code" class="p-3.5 bg-black/90 rounded border border-slate-800 text-slate-200 overflow-x-auto text-[11px] leading-relaxed text-[#14f195]"></pre>
             </div>
           </div>
 
@@ -361,18 +350,18 @@
       </div>
 
       <!-- ==================================================== -->
-      <!-- WINDOW 2: TRYHARD INTERACTIVE REPL AGENT             -->
+      <!-- TAB 2: CANDIDATE INTELLIGENCE REPL                   -->
       <!-- ==================================================== -->
-      <div id="win-2" class="hidden p-4 md:p-6 overflow-y-auto space-y-4 flex-1">
+      <div id="tab-view-2" class="hidden p-4 md:p-6 overflow-y-auto space-y-4 flex-1">
         <div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-slate-800 text-xs">
           <div class="text-slate-400">
-            <span class="text-[#00f2fe] font-bold">Python 3.12.2 / Rust REPL</span> — TryHard Candidate Intelligence Runtime
+            <span class="text-[#00f2fe] font-bold">Python 3.12.2 / Rust REPL</span> — TryHard Autonomous Candidate Reasoning Engine
           </div>
           <div class="text-[11px] text-[#14f195]">READY • 24 CODEBASES INDEXED</div>
         </div>
 
-        <!-- REPL Output Terminal Stream -->
-        <div id="repl-stream" class="bg-black/70 p-4 md:p-5 rounded border border-slate-800 font-mono text-xs md:text-sm space-y-4 min-h-[400px] max-h-[500px] overflow-y-auto custom-scroll">
+        <!-- REPL Output Stream -->
+        <div id="repl-stream" class="bg-black/80 p-4 md:p-5 rounded border border-slate-800 font-mono text-xs md:text-sm space-y-4 min-h-[420px] max-h-[500px] overflow-y-auto custom-scroll">
           <div class="text-slate-500 leading-relaxed">
             &gt;&gt;&gt; import tryhard_candidate as tc<br>
             &gt;&gt;&gt; tc.mount_repositories(["SOLPLAY", "OMESHAM_AI", "SOVEREIGN_AGENT", "SOLWORK", "GEOCLEARANCE", "PETRO_ONE"])<br>
@@ -394,24 +383,24 @@
         <!-- REPL Interactive Input -->
         <form onsubmit="handleReplSubmit(event)" class="bg-[#03060c] p-3 rounded border border-slate-800 flex items-center gap-2">
           <span class="text-[#00f2fe] font-bold">&gt;&gt;&gt;</span>
-          <input id="repl-input" type="text" placeholder="Type a function or query (e.g. 'explain geoclearance', 'why hire for rust', 'how does witsml parser work')..." 
+          <input id="repl-input" type="text" placeholder="Type a function or query (e.g. 'explain geoclearance', 'why hire for rust')..." 
             class="flex-1 bg-transparent text-white font-mono text-xs md:text-sm outline-none placeholder:text-slate-600" autocomplete="off" />
           <button type="submit" class="px-4 py-1.5 bg-[#00f2fe] text-black font-bold text-xs rounded hover:bg-cyan-300 transition">RUN</button>
         </form>
       </div>
 
       <!-- ==================================================== -->
-      <!-- WINDOW 3: OSCILLOSCOPE 1D WAVE PHYSICS ENGINE        -->
+      <!-- TAB 3: 1D WAVE OSCILLOSCOPE PHYSICS ENGINE           -->
       <!-- ==================================================== -->
-      <div id="win-3" class="hidden p-4 md:p-6 overflow-y-auto space-y-4 flex-1">
+      <div id="tab-view-3" class="hidden p-4 md:p-6 overflow-y-auto space-y-4 flex-1">
         <div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-slate-800 text-xs">
           <div class="text-slate-400">
             <span class="text-[#14f195] font-bold">1D HYPERBOLIC WAVE EQUATION SOLVER</span> — Drillstring Torsional Vibration Telemetry
           </div>
-          <div class="text-[11px] text-slate-500">∂²u/∂t² = c² (∂²u/∂x²) • CFL STABILITY: c·Δt/Δx &lt; 1</div>
+          <div class="text-[11px] text-slate-500">∂²u/∂t² = c² (∂²u/∂x²) • CFL: c·Δt/Δx &lt; 1</div>
         </div>
 
-        <!-- Oscilloscope Display -->
+        <!-- Scope Canvas -->
         <div class="bg-black/90 p-4 rounded border border-slate-800 relative space-y-3">
           <div class="flex flex-wrap items-center justify-between text-[11px] font-mono text-slate-400 border-b border-slate-800/80 pb-2">
             <div>SHEAR WAVE VELOCITY: <span class="text-[#14f195] font-bold">c = 3,200 m/s (Steel)</span></div>
@@ -425,13 +414,13 @@
           <div class="flex flex-wrap items-center justify-between text-[11px] font-mono text-slate-500">
             <span>← Drag mouse across the oscilloscope canvas to inject torsional torque spikes</span>
             <div class="flex items-center gap-2">
-              <button onclick="injectPulse(25)" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-[#14f195]">+ Injection Pulse</button>
-              <button onclick="resetWave()" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-400">Reset Wave</button>
+              <button onclick="injectPulse(25)" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-[#14f195]">+ Injection Pulse</button>
+              <button onclick="resetWave()" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-400">Reset Wave</button>
             </div>
           </div>
         </div>
 
-        <!-- Physics Rigor Dossier -->
+        <!-- Rigor Dossier -->
         <div class="p-4 rounded bg-black/60 border border-slate-800 font-mono text-xs space-y-2 text-slate-300 leading-relaxed">
           <div class="text-[#14f195] font-bold uppercase tracking-wider text-[11px]">Subsurface Physics to High-Performance Rust Systems:</div>
           <p>
@@ -442,9 +431,9 @@
       </div>
 
       <!-- ==================================================== -->
-      <!-- WINDOW 4: KERNEL ZSH TERMINAL SHELL                  -->
+      <!-- TAB 4: KERNEL ZSH TERMINAL SHELL                    -->
       <!-- ==================================================== -->
-      <div id="win-4" class="hidden p-4 md:p-6 overflow-y-auto space-y-4 flex-1 font-mono text-xs md:text-sm">
+      <div id="tab-view-4" class="hidden p-4 md:p-6 overflow-y-auto space-y-4 flex-1 font-mono text-xs md:text-sm">
         <div class="flex items-center justify-between pb-2 border-b border-slate-800 text-xs text-slate-400">
           <span>zsh 5.9 (x86_64-apple-darwin23.0) — Solana SBF Sealevel Kernel</span>
           <span class="text-[#14f195]">SESSION: ACTIVE</span>
@@ -483,23 +472,21 @@
   </main>
 
   <!-- ======================================================== -->
-  <!-- TMUX BOTTOM STATUS BAR                                   -->
+  <!-- TMUX BOTTOM STATUS BAR (100% CLEAN ANONYMOUS)            -->
   <!-- ======================================================== -->
-  <footer class="bg-[#05070e] border-t border-slate-800 text-[11px] px-3 md:px-5 py-2 flex flex-wrap items-center justify-between gap-2 select-none z-40 text-slate-400">
+  <footer class="bg-[#050811] border-t border-slate-800 text-[11px] px-3 md:px-5 py-2 flex flex-wrap items-center justify-between gap-2 select-none z-40 text-slate-400">
     <div class="flex items-center gap-3">
-      <span class="text-white font-bold">[0xtryhardx0]</span>
-      <span>24 Repositories</span>
+      <span class="text-white font-bold">[@0xtryhardx0]</span>
+      <span>24 Verified Repositories</span>
       <span>•</span>
-      <span>Rust Anchor &amp; Tokio</span>
+      <span>Rust Anchor &amp; SBF</span>
       <span>•</span>
-      <span>Wave Equation PDE</span>
+      <span>1D Wave Mechanics</span>
     </div>
     <div class="flex items-center gap-3">
       <a href="https://x.com/0xtryhardx0" target="_blank" class="text-[#14f195] hover:underline font-bold">𝕏 @0xtryhardx0</a>
       <span>•</span>
       <a href="https://github.com/0xtryhardx0" target="_blank" class="text-[#00f2fe] hover:underline">github.com/0xtryhardx0</a>
-      <span>•</span>
-      <a href="https://github.com/ayodejierioluwa" target="_blank" class="text-purple-300 hover:underline">github.com/ayodejierioluwa</a>
     </div>
   </footer>
 
@@ -507,104 +494,81 @@
   <!-- JAVASCRIPT: WORKSTATION CORE & PHYSICS ENGINE            -->
   <!-- ======================================================== -->
   <script>
-    // ----------------------------------------------------
-    // 1. Web Audio Synthesizer (Mechanical Click SFX)
-    // ----------------------------------------------------
-    let audioOn = true;
-    let aCtx = null;
+    // 1. Audio Synthesizer
+    let audioOn = true, aCtx = null;
     function playClick(freq = 750, dur = 0.035) {
       if (!audioOn) return;
       try {
         if (!aCtx) aCtx = new (window.AudioContext || window.webkitAudioContext)();
         if (aCtx.state === 'suspended') aCtx.resume();
-        const osc = aCtx.createOscillator();
-        const gain = aCtx.createGain();
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(freq, aCtx.currentTime);
+        const osc = aCtx.createOscillator(), gain = aCtx.createGain();
+        osc.type = 'triangle'; osc.frequency.setValueAtTime(freq, aCtx.currentTime);
         gain.gain.setValueAtTime(0.03, aCtx.currentTime);
         gain.gain.exponentialRampToValueAtTime(0.0001, aCtx.currentTime + dur);
-        osc.connect(gain);
-        gain.connect(aCtx.destination);
-        osc.start();
-        osc.stop(aCtx.currentTime + dur);
+        osc.connect(gain); gain.connect(aCtx.destination);
+        osc.start(); osc.stop(aCtx.currentTime + dur);
       } catch (e) {}
     }
-
     function toggleAudio() {
       audioOn = !audioOn;
       document.getElementById('btn-audio').textContent = audioOn ? '[SFX: ON]' : '[SFX: OFF]';
       if (audioOn) playClick(900);
     }
 
-    // ----------------------------------------------------
-    // 2. CRT Scanline Toggle
-    // ----------------------------------------------------
+    // 2. CRT Scanlines
     let crtOn = true;
     function toggleCRT() {
       crtOn = !crtOn;
-      const overlay = document.getElementById('crt-overlay');
-      overlay.style.display = crtOn ? 'block' : 'none';
+      document.getElementById('crt-overlay').style.display = crtOn ? 'block' : 'none';
       document.getElementById('btn-crt').textContent = crtOn ? '[CRT: ON]' : '[CRT: OFF]';
       playClick(500);
     }
 
-    // ----------------------------------------------------
-    // 3. UTC Live Clock
-    // ----------------------------------------------------
+    // 3. UTC Clock
     function updateClock() {
       const now = new Date();
-      const str = now.toUTCString().split(' ')[4] + ' UTC';
-      const el = document.getElementById('utc-clock');
-      if (el) el.textContent = str;
+      document.getElementById('utc-clock').textContent = now.toUTCString().split(' ')[4] + ' UTC';
     }
-    setInterval(updateClock, 1000);
-    updateClock();
+    setInterval(updateClock, 1000); updateClock();
 
-    // ----------------------------------------------------
-    // 4. TMUX Window Management (0–4)
-    // ----------------------------------------------------
+    // 4. Tab Switching
     const titles = [
-      "tmux: window [0: neofetch.sh] — Systems Dossier & Hardware Architecture",
-      "tmux: window [1: repos.tree] — Full 24+ Repository Filesystem Explorer",
-      "tmux: window [2: tryhard.repl] — Interactive Candidate Intelligence REPL",
-      "tmux: window [3: wave_solver.py] — 1D Hyperbolic Wave Equation Oscilloscope",
-      "tmux: window [4: kernel.zsh] — Interactive Solana SBF Kernel Terminal"
+      "0xOS // WINDOW 0: NEOFETCH SYSTEMS DOSSIER",
+      "0xOS // WINDOW 1: 24+ REPOSITORIES FILESYSTEM TREE EXPLORER",
+      "0xOS // WINDOW 2: TRYHARD INTERACTIVE REPL CANDIDATE ENGINE",
+      "0xOS // WINDOW 3: 1D HYPERBOLIC WAVE EQUATION OSCILLOSCOPE",
+      "0xOS // WINDOW 4: KERNEL ZSH TERMINAL SHELL"
     ];
 
-    function gotoWindow(index) {
+    function switchTab(index) {
       playClick(800);
       for (let i = 0; i <= 4; i++) {
-        const win = document.getElementById('win-' + i);
+        const view = document.getElementById('tab-view-' + i);
         const tab = document.getElementById('tab-' + i);
         if (i === index) {
-          win.classList.remove('hidden');
+          view.classList.remove('hidden');
           tab.className = "px-2.5 py-1 rounded bg-[#14f195] text-black font-bold transition flex items-center gap-1";
           document.getElementById('pane-title').textContent = titles[i];
           if (i === 3) initScope();
           if (i === 4) initMatrix();
         } else {
-          win.classList.add('hidden');
+          view.classList.add('hidden');
           tab.className = "px-2.5 py-1 rounded text-slate-400 hover:text-white transition flex items-center gap-1";
         }
       }
     }
 
-    // Hotkey listener for numbers 0-4
     window.addEventListener('keydown', (e) => {
       if (e.target.tagName === 'INPUT') return;
-      if (['0', '1', '2', '3', '4'].includes(e.key)) {
-        gotoWindow(parseInt(e.key));
-      }
+      if (['0', '1', '2', '3', '4'].includes(e.key)) switchTab(parseInt(e.key));
     });
 
-    // ----------------------------------------------------
-    // 5. Repository Filesystem Explorer Data (Window 1)
-    // ----------------------------------------------------
+    // 5. Repositories Data
     const repoDetails = {
       solplay: {
         file: "cat /var/git/solana_svm/solplay_escrow.rs",
         meta: "Anchor PDA Escrow • Sub-1.2s Settlement",
-        desc: "Non-custodial sports wagering & copy-trading escrow programs authored in Rust (Anchor). User collateral locked in isolated Program Derived Addresses (PDAs) with zero reentrancy risks.<br><br>Features a multi-source consensus oracle verifying DraftKings, ESPN, and TheSportsDB SHA-256 state proofs within 1.2 seconds of official match termination, plus a 2.0% creator commission split redistribution on-chain.",
+        desc: "Non-custodial sports wagering & copy-trading escrow programs in Rust (Anchor). User collateral locked in isolated Program Derived Addresses (PDAs) with zero reentrancy risks.<br><br>Features a multi-source consensus oracle verifying DraftKings, ESPN, and TheSportsDB SHA-256 state proofs within 1.2 seconds of official match termination, plus a 2.0% creator commission split redistribution on-chain.",
         code: `#[program]
 pub mod solplay_escrow {
     use super::*;
@@ -704,10 +668,10 @@ pub mod solplay_escrow {
         self.u = np.zeros(int(length_m / self.dx))
         self.u_prev = np.zeros_like(self.u)
 
-    def step_forward(self, bit_torque_perturbation):
+    def step_forward(self, bit_torque):
         cfl = (self.c * self.dt / self.dx) ** 2
         u_next = 2*self.u - self.u_prev + cfl * (np.roll(self.u, -1) - 2*self.u + np.roll(self.u, 1))
-        u_next[-1] += bit_torque_perturbation
+        u_next[-1] += bit_torque
         self.u_prev, self.u = self.u, u_next
         return self.u`
       },
@@ -747,7 +711,7 @@ pub mod solplay_escrow {
       netco: {
         file: "cat /var/git/subsurface_physics/netco_aspen_hysys.hsc",
         meta: "Aspen HYSYS Process Simulation • HAZOP",
-        desc: "Steady-state oil & gas separation facility network simulation in Aspen HYSYS conducted during NETCO engineering internship. Optimized gas compressor train throughput by +4.2% while verifying 14 pressure relief bottlenecks during HAZOP/HAZID safety sign-offs.",
+        desc: "Steady-state oil & gas separation facility network simulation in Aspen HYSYS conducted during process engineering internship. Optimized gas compressor train throughput by +4.2% while verifying 14 pressure relief bottlenecks during HAZOP/HAZID safety sign-offs.",
         code: `// Aspen HYSYS Process Simulation Output Summary:
 Stream: 3-Phase High-Pressure Separator V-101
 Operating Pressure: 42.5 bar(g) | Operating Temp: 68.4 °C
@@ -801,9 +765,7 @@ payboxServer.tool("disburse_bounty", { researcher: z.string(), severity: z.enum(
     }
     selectRepo('solplay');
 
-    // ----------------------------------------------------
-    // 6. Interactive REPL Agent (Window 2)
-    // ----------------------------------------------------
+    // 6. REPL Answers
     const replAnswers = {
       solplay: `>>> tc.explain_solplay_security()
 [SOLPLAY SECURITY AUDIT VERIFICATION]
@@ -827,9 +789,8 @@ payboxServer.tool("disburse_bounty", { researcher: z.string(), severity: z.enum(
 
       education: `>>> tc.verify_academic_credentials()
 [ACADEMIC CREDENTIALS & RIGOR]
-• Institution: Covenant University, Ota, Nigeria (2020 – 2025).
-• Degree: Bachelor of Engineering (B.Eng.), Petroleum Systems Engineering.
 • Classification: First Class / Upper Division Honors.
+• Degree: Bachelor of Engineering (B.Eng.), Petroleum Systems Engineering.
 • Positions: Society of Petroleum Engineers (SPE) Assistant Membership Lead, Technical Symposium Presenter.`,
 
       hire: `>>> tc.get_contract_dispatch()
@@ -850,13 +811,10 @@ payboxServer.tool("disburse_bounty", { researcher: z.string(), severity: z.enum(
       const input = document.getElementById('repl-input');
       const val = input.value.trim();
       if (!val) return;
-
       playClick(850);
       const stream = document.getElementById('repl-history');
       const lower = val.toLowerCase();
-
       let answer = `>>> ${val}\n[REPL OUTPUT] Query evaluated across 24 repositories. Try calling tc.explain_solplay_security(), tc.explain_omesham_wave_physics(), or tc.get_contract_dispatch().`;
-
       if (lower.includes('solplay') || lower.includes('security') || lower.includes('reentrancy')) answer = replAnswers.solplay;
       else if (lower.includes('omesham') || lower.includes('wave') || lower.includes('physics') || lower.includes('drill')) answer = replAnswers.omesham;
       else if (lower.includes('solwork') || lower.includes('pbkdf2') || lower.includes('payroll') || lower.includes('microtask')) answer = replAnswers.solwork;
@@ -871,47 +829,27 @@ payboxServer.tool("disburse_bounty", { researcher: z.string(), severity: z.enum(
       stream.scrollTop = stream.scrollHeight;
     }
 
-    // ----------------------------------------------------
-    // 7. Oscilloscope 1D Wave Physics Simulator (Window 3)
-    // ----------------------------------------------------
+    // 7. Oscilloscope Simulation
     const scopeCanvas = document.getElementById('scope-canvas');
-    let scopeCtx = null;
-    let sPoints = [];
-    const numSPoints = 140;
-    let sW, sH;
-    let scopeRunning = false;
-
+    let scopeCtx = null, sPoints = [], numSPoints = 140, sW, sH, scopeRunning = false;
     function initScope() {
       if (!scopeCanvas) return;
-      sW = scopeCanvas.parentElement.offsetWidth;
-      sH = scopeCanvas.offsetHeight || 200;
-      scopeCanvas.width = sW;
-      scopeCanvas.height = sH;
+      sW = scopeCanvas.parentElement.offsetWidth; sH = scopeCanvas.offsetHeight || 200;
+      scopeCanvas.width = sW; scopeCanvas.height = sH;
       scopeCtx = scopeCanvas.getContext('2d');
       sPoints = [];
       for (let i = 0; i < numSPoints; i++) sPoints.push({ y: 0, vy: 0 });
-      if (!scopeRunning) {
-        scopeRunning = true;
-        animateScope();
-      }
+      if (!scopeRunning) { scopeRunning = true; animateScope(); }
     }
-
     function injectPulse(force = 20) {
       playClick(600);
       const mid = Math.floor(numSPoints / 2);
-      sPoints[mid].vy += force;
-      sPoints[mid - 1].vy += force * 0.7;
-      sPoints[mid + 1].vy += force * 0.7;
+      sPoints[mid].vy += force; sPoints[mid - 1].vy += force * 0.7; sPoints[mid + 1].vy += force * 0.7;
     }
-
     function resetWave() {
       playClick(400);
-      for (let i = 0; i < numSPoints; i++) {
-        sPoints[i].y = 0;
-        sPoints[i].vy = 0;
-      }
+      for (let i = 0; i < numSPoints; i++) { sPoints[i].y = 0; sPoints[i].vy = 0; }
     }
-
     if (scopeCanvas) {
       scopeCanvas.addEventListener('mousemove', (e) => {
         const rect = scopeCanvas.getBoundingClientRect();
@@ -920,23 +858,12 @@ payboxServer.tool("disburse_bounty", { researcher: z.string(), severity: z.enum(
         if (idx >= 0 && idx < numSPoints) sPoints[idx].vy += 14;
       });
     }
-
     function animateScope() {
       if (!scopeCanvas || !scopeCtx) return;
-      scopeCtx.fillStyle = '#020408';
-      scopeCtx.fillRect(0, 0, sW, sH);
-
-      // Oscilloscope grid lines
-      scopeCtx.strokeStyle = 'rgba(20, 241, 149, 0.08)';
-      scopeCtx.lineWidth = 1;
-      for (let x = 0; x < sW; x += 40) {
-        scopeCtx.beginPath(); scopeCtx.moveTo(x, 0); scopeCtx.lineTo(x, sH); scopeCtx.stroke();
-      }
-      for (let y = 0; y < sH; y += 30) {
-        scopeCtx.beginPath(); scopeCtx.moveTo(0, y); scopeCtx.lineTo(sW, y); scopeCtx.stroke();
-      }
-
-      // Wave propagation physics
+      scopeCtx.fillStyle = '#020408'; scopeCtx.fillRect(0, 0, sW, sH);
+      scopeCtx.strokeStyle = 'rgba(20, 241, 149, 0.08)'; scopeCtx.lineWidth = 1;
+      for (let x = 0; x < sW; x += 40) { scopeCtx.beginPath(); scopeCtx.moveTo(x, 0); scopeCtx.lineTo(x, sH); scopeCtx.stroke(); }
+      for (let y = 0; y < sH; y += 30) { scopeCtx.beginPath(); scopeCtx.moveTo(0, y); scopeCtx.lineTo(sW, y); scopeCtx.stroke(); }
       const tension = 0.038, damping = 0.988, midY = sH / 2;
       for (let i = 0; i < numSPoints; i++) {
         const left = i > 0 ? sPoints[i - 1].y : 0;
@@ -945,67 +872,22 @@ payboxServer.tool("disburse_bounty", { researcher: z.string(), severity: z.enum(
         sPoints[i].vy = (sPoints[i].vy + force) * damping;
         sPoints[i].y += sPoints[i].vy;
       }
-
-      // Draw Oscilloscope Phosphor Wave
-      scopeCtx.beginPath();
-      scopeCtx.moveTo(0, midY + sPoints[0].y);
-      for (let i = 1; i < numSPoints; i++) {
-        scopeCtx.lineTo((i / (numSPoints - 1)) * sW, midY + sPoints[i].y);
-      }
-      scopeCtx.strokeStyle = '#14f195';
-      scopeCtx.lineWidth = 2.5;
-      scopeCtx.shadowColor = '#14f195';
-      scopeCtx.shadowBlur = 10;
+      scopeCtx.beginPath(); scopeCtx.moveTo(0, midY + sPoints[0].y);
+      for (let i = 1; i < numSPoints; i++) scopeCtx.lineTo((i / (numSPoints - 1)) * sW, midY + sPoints[i].y);
+      scopeCtx.strokeStyle = '#14f195'; scopeCtx.lineWidth = 2.5; scopeCtx.shadowColor = '#14f195'; scopeCtx.shadowBlur = 10;
       scopeCtx.stroke();
-
       requestAnimationFrame(animateScope);
     }
 
-    // ----------------------------------------------------
-    // 8. Kernel ZSH Terminal Shell (Window 4)
-    // ----------------------------------------------------
+    // 8. Zsh Shell
     const zshResponses = {
-      'help': `Commands:
-  • <span class="text-[#14f195]">whois</span>            : Systems dossier for @0xtryhardx0
-  • <span class="text-[#00f2fe]">projects --web3</span>  : Solana programs (SolPlay, SolWork, LOC, GeoClearance)
-  • <span class="text-cyan-300">projects --petro</span> : Omesham AI, Petro.One, PetroShield, NETCO HYSYS
-  • <span class="text-purple-300">projects --agents</span>: Sovereign Agent, Mermail MCP, Aether DEX
-  • <span class="text-amber-300">education</span>        : Academic honors (B.Eng. Petroleum, First Class/Upper)
-  • <span class="text-green-400">matrix</span>           : Toggle Matrix digital rain
-  • <span class="text-amber-300">sudo hire</span>        : Direct recruitment dispatch
-  • <span class="text-slate-500">clear</span>            : Flush terminal`,
-
-      'whois': `<span class="text-[#14f195] font-bold">whois @0xtryhardx0:</span>
-Systems Architect & Web3 Engineer specializing in low-latency distributed runtimes, high-throughput Rust smart contracts on Solana, and physics-informed computational engines. Holds a B.Eng. in Petroleum Systems Engineering (First Class / Upper Division Honors). Operates 24+ codebases across Solana, industrial physics, and autonomous agent systems.`,
-
-      'projects --web3': `<span class="text-[#00f2fe] font-bold">SOLANA &amp; WEB3 CODEBASES:</span>
-1. <span class="text-white font-bold">SOLPLAY:</span> Rust Anchor sports prediction escrow & oracle consensus (&lt;1.2s settlement).
-2. <span class="text-white font-bold">SOLWORK:</span> Decentralized microtasking protocol with deterministic client PBKDF2 key derivation.
-3. <span class="text-white font-bold">GEOCLEARANCE NYSC:</span> Decentralized biometric and GPS geofence clearance platform.
-4. <span class="text-white font-bold">LAGOS ON CHAIN (LOC):</span> Dialect Blinks social ticketing & cNFT event check-ins.
-5. <span class="text-white font-bold">COOKIEPAY:</span> Fast micro-tipping & invoice engine on Cookie Chain (SVM).`,
-
-      'projects --petro': `<span class="text-cyan-300 font-bold">PETROLEUM &amp; INDUSTRIAL PHYSICS:</span>
-1. <span class="text-white font-bold">OMESHAM AI:</span> 1D wave equation drillstring torsional dynamics; prevented $250k+ rig downtime.
-2. <span class="text-white font-bold">PETRO.ONE:</span> Integrated DCF asset valuation & satellite spectral seep exploration.
-3. <span class="text-white font-bold">PETROSHIELD AI:</span> Subsurface wellbore integrity and blowout hazard forecasting.
-4. <span class="text-white font-bold">NETCO SIMULATION:</span> Aspen HYSYS offshore compressor separation network (+4.2% throughput).`,
-
-      'projects --agents': `<span class="text-purple-300 font-bold">AUTONOMOUS AGENTS &amp; RUNTIMES:</span>
-1. <span class="text-white font-bold">SOVEREIGN AGENT v2.0:</span> Alpha sentinel, Argus security shield & BlinkCraft co-pilot.
-2. <span class="text-white font-bold">MERMAIL SECURITY DESK:</span> Zero-trust bug bounty remittance desk with Anthropic MCP servers.
-3. <span class="text-white font-bold">AETHER DEX:</span> Sub-18ms concurrent WebSocket orderbook routing (Tokio async).
-4. <span class="text-white font-bold">ANIMUS ENGINE:</span> High-performance concurrent multi-agent decision runtime.`,
-
-      'education': `<span class="text-slate-100 font-bold">ACADEMIC RIGOR &amp; ENGINEERING HONORS:</span>
-• Degree: Bachelor of Engineering (B.Eng.), Petroleum Systems Engineering
-• Classification: First Class / Upper Division Honors (Top Tier Academic Standing)
-• Leadership: SPE Assistant Membership Lead, Technical Symposium Presenter.`,
-
-      'sudo hire': `<span class="text-amber-300 font-bold">⚡ [FAST-TRACK CANDIDATE DISPATCH]</span>
-Status: Available for remote contracts, Solana Core development, and systems architecture.
-• Direct Message on X: <a href="https://x.com/0xtryhardx0" target="_blank" class="text-[#14f195] underline">@0xtryhardx0</a>
-• GitHub: <a href="https://github.com/0xtryhardx0" target="_blank" class="text-[#00f2fe] underline">github.com/0xtryhardx0</a>`
+      'help': `Commands:\n  • whois\n  • projects --web3\n  • projects --petro\n  • projects --agents\n  • education\n  • matrix\n  • sudo hire\n  • clear`,
+      'whois': `whois @0xtryhardx0: Systems Architect & Web3 Engineer. B.Eng. Petroleum Systems (First Class / Upper Division Honors). Operates 24+ Codebases across Solana Anchor, wave physics, and agent runtimes.`,
+      'projects --web3': `SOLPLAY (Sportsbook) • SOLWORK (Microtasking) • GEOCLEARANCE NYSC • LAGOS ON CHAIN • COOKIEPAY • AETHER DEX`,
+      'projects --petro': `OMESHAM AI (Wave Mechanics) • PETRO.ONE (Valuation) • PETROSHIELD AI • NETCO HYSYS`,
+      'projects --agents': `SOVEREIGN AGENT v2.0 • MERMAIL SECURITY DESK • ANIMUS ENGINE • OPENCODE MEMORY`,
+      'education': `Top-Tier Institute: B.Eng. Petroleum Systems Engineering (First Class / Upper Division Honors)`,
+      'sudo hire': `Dispatch: https://x.com/0xtryhardx0 (DMs Open)`
     };
 
     function execZsh(cmd) {
@@ -1014,11 +896,9 @@ Status: Available for remote contracts, Solana Core development, and systems arc
       const out = document.getElementById('zsh-output');
       if (clean === 'clear') { out.innerHTML = ''; return; }
       if (clean === 'matrix') toggleMatrix();
-
       const userLine = document.createElement('div');
       userLine.innerHTML = `<span class="text-[#14f195] font-bold">0xtryhardx0@node:~$</span> <span class="text-white">${cmd}</span>`;
       out.appendChild(userLine);
-
       const respLine = document.createElement('div');
       respLine.className = 'text-xs text-slate-300 pl-2 border-l border-white/20 my-1 leading-relaxed';
       respLine.innerHTML = zshResponses[clean] || `<span class="text-red-400">zsh: command not found: ${cmd}</span>. Type <span class="text-[#14f195]">help</span>.`;
@@ -1035,22 +915,17 @@ Status: Available for remote contracts, Solana Core development, and systems arc
       input.value = '';
     }
 
-    // Matrix Digital Rain
     let mInterval = null;
     function initMatrix() {
       const mCanvas = document.getElementById('term-matrix-canvas');
       if (!mCanvas) return;
       const mCtx = mCanvas.getContext('2d');
-      mCanvas.width = mCanvas.parentElement.offsetWidth;
-      mCanvas.height = mCanvas.parentElement.offsetHeight;
+      mCanvas.width = mCanvas.parentElement.offsetWidth; mCanvas.height = mCanvas.parentElement.offsetHeight;
       const letters = '01TRYHARDX0SOLANARUSTTOKENANCHORWAVE10';
       const fSize = 13, cols = Math.floor(mCanvas.width / fSize), drops = Array(cols).fill(1);
-
       function draw() {
-        mCtx.fillStyle = 'rgba(3, 5, 9, 0.08)';
-        mCtx.fillRect(0, 0, mCanvas.width, mCanvas.height);
-        mCtx.fillStyle = '#14f195';
-        mCtx.font = fSize + 'px monospace';
+        mCtx.fillStyle = 'rgba(3, 5, 9, 0.08)'; mCtx.fillRect(0, 0, mCanvas.width, mCanvas.height);
+        mCtx.fillStyle = '#14f195'; mCtx.font = fSize + 'px monospace';
         for (let i = 0; i < drops.length; i++) {
           const txt = letters.charAt(Math.floor(Math.random() * letters.length));
           mCtx.fillText(txt, i * fSize, drops[i] * fSize);
@@ -1061,7 +936,6 @@ Status: Available for remote contracts, Solana Core development, and systems arc
       if (mInterval) clearInterval(mInterval);
       mInterval = setInterval(draw, 40);
     }
-
     function toggleMatrix() {
       const mCanvas = document.getElementById('term-matrix-canvas');
       mCanvas.style.display = (mCanvas.style.display === 'none') ? 'block' : 'none';
