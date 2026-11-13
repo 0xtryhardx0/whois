@@ -1,925 +1,979 @@
 <!DOCTYPE html>
-<html lang="en" class="dark scroll-smooth">
+<html lang="en" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>whois @0xtryhardx0 — Systems Architect, Solana Core &amp; Subsurface AI</title>
-  <meta name="description" content="Official Interactive Dossier for @0xtryhardx0: Solana Rust Smart Contracts, Subsurface Physics Simulation, and Autonomous Agent Systems.">
+  <title>0xOS v3.8 — @0xtryhardx0 Systems Workstation</title>
+  <meta name="description" content="0xOS: Systems Architect & Web3 Runtime Engineer Workstation for @0xtryhardx0. Solana Anchor SBF, Subsurface Wave Equation Physics, and Low-Latency Concurrency.">
   
   <!-- Tailwind CSS -->
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
 
-  <!-- Typography -->
+  <!-- JetBrains Mono & Fira Code Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --bg: #030407;
-      --card-bg: rgba(10, 14, 23, 0.78);
-      --card-border: rgba(255, 255, 255, 0.08);
-      --card-border-hover: rgba(255, 255, 255, 0.22);
-      --solana-green: #14F195;
-      --cyber-cyan: #00F2FE;
+      --term-green: #14f195;
+      --term-cyan: #00f2fe;
+      --term-purple: #9945ff;
+      --term-amber: #f59e0b;
+      --term-dim: #475569;
+      --term-border: #1e293b;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: 'JetBrains Mono', monospace;
     }
 
     body {
       background-color: var(--bg);
-      font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #cbd5e1;
+      margin: 0;
+      padding: 0;
       overflow-x: hidden;
-      color: #e2e8f0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
-    .font-mono {
-      font-family: 'JetBrains Mono', monospace;
+    /* Subtle CRT Scanlines (Toggleable) */
+    .crt-scanlines {
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+      background-size: 100% 3px, 6px 100%;
+      pointer-events: none;
     }
 
-    /* Ambient noise & grid */
-    .bg-grid {
-      background-size: 36px 36px;
-      background-image: 
-        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    /* Workstation Pane */
+    .workstation-pane {
+      background: rgba(4, 7, 13, 0.95);
+      border: 1px solid #1e293b;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.9);
     }
 
-    /* Laser-edge cards */
-    .spotlight-card {
-      position: relative;
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
-      transition: border-color 0.22s ease, transform 0.2s ease, box-shadow 0.22s ease;
-    }
-
-    .spotlight-card:hover {
-      border-color: var(--card-border-hover);
-      box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.12), 0 12px 32px -12px rgba(0, 0, 0, 0.85);
-    }
-
-    /* Glass pill */
-    .glass-pill {
-      background: rgba(255, 255, 255, 0.04);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .glass-pill:hover {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: rgba(255, 255, 255, 0.18);
-    }
-
-    /* Custom scrollbars */
-    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    /* Custom Terminal Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: #030407; }
-    ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.12); border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(20, 241, 149, 0.4); }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 2px; }
+    ::-webkit-scrollbar-thumb:hover { background: #14f195; }
 
-    /* Blinking Terminal Cursor */
-    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-    .caret-blink { animation: blink 1s infinite; }
+    /* Blinking Terminal Caret */
+    @keyframes termBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+    .term-caret { animation: termBlink 0.9s infinite; }
 
-    /* Matrix Rain Canvas */
-    .matrix-canvas {
+    /* Matrix canvas overlay */
+    .matrix-layer {
       position: absolute;
       top: 0; left: 0; width: 100%; height: 100%;
-      pointer-events: none; opacity: 0.16; z-index: 0;
+      pointer-events: none;
+      opacity: 0.14;
+      z-index: 0;
     }
   </style>
 </head>
-<body class="bg-grid antialiased selection:bg-[#14f195] selection:text-black min-h-screen flex flex-col justify-between">
+<body class="selection:bg-[#14f195] selection:text-black antialiased text-xs md:text-sm">
 
-  <!-- MOUSE SPOTLIGHT FOLLOWER -->
-  <div id="mouse-glow" class="pointer-events-none fixed inset-0 z-0 opacity-40 transition-opacity duration-300" 
-    style="background: radial-gradient(700px circle at 50% 30%, rgba(20, 241, 149, 0.08), rgba(0, 242, 254, 0.03), transparent 70%);"></div>
+  <!-- CRT Scanline Overlay -->
+  <div id="crt-overlay" class="crt-scanlines fixed inset-0 z-50 pointer-events-none opacity-40"></div>
 
   <!-- ======================================================== -->
-  <!-- TOP PERSISTENT NAVIGATION & PROMINENT 3-MODE SWITCHER     -->
+  <!-- TMUX TOP STATUS & HARDWARE SENSORS BAR                   -->
   <!-- ======================================================== -->
-  <header class="sticky top-0 z-50 border-b border-white/10 bg-[#030407]/85 backdrop-blur-xl px-4 md:px-8 py-3.5">
-    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
-      
-      <!-- Brand & Available Badge -->
-      <div class="flex items-center gap-3">
-        <div class="relative flex items-center justify-center">
-          <div class="w-2.5 h-2.5 rounded-full bg-[#14f195]"></div>
-          <div class="absolute w-5 h-5 rounded-full bg-[#14f195]/30 animate-ping"></div>
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="font-bold text-sm tracking-tight text-white font-mono">whois @0xtryhardx0</span>
-          <span class="hidden lg:inline-flex items-center gap-1 text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-400">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#14f195]"></span> SOLANA • PETRO PHYSICS • AGENT RUNTIMES
-          </span>
-        </div>
+  <header class="bg-[#05070e] border-b border-slate-800 text-[11px] px-3 md:px-5 py-2 flex flex-wrap items-center justify-between gap-2 select-none sticky top-0 z-40">
+    
+    <!-- Left: Host & Session Badge -->
+    <div class="flex items-center gap-3">
+      <div class="flex items-center gap-1.5 font-bold text-white">
+        <span class="w-2.5 h-2.5 rounded-sm bg-[#14f195] inline-block animate-pulse"></span>
+        <span class="text-[#14f195]">0xOS</span><span>:</span><span class="text-slate-300">workstation-01</span>
       </div>
-
-      <!-- THE 3 CORE DESIGNS SELECTOR TABS -->
-      <nav class="flex items-center bg-black/60 p-1 rounded-xl border border-white/10 text-xs font-mono shadow-inner">
-        <button id="nav-btn-agent" onclick="switchDesign('agent')" class="px-3 py-1.5 rounded-lg font-bold transition flex items-center gap-1.5 bg-gradient-to-r from-[#14f195] to-[#00f2fe] text-black shadow-md">
-          <span>🤖</span> <span>Ask Agent</span>
-        </button>
-        <button id="nav-btn-bento" onclick="switchDesign('bento')" class="px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-1.5 text-slate-400 hover:text-white">
-          <span>⚡</span> <span>Cyber-Bento &amp; Wave</span>
-        </button>
-        <button id="nav-btn-terminal" onclick="switchDesign('terminal')" class="px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-1.5 text-slate-400 hover:text-white">
-          <span>&gt;_</span> <span>Kernel TTY</span>
-        </button>
-      </nav>
-
-      <!-- Right Action Badges -->
-      <div class="flex items-center gap-2">
-        <button onclick="toggleAudio()" id="audio-toggle-btn" class="p-2 rounded-lg glass-pill text-xs text-slate-400 hover:text-white transition font-mono" title="Toggle Mechanical Web Audio SFX">
-          🔊
-        </button>
-        <a href="https://x.com/0xtryhardx0" target="_blank" class="px-3.5 py-1.5 rounded-lg bg-white text-black hover:bg-slate-200 text-xs font-bold transition flex items-center gap-1.5 tracking-tight">
-          <span>𝕏</span> <span>DM @0xtryhardx0</span>
-        </a>
-      </div>
-
+      <span class="text-slate-600">|</span>
+      <span class="text-slate-400 font-mono hidden sm:inline">user: <span class="text-white font-bold">@0xtryhardx0</span></span>
+      <span class="text-slate-600 hidden sm:inline">|</span>
+      <span class="text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20 text-[10px]">MAINNET-BETA</span>
     </div>
+
+    <!-- Center: TMUX WINDOW TABS (1-Click or Hotkey) -->
+    <nav class="flex items-center bg-black/60 p-0.5 rounded border border-slate-800 text-[11px] font-mono overflow-x-auto">
+      <button id="tab-0" onclick="gotoWindow(0)" class="px-2.5 py-1 rounded bg-[#14f195] text-black font-bold transition flex items-center gap-1">
+        <span>0:neofetch*</span>
+      </button>
+      <button id="tab-1" onclick="gotoWindow(1)" class="px-2.5 py-1 rounded text-slate-400 hover:text-white transition flex items-center gap-1">
+        <span>1:repos.tree</span>
+      </button>
+      <button id="tab-2" onclick="gotoWindow(2)" class="px-2.5 py-1 rounded text-slate-400 hover:text-white transition flex items-center gap-1">
+        <span>2:tryhard.repl</span>
+      </button>
+      <button id="tab-3" onclick="gotoWindow(3)" class="px-2.5 py-1 rounded text-slate-400 hover:text-white transition flex items-center gap-1">
+        <span>3:wave_solver</span>
+      </button>
+      <button id="tab-4" onclick="gotoWindow(4)" class="px-2.5 py-1 rounded text-slate-400 hover:text-white transition flex items-center gap-1">
+        <span>4:kernel.zsh</span>
+      </button>
+    </nav>
+
+    <!-- Right: Telemetry & Toggles -->
+    <div class="flex items-center gap-3 text-[10px] text-slate-400">
+      <div class="hidden md:flex items-center gap-2">
+        <span>RTT:<span class="text-[#00f2fe] font-bold">18ms</span></span>
+        <span>LOAD:<span class="text-[#14f195] font-bold">0.12</span></span>
+        <span id="utc-clock" class="text-slate-300 font-bold tabular-nums">14:50:00 UTC</span>
+      </div>
+      <button onclick="toggleAudio()" id="btn-audio" class="px-1.5 py-0.5 rounded bg-slate-900 border border-slate-700 hover:text-white" title="Toggle Mechanical Typing SFX">
+        [SFX: ON]
+      </button>
+      <button onclick="toggleCRT()" id="btn-crt" class="px-1.5 py-0.5 rounded bg-slate-900 border border-slate-700 hover:text-white" title="Toggle CRT Scanline Shader">
+        [CRT: ON]
+      </button>
+      <a href="https://x.com/0xtryhardx0" target="_blank" class="px-2 py-0.5 rounded bg-white text-black font-bold hover:bg-slate-200">
+        𝕏 DM
+      </a>
+    </div>
+
   </header>
 
   <!-- ======================================================== -->
-  <!-- MAIN DISPLAY WRAPPER                                     -->
+  <!-- WORKSTATION MAIN SCREEN AREA                             -->
   <!-- ======================================================== -->
-  <main class="max-w-7xl mx-auto w-full px-4 md:px-8 py-8 flex-1 relative z-10">
-
-    <!-- ======================================================== -->
-    <!-- DESIGN 1: THE DEDICATED AGENTIC INTERVIEW ENGINE         -->
-    <!-- ======================================================== -->
-    <section id="view-agent" class="space-y-6">
+  <main class="max-w-7xl mx-auto w-full p-3 md:p-6 flex-1 flex flex-col justify-start relative z-10">
+    
+    <div class="workstation-pane rounded-lg overflow-hidden border border-slate-800 flex-1 flex flex-col min-h-[640px] relative">
       
-      <!-- Sub-header & Status -->
-      <div class="flex flex-wrap items-center justify-between gap-3 pb-2 border-b border-white/10 text-xs font-mono">
-        <div class="flex items-center gap-2 text-slate-400">
-          <span class="text-[#14f195]">● CANDIDATE AGENT ACTIVE</span>
-          <span>// DEEP REASONING NODE OVER 24+ CODEBASES</span>
+      <!-- Window Titlebar -->
+      <div class="bg-[#080c16] px-4 py-2 border-b border-slate-800 flex items-center justify-between text-xs text-slate-400 select-none">
+        <div class="flex items-center gap-2">
+          <span class="text-[#14f195]">●</span>
+          <span id="pane-title" class="text-white font-bold">tmux: window [0: neofetch.sh] — Systems Dossier & Hardware Architecture</span>
         </div>
-        <div class="text-slate-500">INDEXED: SOLPLAY • OMESHAM • SOVEREIGN AGENT • GEOCLEARANCE • PETRO.ONE</div>
+        <div class="text-[11px] text-slate-500 font-mono hidden sm:inline">
+          Press keys <kbd class="px-1 rounded bg-slate-800 text-slate-300">0</kbd>–<kbd class="px-1 rounded bg-slate-800 text-slate-300">4</kbd> to switch windows
+        </div>
       </div>
 
-      <div class="spotlight-card rounded-2xl overflow-hidden border border-white/15 bg-[#070a12] flex flex-col lg:flex-row min-h-[620px] shadow-2xl">
-        
-        <!-- Left Sidebar: Persona Dossier & Verified Knowledge Modules -->
-        <div class="w-full lg:w-96 bg-black/40 p-5 md:p-6 border-b lg:border-b-0 lg:border-r border-white/10 flex flex-col justify-between space-y-5">
-          <div class="space-y-4">
+      <!-- ==================================================== -->
+      <!-- WINDOW 0: NEOFETCH / SYSTEMS DOSSIER                -->
+      <!-- ==================================================== -->
+      <div id="win-0" class="p-4 md:p-8 overflow-y-auto space-y-6 flex-1">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- Left: ASCII Art Logo -->
+          <div class="lg:col-span-4 text-emerald-400 font-bold select-none leading-tight font-mono text-[11px] md:text-xs">
+            <pre class="text-[#14f195]">
+   ██████╗ ██╗  ██╗ ██████╗ ███████╗
+  ██╔═████╗╚██╗██╔╝██╔═══██╗██╔════╝
+  ██║██╔██║ ╚███╔╝ ██║   ██║███████╗
+  ████╔╝██║ ██╔██╗ ██║   ██║╚════██║
+  ╚██████╔╝██╔╝ ██╗╚██████╔╝███████║
+   ╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚══════╝
+            </pre>
+            <div class="text-slate-400 mt-2 space-y-1 text-xs">
+              <div><span class="text-white font-bold">0xtryhardx0</span>@solana-node</div>
+              <div class="text-slate-500">--------------------------</div>
+              <div><span class="text-[#14f195] font-bold">Role:</span> Systems &amp; Web3 Architect</div>
+              <div><span class="text-[#00f2fe] font-bold">Degree:</span> B.Eng. Petroleum Systems</div>
+              <div><span class="text-purple-400 font-bold">Honors:</span> First Class / Upper Division</div>
+              <div><span class="text-amber-400 font-bold">Status:</span> Available for Contracts / Remote</div>
+            </div>
             
-            <!-- Agent ID Card -->
-            <div class="flex items-center gap-3 p-3.5 rounded-xl bg-white/5 border border-white/10">
-              <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-[#14f195] via-[#00f2fe] to-purple-600 flex items-center justify-center text-black font-black text-xl font-mono shadow-lg">
-                0x
-              </div>
-              <div>
-                <h3 class="font-bold text-sm text-white font-mono flex items-center gap-1.5">
-                  TryHard-Agent v3.0
-                  <span class="w-2 h-2 rounded-full bg-[#14f195] inline-block animate-pulse"></span>
-                </h3>
-                <p class="text-[11px] text-slate-400 font-mono">Verified Autonomous Representative</p>
-                <p class="text-[10px] text-[#00f2fe] font-mono mt-0.5">24+ Repositories Ingested</p>
-              </div>
-            </div>
-
-            <p class="text-xs text-slate-300 font-mono leading-relaxed">
-              Query me on any of @0xtryhardx0's repositories across both GitHub accounts. I provide exact mathematical formulations, smart contract PDA structures, and production trade-offs.
-            </p>
-
-            <!-- Categorized "Grill Me" Quick Questions -->
-            <div class="space-y-2 pt-2 border-t border-white/10">
-              <div class="text-[11px] font-mono text-amber-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
-                <span>🔥</span> TARGETED CHALLENGE PROMPTS
-              </div>
-
-              <!-- Solana / Web3 Grill -->
-              <button onclick="askAgent('How does SOLPLAY prevent reentrancy and oracle courtsiding on Solana?')" 
-                class="w-full text-left p-2.5 rounded-xl bg-black/50 hover:bg-white/10 border border-white/10 text-xs transition group">
-                <div class="font-bold text-slate-200 group-hover:text-[#14f195] font-mono flex items-center justify-between">
-                  <span>🛡️ SolPlay Escrows &amp; Oracles</span>
-                  <span class="text-[10px] text-slate-500">Rust</span>
-                </div>
-                <div class="text-[11px] text-slate-400 font-mono mt-0.5">PDA isolation, SHA-256 state hashes, sub-1.2s settlement</div>
-              </button>
-
-              <!-- Petroleum / Physics Grill -->
-              <button onclick="askAgent('Explain the 1D wave equation in Omesham AI and how it prevents $250k drilling downtime.')" 
-                class="w-full text-left p-2.5 rounded-xl bg-black/50 hover:bg-white/10 border border-white/10 text-xs transition group">
-                <div class="font-bold text-slate-200 group-hover:text-[#00f2fe] font-mono flex items-center justify-between">
-                  <span>𝛛 Omesham AI &amp; Wave Physics</span>
-                  <span class="text-[10px] text-slate-500">Physics</span>
-                </div>
-                <div class="text-[11px] text-slate-400 font-mono mt-0.5">Drillstring torsional stick-slip &amp; witsml_parser_rs</div>
-              </button>
-
-              <!-- Sovereign Agent / AI Bounties -->
-              <button onclick="askAgent('What is Sovereign Agent v2 and the Mermail Zero-Trust Security Desk?')" 
-                class="w-full text-left p-2.5 rounded-xl bg-black/50 hover:bg-white/10 border border-white/10 text-xs transition group">
-                <div class="font-bold text-slate-200 group-hover:text-purple-300 font-mono flex items-center justify-between">
-                  <span>⚡ Sovereign Agent &amp; Mermail MCP</span>
-                  <span class="text-[10px] text-slate-500">Agents</span>
-                </div>
-                <div class="text-[11px] text-slate-400 font-mono mt-0.5">Autonomous bug bounty remittance &amp; prompt quarantines</div>
-              </button>
-
-              <!-- GeoClearance / SolWork Protocol -->
-              <button onclick="askAgent('How do GeoClearance NYSC and SolWork solve verification and African payroll?')" 
-                class="w-full text-left p-2.5 rounded-xl bg-black/50 hover:bg-white/10 border border-white/10 text-xs transition group">
-                <div class="font-bold text-slate-200 group-hover:text-amber-300 font-mono flex items-center justify-between">
-                  <span>🌍 GeoClearance &amp; SolWork Protocol</span>
-                  <span class="text-[10px] text-slate-500">FinTech</span>
-                </div>
-                <div class="text-[11px] text-slate-400 font-mono mt-0.5">Decentralized GPS biometrics &amp; PBKDF2 deterministic keys</div>
-              </button>
-
-              <!-- Academic Honors -->
-              <button onclick="askAgent('What are his engineering degree credentials and academic honors?')" 
-                class="w-full text-left p-2.5 rounded-xl bg-black/50 hover:bg-white/10 border border-white/10 text-xs transition group">
-                <div class="font-bold text-slate-200 group-hover:text-white font-mono flex items-center justify-between">
-                  <span>🎓 First Class / Upper Academic Rigor</span>
-                  <span class="text-[10px] text-slate-500">Degree</span>
-                </div>
-                <div class="text-[11px] text-slate-400 font-mono mt-0.5">B.Eng. Petroleum Systems Engineering, SPE Officer</div>
-              </button>
+            <div class="mt-4 pt-4 border-t border-slate-800 text-[11px] text-slate-500 space-y-1">
+              <div>• 24+ Production Codebases Index</div>
+              <div>• Non-Custodial Anchor Escrows</div>
+              <div>• Subsurface Wave Mechanics</div>
+              <div>• &lt;18ms Market Data Pipelines</div>
             </div>
           </div>
 
-          <!-- Direct Dispatch -->
-          <div class="pt-3 border-t border-white/10">
-            <a href="https://x.com/0xtryhardx0" target="_blank" class="block text-center py-2.5 px-3 rounded-xl bg-[#14f195] hover:bg-[#12d683] text-black text-xs font-bold font-mono transition shadow">
-              𝕏 Send Direct Message / Inquiry ↗
-            </a>
+          <!-- Right: Neofetch Specs Table -->
+          <div class="lg:col-span-8 space-y-3 font-mono text-xs md:text-sm">
+            <div class="p-4 rounded bg-black/60 border border-slate-800 space-y-2 leading-relaxed">
+              <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+                <span class="text-[#14f195] font-bold w-36 shrink-0">OS Architecture:</span>
+                <span class="text-white">0xOS v3.8 (Rust Tokio Async / Solana SBF Runtime)</span>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+                <span class="text-[#00f2fe] font-bold w-36 shrink-0">Academic Rigor:</span>
+                <span class="text-slate-200">Covenant University — B.Eng. Petroleum Systems (1st Class / Upper)</span>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+                <span class="text-purple-400 font-bold w-36 shrink-0">Web3 Core:</span>
+                <span class="text-slate-200">Solana Anchor Framework, Program Derived Addresses (PDAs), SPL Tokens, Dialect Blinks, cNFTs</span>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+                <span class="text-amber-400 font-bold w-36 shrink-0">Industrial Physics:</span>
+                <span class="text-slate-200">1D Wave Equation Drillstring Vibration, witsml_parser_rs, Aspen HYSYS Safety Modeling</span>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+                <span class="text-emerald-400 font-bold w-36 shrink-0">Escrow Benchmark:</span>
+                <span class="text-[#14f195] font-bold">&lt;400ms settlement with zero reentrancy risks (SolPlay, SolWork)</span>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+                <span class="text-cyan-400 font-bold w-36 shrink-0">Market Routing:</span>
+                <span class="text-[#00f2fe] font-bold">&lt;18ms WebSocket DEX ingestion (Raydium, Pump.fun)</span>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+                <span class="text-amber-300 font-bold w-36 shrink-0">Industrial Impact:</span>
+                <span class="text-amber-300 font-bold">$250,000+ rig downtime (NPT) prevented (Omesham AI)</span>
+              </div>
+            </div>
+
+            <!-- Fast-Jump Executable Buttons -->
+            <div class="p-4 rounded bg-black/40 border border-slate-800 space-y-2">
+              <div class="text-[11px] uppercase tracking-wider text-slate-500 font-bold">Fast Workstation Commands:</div>
+              <div class="flex flex-wrap gap-2 text-xs">
+                <button onclick="gotoWindow(1)" class="px-3 py-1.5 rounded bg-slate-900 hover:bg-slate-800 text-[#14f195] border border-slate-700 transition">
+                  [1] Browse 24+ Repositories Tree ➔
+                </button>
+                <button onclick="gotoWindow(2)" class="px-3 py-1.5 rounded bg-slate-900 hover:bg-slate-800 text-[#00f2fe] border border-slate-700 transition">
+                  [2] Query TryHard REPL Agent ➔
+                </button>
+                <button onclick="gotoWindow(3)" class="px-3 py-1.5 rounded bg-slate-900 hover:bg-slate-800 text-amber-300 border border-slate-700 transition">
+                  [3] Run Wave Physics Simulator ➔
+                </button>
+                <button onclick="gotoWindow(4)" class="px-3 py-1.5 rounded bg-slate-900 hover:bg-slate-800 text-purple-300 border border-slate-700 transition">
+                  [4] Open Kernel Zsh Shell ➔
+                </button>
+              </div>
+            </div>
           </div>
+
+        </div>
+      </div>
+
+      <!-- ==================================================== -->
+      <!-- WINDOW 1: REPOSITORIES FILESYSTEM TREE EXPLORER      -->
+      <!-- ==================================================== -->
+      <div id="win-1" class="hidden p-4 md:p-6 overflow-y-auto space-y-4 flex-1">
+        <div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-slate-800 text-xs">
+          <div class="text-slate-400">
+            <span class="text-[#14f195] font-bold">TREE /var/git/</span> — 24+ Repositories Across Org (@0xtryhardx0) &amp; Core (@ayodejierioluwa)
+          </div>
+          <div class="text-[11px] text-slate-500">Click any file to inspect verified code &amp; architectural manifest</div>
         </div>
 
-        <!-- Right Side: Conversational Stream & Intelligent Input -->
-        <div class="flex-1 flex flex-col justify-between bg-[#04060a] relative">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           
-          <!-- Chat Feed -->
-          <div id="agent-chat-feed" class="p-5 md:p-6 space-y-4 overflow-y-auto max-h-[500px] custom-scroll flex-1 font-mono text-xs md:text-sm">
+          <!-- Tree Navigation List -->
+          <div class="lg:col-span-5 bg-black/60 p-4 rounded border border-slate-800 font-mono text-xs space-y-3 max-h-[520px] overflow-y-auto">
             
-            <div class="flex gap-3 text-xs md:text-sm">
-              <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#14f195] to-[#00f2fe] text-black flex items-center justify-center font-bold text-xs shrink-0 shadow font-mono">
-                AI
+            <!-- Solana Category -->
+            <div class="space-y-1">
+              <div class="text-[#14f195] font-bold flex items-center gap-1.5">
+                <span>📁</span> <span>solana_svm/</span>
               </div>
-              <div class="p-4 rounded-2xl rounded-tl-none bg-white/5 border border-white/10 text-slate-200 space-y-2 max-w-2xl leading-relaxed">
-                <div class="text-white font-bold text-xs pb-1 border-b border-white/10 flex items-center justify-between">
-                  <span>TRYHARD-AGENT v3.0 ONLINE</span>
-                  <span class="text-[#14f195] text-[10px]">ALL REPOSITORIES MOUNTED</span>
+              <div class="pl-4 space-y-1 text-slate-400 border-l border-slate-800">
+                <div onclick="selectRepo('solplay')" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1 rounded transition flex items-center justify-between">
+                  <span>├── solplay_escrow.rs</span> <span class="text-[10px] text-emerald-400">Anchor</span>
                 </div>
-                <p>
-                  I am the verified representative for <strong>@0xtryhardx0</strong>. I hold complete architectural context across his <strong>24+ public &amp; private repositories</strong>, spanning:
-                </p>
-                <ul class="text-slate-300 text-xs space-y-1 pl-2">
-                  <li>• <strong>Solana / SVM Core</strong>: SolPlay, SolWork, Sovereign Agent, CookiePay, Lagos On Chain (LOC).</li>
-                  <li>• <strong>Industrial Energy &amp; Physics</strong>: Omesham AI, PetroOne, PetroShield AI, PetroGenesis 3D, NETCO HYSYS.</li>
-                  <li>• <strong>Autonomous Concurrency</strong>: Aether DEX &amp; Bot, Animus Engine, OpenCode Memory, Phoenix Scanner.</li>
-                </ul>
-                <p class="text-[#00f2fe] text-xs pt-1">
-                  Ask me any technical question, or tap a challenge prompt on the left.
-                </p>
+                <div onclick="selectRepo('solwork')" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1 rounded transition flex items-center justify-between">
+                  <span>├── solwork_pbkdf2.ts</span> <span class="text-[10px] text-amber-400">Escrow</span>
+                </div>
+                <div onclick="selectRepo('geoclearance')" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1 rounded transition flex items-center justify-between">
+                  <span>├── geoclearance_nysc.rs</span> <span class="text-[10px] text-cyan-400">GPS</span>
+                </div>
+                <div onclick="selectRepo('lagos')" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1 rounded transition flex items-center justify-between">
+                  <span>├── lagos_on_chain.ts</span> <span class="text-[10px] text-slate-400">Blinks</span>
+                </div>
+                <div onclick="selectRepo('cookiepay')" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1 rounded transition flex items-center justify-between">
+                  <span>├── cookiepay_svm.rs</span> <span class="text-[10px] text-slate-400">Tips</span>
+                </div>
+                <div onclick="selectRepo('aether')" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1 rounded transition flex items-center justify-between">
+                  <span>└── aether_dex_router.rs</span> <span class="text-[10px] text-purple-400">&lt;18ms</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Petroleum & Physics Category -->
+            <div class="space-y-1 pt-2">
+              <div class="text-[#00f2fe] font-bold flex items-center gap-1.5">
+                <span>📁</span> <span>subsurface_physics/</span>
+              </div>
+              <div class="pl-4 space-y-1 text-slate-400 border-l border-slate-800">
+                <div onclick="selectRepo('omesham')" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1 rounded transition flex items-center justify-between">
+                  <span>├── omesham_wave_solver.py</span> <span class="text-[10px] text-cyan-400">Wave PDE</span>
+                </div>
+                <div onclick="selectRepo('witsml')" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1 rounded transition flex items-center justify-between">
+                  <span>├── witsml_parser_rs.rs</span> <span class="text-[10px] text-emerald-400">Fast LAS</span>
+                </div>
+                <div onclick="selectRepo('petro')" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1 rounded transition flex items-center justify-between">
+                  <span>├── petro_one_valuation.py</span> <span class="text-[10px] text-amber-400">DCF+GIS</span>
+                </div>
+                <div onclick="selectRepo('petroshield')" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1 rounded transition flex items-center justify-between">
+                  <span>├── petroshield_hazard.py</span> <span class="text-[10px] text-red-400">Safety</span>
+                </div>
+                <div onclick="selectRepo('netco')" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1 rounded transition flex items-center justify-between">
+                  <span>└── netco_aspen_hysys.hsc</span> <span class="text-[10px] text-purple-400">P&amp;ID</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Autonomous Agents Category -->
+            <div class="space-y-1 pt-2">
+              <div class="text-purple-400 font-bold flex items-center gap-1.5">
+                <span>📁</span> <span>autonomous_agents/</span>
+              </div>
+              <div class="pl-4 space-y-1 text-slate-400 border-l border-slate-800">
+                <div onclick="selectRepo('sovereign')" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1 rounded transition flex items-center justify-between">
+                  <span>├── sovereign_sentinel.py</span> <span class="text-[10px] text-purple-400">Argus</span>
+                </div>
+                <div onclick="selectRepo('mermail')" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1 rounded transition flex items-center justify-between">
+                  <span>├── mermail_mcp_server.ts</span> <span class="text-[10px] text-cyan-400">MCP SDK</span>
+                </div>
+                <div onclick="selectRepo('animus')" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1 rounded transition flex items-center justify-between">
+                  <span>├── animus_engine_v2.py</span> <span class="text-[10px] text-emerald-400">Multi-Agent</span>
+                </div>
+                <div onclick="selectRepo('opencode')" class="cursor-pointer hover:text-white hover:bg-slate-800/80 p-1 rounded transition flex items-center justify-between">
+                  <span>└── opencode_memory_rag.py</span> <span class="text-[10px] text-slate-400">Vector</span>
+                </div>
               </div>
             </div>
 
           </div>
 
-          <!-- Input Bar -->
-          <div class="p-4 bg-black/60 border-t border-white/10 flex items-center gap-2.5">
-            <input id="agent-user-input" type="text" placeholder="Ask about any project (e.g. 'what is sovereign agent', 'how does omesham wave solver work')..." 
-              onkeydown="if(event.key === 'Enter') handleAgentSubmit()"
-              class="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs md:text-sm text-white outline-none focus:border-[#14f195] transition font-mono placeholder:text-slate-600" />
-            <button onclick="handleAgentSubmit()" class="px-5 py-3 bg-[#14f195] hover:bg-[#12d683] text-black font-bold text-xs font-mono rounded-xl transition flex items-center gap-1.5 shadow">
-              <span>Execute</span> <span>➔</span>
-            </button>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ======================================================== -->
-    <!-- DESIGN 2: THE CYBER-BENTO & LIVE WAVE PHYSICS CANVAS    -->
-    <!-- ======================================================== -->
-    <section id="view-bento" class="hidden space-y-8">
-      
-      <!-- Bento Profile Hero -->
-      <div class="space-y-6">
-        <div class="flex flex-wrap items-center gap-2 text-xs font-mono">
-          <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-[#14f195] flex items-center gap-1.5">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#14f195]"></span> SOLANA ANCHOR SBF CORE
-          </span>
-          <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-[#00f2fe]">
-            &lt;18ms CONCURRENT WEBSOCKET PIPELINE
-          </span>
-          <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-purple-300">
-            SUBSURFACE 1D WAVE EQUATIONS
-          </span>
-          <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-amber-300">
-            24+ REPOSITORIES (ORG &amp; PERSONAL)
-          </span>
-        </div>
-
-        <div class="space-y-3">
-          <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tighter text-white leading-none">
-            Systems Architect &amp; <br class="hidden sm:inline">
-            <span class="bg-gradient-to-r from-white via-slate-200 to-slate-500 bg-clip-text text-transparent">Web3 Runtime Engineer</span>
-          </h1>
-          <p class="text-slate-400 text-sm md:text-base max-w-3xl font-normal leading-relaxed">
-            Building at the intersection of <strong>censorship-resistant financial escrows</strong> (sub-400ms finality, non-custodial Anchor PDAs) and <strong>physics-informed computational engines</strong> (finite-difference drillstring wave mechanics mitigating $250k+ rig non-productive downtime).
-          </p>
-        </div>
-
-        <!-- 1D Wave Equation Physics Simulator Canvas -->
-        <div class="spotlight-card rounded-2xl p-4 md:p-6 overflow-hidden relative">
-          <div class="flex flex-wrap items-center justify-between gap-2 pb-3 mb-2 border-b border-white/10 text-xs font-mono">
-            <div class="flex items-center gap-2 text-slate-300">
-              <span class="text-[#00f2fe] font-bold">WAVE SOLVER //</span>
-              <span>1D MECHANICAL WAVE DRILLSTRING SIMULATOR</span>
+          <!-- Right File Previewer -->
+          <div class="lg:col-span-7 bg-[#020408] p-5 rounded border border-slate-800 font-mono text-xs space-y-3 min-h-[460px]">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-800 text-slate-400">
+              <span id="repo-inspect-file" class="text-[#14f195] font-bold">cat /var/git/solana_svm/solplay_escrow.rs</span>
+              <span id="repo-inspect-meta" class="text-[10px] text-slate-500">Anchor PDA Escrow</span>
             </div>
-            <div class="text-[11px] text-slate-500">∂²u/∂t² = c² (∂²u/∂x²) • LIVE CANV_FX</div>
-          </div>
-          
-          <canvas id="bento-wave-canvas" class="w-full h-24 md:h-32 block cursor-crosshair"></canvas>
-          
-          <div class="flex items-center justify-between pt-2 text-[10px] font-mono text-slate-500">
-            <span>← Hover / drag mouse over wave to introduce torsional stress pulses</span>
-            <span class="text-[#14f195]">STRESS ABSORPTION: NOMINAL</span>
-          </div>
-        </div>
-      </div>
+            
+            <!-- Dynamic Content Output -->
+            <div id="repo-inspect-desc" class="text-slate-300 leading-relaxed space-y-2">
+              <p>Non-custodial sports wagering &amp; copy-trading escrow programs authored in Rust (Anchor framework). Wagers and pool collateral are strictly locked in Program Derived Addresses (PDAs) with zero reentrancy risks.</p>
+              <div class="p-3 bg-black/60 rounded border border-slate-800/80 text-emerald-400 space-y-1">
+                <div>• Sub-1.2s settlement oracle ingesting DraftKings, ESPN, and TheSportsDB SHA-256 state proofs.</div>
+                <div>• Automated 2.0% creator commission split redistribution directly on-chain.</div>
+              </div>
+            </div>
 
-      <!-- Live Metric Strip -->
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
-        <div class="spotlight-card p-4 md:p-5 rounded-2xl space-y-1.5">
-          <div class="text-[10px] font-mono uppercase tracking-widest text-slate-500">Escrow Finality</div>
-          <div class="text-2xl md:text-3xl font-extrabold text-[#14f195] font-mono tracking-tight">&lt; 400ms</div>
-          <p class="text-[11px] text-slate-400 leading-snug">Solana Anchor PDAs with zero reentrancy risks (SolPlay, SolWork).</p>
-        </div>
-
-        <div class="spotlight-card p-4 md:p-5 rounded-2xl space-y-1.5">
-          <div class="text-[10px] font-mono uppercase tracking-widest text-slate-500">Orderbook Latency</div>
-          <div class="text-2xl md:text-3xl font-extrabold text-[#00f2fe] font-mono tracking-tight">&lt; 18ms</div>
-          <p class="text-[11px] text-slate-400 leading-snug">Sub-second WebSocket routing across Raydium &amp; Pump.fun (Aether DEX).</p>
-        </div>
-
-        <div class="spotlight-card p-4 md:p-5 rounded-2xl space-y-1.5">
-          <div class="text-[10px] font-mono uppercase tracking-widest text-slate-500">Downhole Safety</div>
-          <div class="text-2xl md:text-3xl font-extrabold text-amber-400 font-mono tracking-tight">$250K+</div>
-          <p class="text-[11px] text-slate-400 leading-snug">Rig non-productive downtime (NPT) prevented via 30-min stall forecast.</p>
-        </div>
-
-        <div class="spotlight-card p-4 md:p-5 rounded-2xl space-y-1.5">
-          <div class="text-[10px] font-mono uppercase tracking-widest text-slate-500">Academic Standing</div>
-          <div class="text-2xl md:text-3xl font-extrabold text-purple-300 font-mono tracking-tight">1st / Upper</div>
-          <p class="text-[11px] text-slate-400 leading-snug">B.Eng. Petroleum Systems Engineering (First Class / Upper Division Honors).</p>
-        </div>
-      </div>
-
-      <!-- Comprehensive Multi-Track Projects Grid (All 24+ Repos Represented) -->
-      <div class="space-y-4">
-        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-3">
-          <div>
-            <h2 class="text-xl md:text-2xl font-bold tracking-tight text-white">Full Production Repository Index</h2>
-            <p class="text-xs text-slate-400 font-mono">Filter systems across both org and core accounts</p>
-          </div>
-
-          <!-- Filter Pills -->
-          <div class="flex items-center gap-1.5 p-1 rounded-xl bg-black/60 border border-white/10 text-xs font-mono">
-            <button onclick="filterBento('all')" id="bento-filter-all" class="px-3 py-1 rounded-lg bg-white text-black font-bold transition">ALL SYSTEMS (24+)</button>
-            <button onclick="filterBento('web3')" id="bento-filter-web3" class="px-3 py-1 rounded-lg text-slate-400 hover:text-white transition">SOLANA &amp; WEB3</button>
-            <button onclick="filterBento('physics')" id="bento-filter-physics" class="px-3 py-1 rounded-lg text-slate-400 hover:text-white transition">PETRO &amp; PHYSICS</button>
-            <button onclick="filterBento('agents')" id="bento-filter-agents" class="px-3 py-1 rounded-lg text-slate-400 hover:text-white transition">AGENTS &amp; COMPILERS</button>
-          </div>
-        </div>
-
-        <!-- 8 Flagship Deep Dossiers -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          
-          <!-- 1. SOLPLAY -->
-          <div class="bento-card spotlight-card p-6 rounded-2xl space-y-3.5 group" data-cat="web3">
-            <div class="flex items-center justify-between">
-              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-[#14f195] border border-emerald-500/20 font-bold">SOLANA / ANCHOR</span>
-              <span class="text-xs font-mono text-slate-500">0xtryhardx0/SOLPLAY</span>
-            </div>
-            <h3 class="text-lg font-bold text-white group-hover:text-[#14f195] transition">SOLPLAY — Decentralized Sports Prediction &amp; Copy-Trading</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Non-custodial wagering escrows in Rust (Anchor). User collateral locked in Program Derived Addresses (PDAs) with zero reentrancy risks. Multi-source consensus oracle (ESPN, DraftKings) with SHA-256 state proofs and sub-1.2s settlement.
-            </p>
-            <div class="flex items-center justify-between pt-2 border-t border-white/10 text-xs font-mono">
-              <button onclick="openCodeModal('solplay')" class="text-slate-300 hover:text-white underline underline-offset-4 flex items-center gap-1">Inspect Anchor PDA Code →</button>
-              <span class="text-[#14f195]">Sub-1.2s Finality</span>
-            </div>
-          </div>
-
-          <!-- 2. OMESHAM AI -->
-          <div class="bento-card spotlight-card p-6 rounded-2xl space-y-3.5 group" data-cat="physics">
-            <div class="flex items-center justify-between">
-              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-500/10 text-[#00f2fe] border border-cyan-500/20 font-bold">INDUSTRIAL AI &amp; PHYSICS</span>
-              <span class="text-xs font-mono text-slate-500">ayodejierioluwa/omesham-ai</span>
-            </div>
-            <h3 class="text-lg font-bold text-white group-hover:text-[#00f2fe] transition">Omesham AI — Subsurface Drillstring Wave Dynamics Co-pilot</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Simulates drillstring torsional vibrations via 1D wave equations. Forecasts bit stalls 30 mins in advance to prevent $250k+ non-productive rig downtime (NPT). Includes custom high-speed Rust WITSML/LAS streaming parser (<code class="text-cyan-300">witsml_parser_rs</code>).
-            </p>
-            <div class="flex items-center justify-between pt-2 border-t border-white/10 text-xs font-mono">
-              <button onclick="openCodeModal('omesham')" class="text-slate-300 hover:text-white underline underline-offset-4 flex items-center gap-1">Inspect Wave Equation Solver →</button>
-              <span class="text-[#00f2fe]">$250k+ NPT Saved</span>
-            </div>
-          </div>
-
-          <!-- 3. SOVEREIGN AGENT & MERMAIL -->
-          <div class="bento-card spotlight-card p-6 rounded-2xl space-y-3.5 group" data-cat="agents">
-            <div class="flex items-center justify-between">
-              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-500/10 text-purple-300 border border-purple-500/20 font-bold">AUTONOMOUS MCP AGENTS</span>
-              <span class="text-xs font-mono text-slate-500">0xtryhardx0/sovereign-agent</span>
-            </div>
-            <h3 class="text-lg font-bold text-white group-hover:text-purple-300 transition">Sovereign Agent v2.0 &amp; Mermail Security Desk</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Autonomous Solana AI Alpha Sentinel and zero-trust bug bounty remittance desk. Implements Anthropic Model Context Protocol (MCP) server endpoints, prompt-injection quarantine sandboxing, and automated on-chain PayBox white-hat disbursements.
-            </p>
-            <div class="flex items-center justify-between pt-2 border-t border-white/10 text-xs font-mono">
-              <button onclick="openCodeModal('mermail')" class="text-slate-300 hover:text-white underline underline-offset-4 flex items-center gap-1">Inspect Zero-Trust MCP →</button>
-              <span class="text-purple-300">MCP Protocol</span>
-            </div>
-          </div>
-
-          <!-- 4. SOLWORK -->
-          <div class="bento-card spotlight-card p-6 rounded-2xl space-y-3.5 group" data-cat="web3">
-            <div class="flex items-center justify-between">
-              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20 font-bold">DECENTRALIZED WORKFORCE</span>
-              <span class="text-xs font-mono text-slate-500">0xtryhardx0/SOLWORK</span>
-            </div>
-            <h3 class="text-lg font-bold text-white group-hover:text-amber-300 transition">SOLWORK — AI Microtasking &amp; Milestone Escrows</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Solana protocol enabling African workers to bypass legacy cross-border payment dropouts. Features client-side deterministic PBKDF2/SHA-256 keypair derivation from email and on-chain Anchor worker tier-qualification programs.
-            </p>
-            <div class="flex items-center justify-between pt-2 border-t border-white/10 text-xs font-mono">
-              <button onclick="openCodeModal('solwork')" class="text-slate-300 hover:text-white underline underline-offset-4 flex items-center gap-1">Inspect PBKDF2 Logic →</button>
-              <span class="text-amber-300">Non-Custodial</span>
-            </div>
-          </div>
-
-          <!-- 5. GEOCLEARANCE NYSC -->
-          <div class="bento-card spotlight-card p-6 rounded-2xl space-y-3.5 group" data-cat="web3">
-            <div class="flex items-center justify-between">
-              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-[#14f195] border border-emerald-500/20 font-bold">DECENTRALIZED BIOMETRICS</span>
-              <span class="text-xs font-mono text-slate-500">0xtryhardx0/geoclearance-nysc</span>
-            </div>
-            <h3 class="text-lg font-bold text-white group-hover:text-[#14f195] transition">GeoClearance NYSC — Decentralized Location Clearance</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Decentralized biometric attendance and geofence clearance platform for Nigerian Corps Members. Uses GPS anti-spoofing cryptographic signatures and on-chain verification to eliminate manual queuing and physical paperwork bottlenecks.
-            </p>
-            <div class="flex items-center justify-between pt-2 border-t border-white/10 text-xs font-mono">
-              <span class="text-slate-400">Anti-Spoofing GPS</span>
-              <span class="text-[#14f195]">B2G Architecture</span>
-            </div>
-          </div>
-
-          <!-- 6. PETRO.ONE & PETROSHIELD -->
-          <div class="bento-card spotlight-card p-6 rounded-2xl space-y-3.5 group" data-cat="physics">
-            <div class="flex items-center justify-between">
-              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-500/10 text-[#00f2fe] border border-cyan-500/20 font-bold">PETROLEUM VALUATION</span>
-              <span class="text-xs font-mono text-slate-500">ayodejierioluwa/PETRO.ONE</span>
-            </div>
-            <h3 class="text-lg font-bold text-white group-hover:text-[#00f2fe] transition">PETRO.ONE &amp; PetroShield AI Intelligence</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Integrated asset valuation suite pairing discounted cash-flow (DCF) models with satellite orbital spectral analysis. Features a 37-state GIS hydrocarbon database and wellbore integrity blowout risk simulation.
-            </p>
-            <div class="flex items-center justify-between pt-2 border-t border-white/10 text-xs font-mono">
-              <span class="text-slate-400">Satellite GIS Mapping</span>
-              <span class="text-[#00f2fe]">Asset Valuation</span>
-            </div>
-          </div>
-
-          <!-- 7. AETHER DEX & RUNTIME -->
-          <div class="bento-card spotlight-card p-6 rounded-2xl space-y-3.5 group" data-cat="agents">
-            <div class="flex items-center justify-between">
-              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-500/10 text-purple-300 border border-purple-500/20 font-bold">LOW-LATENCY RUNTIME</span>
-              <span class="text-xs font-mono text-slate-500">0xtryhardx0/AETHER-DEX</span>
-            </div>
-            <h3 class="text-lg font-bold text-white group-hover:text-purple-300 transition">Aether DEX Concurrency Engine &amp; Trading Bot</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Asynchronous multi-agent execution pipeline in Python and Rust Tokio. Subscribes to raw Solana DEX WebSocket streams (Raydium, Pump.fun), achieving &lt;18ms market data ingestion, slippage mitigation, and auto-exit triggers.
-            </p>
-            <div class="flex items-center justify-between pt-2 border-t border-white/10 text-xs font-mono">
-              <span class="text-slate-400">&lt;18ms WebSocket Engine</span>
-              <span class="text-purple-300">Tokio Async</span>
-            </div>
-          </div>
-
-          <!-- 8. LAGOS ON CHAIN (LOC) & COOKIEPAY -->
-          <div class="bento-card spotlight-card p-6 rounded-2xl space-y-3.5 group" data-cat="web3">
-            <div class="flex items-center justify-between">
-              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20 font-bold">SOLANA BLINKS &amp; SVM</span>
-              <span class="text-xs font-mono text-slate-500">0xtryhardx0/lagos-on-chain</span>
-            </div>
-            <h3 class="text-lg font-bold text-white group-hover:text-amber-300 transition">Lagos On Chain (LOC) &amp; CookiePay (SVM)</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              1-Click social ticketing via Dialect Solana Blinks directly inside Twitter/X feeds, paired with compressed NFT (cNFT) Proof-of-Physical-Vibe venue check-ins. Bypasses 35% domestic gate POS card failure rates.
-            </p>
-            <div class="flex items-center justify-between pt-2 border-t border-white/10 text-xs font-mono">
-              <span class="text-slate-400">Dialect Blinks + cNFTs</span>
-              <span class="text-amber-300">Superteam Grant Track</span>
+            <!-- Code Snippet Display -->
+            <div class="pt-2">
+              <div class="text-slate-500 text-[10px] pb-1 uppercase tracking-wider">Source Architecture Snippet:</div>
+              <pre id="repo-inspect-code" class="p-3.5 bg-black/80 rounded border border-slate-800 text-slate-200 overflow-x-auto text-[11px] leading-relaxed text-[#14f195]"></pre>
             </div>
           </div>
 
         </div>
       </div>
 
-    </section>
-
-    <!-- ======================================================== -->
-    <!-- DESIGN 3: THE KERNEL TTY WHOIS CONSOLE (RETRO TERMINAL)  -->
-    <!-- ======================================================== -->
-    <section id="view-terminal" class="hidden space-y-4">
-      <div class="flex items-center justify-between text-xs font-mono text-slate-400 pb-1">
-        <span>MODE 3 // RECEPTIVE TTY v2.40 [OBSIDIAN EDITION]</span>
-        <span class="text-[#14f195]">SYS_OK • 24 REPOS MOUNTED</span>
-      </div>
-
-      <div class="rounded-2xl border border-white/15 bg-[#05070c] shadow-2xl overflow-hidden font-mono text-xs md:text-sm relative">
-        <canvas id="matrix-canvas" class="matrix-canvas"></canvas>
-
-        <!-- Top Bar -->
-        <div class="bg-black/80 px-4 py-3 border-b border-white/10 flex items-center justify-between relative z-10">
-          <div class="flex items-center gap-2">
-            <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
-            <span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
-            <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
-            <span class="ml-2 text-xs text-slate-300 font-bold">0xtryhardx0@solana-node: ~/whois</span>
+      <!-- ==================================================== -->
+      <!-- WINDOW 2: TRYHARD INTERACTIVE REPL AGENT             -->
+      <!-- ==================================================== -->
+      <div id="win-2" class="hidden p-4 md:p-6 overflow-y-auto space-y-4 flex-1">
+        <div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-slate-800 text-xs">
+          <div class="text-slate-400">
+            <span class="text-[#00f2fe] font-bold">Python 3.12.2 / Rust REPL</span> — TryHard Candidate Intelligence Runtime
           </div>
-          <span class="text-[11px] text-slate-500">tokio-async • zsh</span>
+          <div class="text-[11px] text-[#14f195]">READY • 24 CODEBASES INDEXED</div>
         </div>
 
-        <!-- Terminal Output -->
-        <div id="tty-screen" class="p-5 md:p-6 space-y-3 min-h-[420px] max-h-[540px] overflow-y-auto custom-scroll text-slate-300 relative z-10">
-          <div class="text-slate-500">
-            [KERNEL INITIALIZED] whois @0xtryhardx0 — Systems &amp; Web3 Runtime Engine.<br>
-            Type <span class="text-[#14f195] font-bold">help</span> or tap any quick-command pill below:
+        <!-- REPL Output Terminal Stream -->
+        <div id="repl-stream" class="bg-black/70 p-4 md:p-5 rounded border border-slate-800 font-mono text-xs md:text-sm space-y-4 min-h-[400px] max-h-[500px] overflow-y-auto custom-scroll">
+          <div class="text-slate-500 leading-relaxed">
+            &gt;&gt;&gt; import tryhard_candidate as tc<br>
+            &gt;&gt;&gt; tc.mount_repositories(["SOLPLAY", "OMESHAM_AI", "SOVEREIGN_AGENT", "SOLWORK", "GEOCLEARANCE", "PETRO_ONE"])<br>
+            [OK] Ingested 24 repositories. REPL is live. Type queries below or tap prompt invocations:
           </div>
-          <div class="text-white pt-1">
-            <span class="text-[#14f195] font-bold">@0xtryhardx0</span> — Systems Architect (B.Eng. Petroleum Systems, 1st Class / Upper)
-          </div>
-          <div id="tty-history" class="space-y-3 pt-2"></div>
+          <div id="repl-history" class="space-y-4"></div>
         </div>
 
-        <!-- Quick Tap Command Pills -->
-        <div class="bg-black/80 px-4 py-2.5 border-t border-white/10 flex flex-wrap gap-1.5 items-center text-xs relative z-10">
-          <span class="text-slate-500 mr-1 font-mono">Tap:</span>
-          <button onclick="execTTY('whois')" class="px-2.5 py-1 rounded bg-white/10 hover:bg-white/20 text-[#14f195] transition">whois</button>
-          <button onclick="execTTY('projects --web3')" class="px-2.5 py-1 rounded bg-white/10 hover:bg-white/20 text-[#00f2fe] transition">projects --web3</button>
-          <button onclick="execTTY('projects --petro')" class="px-2.5 py-1 rounded bg-white/10 hover:bg-white/20 text-cyan-300 transition">projects --petro</button>
-          <button onclick="execTTY('projects --agents')" class="px-2.5 py-1 rounded bg-white/10 hover:bg-white/20 text-purple-300 transition">projects --agents</button>
-          <button onclick="execTTY('education')" class="px-2.5 py-1 rounded bg-white/10 hover:bg-white/20 text-slate-200 transition">education</button>
-          <button onclick="execTTY('matrix')" class="px-2.5 py-1 rounded bg-white/10 hover:bg-white/20 text-green-400 font-bold transition font-mono">matrix</button>
-          <button onclick="execTTY('sudo hire')" class="px-2.5 py-1 rounded bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 font-bold transition">sudo hire</button>
-          <button onclick="execTTY('clear')" class="px-2 py-1 rounded bg-white/5 text-slate-500 hover:text-white ml-auto">clear</button>
+        <!-- Quick REPL Prompts -->
+        <div class="flex flex-wrap gap-1.5 items-center text-xs font-mono">
+          <span class="text-slate-500 mr-1 text-[11px]">Run:</span>
+          <button onclick="runReplQuery('tc.explain_solplay_security()')" class="px-2 py-1 rounded bg-slate-900 hover:bg-slate-800 text-[#14f195] border border-slate-800 transition">tc.explain_solplay_security()</button>
+          <button onclick="runReplQuery('tc.explain_omesham_wave_physics()')" class="px-2 py-1 rounded bg-slate-900 hover:bg-slate-800 text-[#00f2fe] border border-slate-800 transition">tc.explain_omesham_wave_physics()</button>
+          <button onclick="runReplQuery('tc.explain_solwork_pbkdf2()')" class="px-2 py-1 rounded bg-slate-900 hover:bg-slate-800 text-amber-300 border border-slate-800 transition">tc.explain_solwork_pbkdf2()</button>
+          <button onclick="runReplQuery('tc.verify_academic_credentials()')" class="px-2 py-1 rounded bg-slate-900 hover:bg-slate-800 text-purple-300 border border-slate-800 transition">tc.verify_academic_credentials()</button>
+          <button onclick="runReplQuery('tc.get_contract_dispatch()')" class="px-2 py-1 rounded bg-slate-900 hover:bg-slate-800 text-emerald-300 border border-slate-800 transition">tc.get_contract_dispatch()</button>
         </div>
 
-        <!-- Command Input Form -->
-        <form onsubmit="handleTTYSubmit(event)" class="bg-[#030509] px-4 py-3.5 border-t border-white/10 flex items-center gap-2 relative z-10">
-          <span class="text-[#14f195] font-bold">0xtryhardx0@node:~$</span>
-          <input id="tty-input" type="text" placeholder="Type a command (whois, projects --web3, projects --petro, matrix, sudo hire)..." 
-            class="flex-1 bg-transparent text-slate-100 outline-none border-none font-mono text-xs md:text-sm placeholder:text-slate-600" autocomplete="off" />
-          <button type="submit" class="text-xs bg-[#14f195] hover:bg-[#12d683] text-black font-bold px-4 py-1.5 rounded transition">RUN</button>
+        <!-- REPL Interactive Input -->
+        <form onsubmit="handleReplSubmit(event)" class="bg-[#03060c] p-3 rounded border border-slate-800 flex items-center gap-2">
+          <span class="text-[#00f2fe] font-bold">&gt;&gt;&gt;</span>
+          <input id="repl-input" type="text" placeholder="Type a function or query (e.g. 'explain geoclearance', 'why hire for rust', 'how does witsml parser work')..." 
+            class="flex-1 bg-transparent text-white font-mono text-xs md:text-sm outline-none placeholder:text-slate-600" autocomplete="off" />
+          <button type="submit" class="px-4 py-1.5 bg-[#00f2fe] text-black font-bold text-xs rounded hover:bg-cyan-300 transition">RUN</button>
         </form>
       </div>
-    </section>
 
-    <!-- ======================================================== -->
-    <!-- INTERACTIVE CODE / ARCHITECTURE DRAWER MODAL             -->
-    <!-- ======================================================== -->
-    <div id="code-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4">
-      <div class="spotlight-card w-full max-w-3xl rounded-2xl overflow-hidden border border-white/15 bg-[#07090f] shadow-2xl flex flex-col max-h-[85vh]">
-        <div class="flex items-center justify-between px-5 py-3.5 border-b border-white/10 bg-black/40">
-          <div class="flex items-center gap-2 font-mono text-xs text-slate-300">
-            <span id="modal-badge" class="px-2 py-0.5 rounded bg-emerald-500/10 text-[#14f195] border border-emerald-500/20 font-bold">RUST ANCHOR</span>
-            <span id="modal-title" class="font-bold text-white">solplay_escrow.rs</span>
+      <!-- ==================================================== -->
+      <!-- WINDOW 3: OSCILLOSCOPE 1D WAVE PHYSICS ENGINE        -->
+      <!-- ==================================================== -->
+      <div id="win-3" class="hidden p-4 md:p-6 overflow-y-auto space-y-4 flex-1">
+        <div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-slate-800 text-xs">
+          <div class="text-slate-400">
+            <span class="text-[#14f195] font-bold">1D HYPERBOLIC WAVE EQUATION SOLVER</span> — Drillstring Torsional Vibration Telemetry
           </div>
-          <button onclick="closeCodeModal()" class="text-slate-400 hover:text-white text-sm font-mono px-2 py-1">✕ CLOSE</button>
+          <div class="text-[11px] text-slate-500">∂²u/∂t² = c² (∂²u/∂x²) • CFL STABILITY: c·Δt/Δx &lt; 1</div>
         </div>
-        <div class="p-5 overflow-y-auto font-mono text-xs text-slate-300 bg-[#05070c] custom-scroll leading-relaxed">
-          <pre id="modal-code" class="text-emerald-400"></pre>
+
+        <!-- Oscilloscope Display -->
+        <div class="bg-black/90 p-4 rounded border border-slate-800 relative space-y-3">
+          <div class="flex flex-wrap items-center justify-between text-[11px] font-mono text-slate-400 border-b border-slate-800/80 pb-2">
+            <div>SHEAR WAVE VELOCITY: <span class="text-[#14f195] font-bold">c = 3,200 m/s (Steel)</span></div>
+            <div>WELL DEPTH: <span class="text-[#00f2fe] font-bold">3,500m Measured Depth</span></div>
+            <div>STALL FORECAST: <span class="text-amber-400 font-bold">30 Mins Lead Time</span></div>
+            <div>NPT MITIGATED: <span class="text-purple-400 font-bold">$250,000+</span></div>
+          </div>
+
+          <canvas id="scope-canvas" class="w-full h-44 md:h-60 block cursor-crosshair bg-[#020408] rounded"></canvas>
+
+          <div class="flex flex-wrap items-center justify-between text-[11px] font-mono text-slate-500">
+            <span>← Drag mouse across the oscilloscope canvas to inject torsional torque spikes</span>
+            <div class="flex items-center gap-2">
+              <button onclick="injectPulse(25)" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-[#14f195]">+ Injection Pulse</button>
+              <button onclick="resetWave()" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-400">Reset Wave</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Physics Rigor Dossier -->
+        <div class="p-4 rounded bg-black/60 border border-slate-800 font-mono text-xs space-y-2 text-slate-300 leading-relaxed">
+          <div class="text-[#14f195] font-bold uppercase tracking-wider text-[11px]">Subsurface Physics to High-Performance Rust Systems:</div>
+          <p>
+            Omesham AI models drillstring torsional stick-slip oscillations that cause fatal drill-pipe washouts and bit destruction in deep offshore drilling. 
+            By solving the hyperbolic wave equation at sub-second discretizations and coupling it with real-time WITSML streaming mud telemetry (<code class="text-cyan-300">witsml_parser_rs</code>), it predicts catastrophic stalls 30 minutes before occurrence, saving operators over $250k in rig spread costs per incident.
+          </p>
         </div>
       </div>
+
+      <!-- ==================================================== -->
+      <!-- WINDOW 4: KERNEL ZSH TERMINAL SHELL                  -->
+      <!-- ==================================================== -->
+      <div id="win-4" class="hidden p-4 md:p-6 overflow-y-auto space-y-4 flex-1 font-mono text-xs md:text-sm">
+        <div class="flex items-center justify-between pb-2 border-b border-slate-800 text-xs text-slate-400">
+          <span>zsh 5.9 (x86_64-apple-darwin23.0) — Solana SBF Sealevel Kernel</span>
+          <span class="text-[#14f195]">SESSION: ACTIVE</span>
+        </div>
+
+        <div class="bg-black/90 p-4 md:p-6 rounded border border-slate-800 space-y-3 min-h-[440px] max-h-[540px] overflow-y-auto custom-scroll relative">
+          <canvas id="term-matrix-canvas" class="matrix-layer"></canvas>
+          <div class="text-slate-500 relative z-10">
+            Type <span class="text-[#14f195] font-bold">help</span>, <span class="text-[#00f2fe] font-bold">whois</span>, <span class="text-purple-400 font-bold">projects</span>, <span class="text-amber-400 font-bold">matrix</span>, or <span class="text-white font-bold">sudo hire</span>.
+          </div>
+          <div id="zsh-output" class="space-y-3 relative z-10"></div>
+        </div>
+
+        <!-- Fast Tap Buttons -->
+        <div class="flex flex-wrap gap-1.5 items-center text-xs">
+          <span class="text-slate-500 mr-1 text-[11px]">Command:</span>
+          <button onclick="execZsh('whois')" class="px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-[#14f195] border border-slate-800">whois</button>
+          <button onclick="execZsh('projects --web3')" class="px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-[#00f2fe] border border-slate-800">projects --web3</button>
+          <button onclick="execZsh('projects --petro')" class="px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-cyan-300 border border-slate-800">projects --petro</button>
+          <button onclick="execZsh('education')" class="px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-purple-300 border border-slate-800">education</button>
+          <button onclick="execZsh('matrix')" class="px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-green-400 font-bold border border-slate-800">matrix</button>
+          <button onclick="execZsh('sudo hire')" class="px-2.5 py-1 rounded bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 font-bold border border-amber-500/30">sudo hire</button>
+          <button onclick="execZsh('clear')" class="px-2 py-1 rounded bg-slate-900 text-slate-500 hover:text-white ml-auto">clear</button>
+        </div>
+
+        <form onsubmit="handleZshSubmit(event)" class="bg-[#03060c] p-3 rounded border border-slate-800 flex items-center gap-2">
+          <span class="text-[#14f195] font-bold">0xtryhardx0@node:~$</span>
+          <input id="zsh-input" type="text" placeholder="Type a shell command..." 
+            class="flex-1 bg-transparent text-white font-mono text-xs md:text-sm outline-none placeholder:text-slate-600" autocomplete="off" />
+          <button type="submit" class="px-4 py-1.5 bg-[#14f195] text-black font-bold text-xs rounded hover:bg-[#12d683] transition">RUN</button>
+        </form>
+      </div>
+
     </div>
 
   </main>
 
   <!-- ======================================================== -->
-  <!-- FOOTER                                                   -->
+  <!-- TMUX BOTTOM STATUS BAR                                   -->
   <!-- ======================================================== -->
-  <footer class="border-t border-white/10 py-6 px-4 md:px-8 text-center text-xs font-mono text-slate-500">
-    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
-      <div class="flex items-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-[#14f195]"></span>
-        <span>whois @0xtryhardx0 • Systems Architect • 24+ Public &amp; Org Repositories</span>
-      </div>
-      <div class="flex items-center gap-4">
-        <a href="https://x.com/0xtryhardx0" target="_blank" class="hover:text-white transition">𝕏 @0xtryhardx0</a>
-        <span>•</span>
-        <a href="https://github.com/0xtryhardx0" target="_blank" class="hover:text-white transition">GitHub Org: 0xtryhardx0</a>
-        <span>•</span>
-        <a href="https://github.com/ayodejierioluwa" target="_blank" class="hover:text-white transition">Core: ayodejierioluwa</a>
-      </div>
+  <footer class="bg-[#05070e] border-t border-slate-800 text-[11px] px-3 md:px-5 py-2 flex flex-wrap items-center justify-between gap-2 select-none z-40 text-slate-400">
+    <div class="flex items-center gap-3">
+      <span class="text-white font-bold">[0xtryhardx0]</span>
+      <span>24 Repositories</span>
+      <span>•</span>
+      <span>Rust Anchor &amp; Tokio</span>
+      <span>•</span>
+      <span>Wave Equation PDE</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <a href="https://x.com/0xtryhardx0" target="_blank" class="text-[#14f195] hover:underline font-bold">𝕏 @0xtryhardx0</a>
+      <span>•</span>
+      <a href="https://github.com/0xtryhardx0" target="_blank" class="text-[#00f2fe] hover:underline">github.com/0xtryhardx0</a>
+      <span>•</span>
+      <a href="https://github.com/ayodejierioluwa" target="_blank" class="text-purple-300 hover:underline">github.com/ayodejierioluwa</a>
     </div>
   </footer>
 
   <!-- ======================================================== -->
-  <!-- JAVASCRIPT LOGIC & COMPREHENSIVE INTELLIGENCE ENGINE     -->
+  <!-- JAVASCRIPT: WORKSTATION CORE & PHYSICS ENGINE            -->
   <!-- ======================================================== -->
   <script>
-    // --------------------------------------------------------
-    // 1. Mouse Spotlight Tracker
-    // --------------------------------------------------------
-    const mouseGlow = document.getElementById('mouse-glow');
-    window.addEventListener('mousemove', (e) => {
-      mouseGlow.style.background = `radial-gradient(700px circle at ${e.clientX}px ${e.clientY}px, rgba(20, 241, 149, 0.08), rgba(0, 242, 254, 0.03), transparent 70%)`;
+    // ----------------------------------------------------
+    // 1. Web Audio Synthesizer (Mechanical Click SFX)
+    // ----------------------------------------------------
+    let audioOn = true;
+    let aCtx = null;
+    function playClick(freq = 750, dur = 0.035) {
+      if (!audioOn) return;
+      try {
+        if (!aCtx) aCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (aCtx.state === 'suspended') aCtx.resume();
+        const osc = aCtx.createOscillator();
+        const gain = aCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, aCtx.currentTime);
+        gain.gain.setValueAtTime(0.03, aCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, aCtx.currentTime + dur);
+        osc.connect(gain);
+        gain.connect(aCtx.destination);
+        osc.start();
+        osc.stop(aCtx.currentTime + dur);
+      } catch (e) {}
+    }
+
+    function toggleAudio() {
+      audioOn = !audioOn;
+      document.getElementById('btn-audio').textContent = audioOn ? '[SFX: ON]' : '[SFX: OFF]';
+      if (audioOn) playClick(900);
+    }
+
+    // ----------------------------------------------------
+    // 2. CRT Scanline Toggle
+    // ----------------------------------------------------
+    let crtOn = true;
+    function toggleCRT() {
+      crtOn = !crtOn;
+      const overlay = document.getElementById('crt-overlay');
+      overlay.style.display = crtOn ? 'block' : 'none';
+      document.getElementById('btn-crt').textContent = crtOn ? '[CRT: ON]' : '[CRT: OFF]';
+      playClick(500);
+    }
+
+    // ----------------------------------------------------
+    // 3. UTC Live Clock
+    // ----------------------------------------------------
+    function updateClock() {
+      const now = new Date();
+      const str = now.toUTCString().split(' ')[4] + ' UTC';
+      const el = document.getElementById('utc-clock');
+      if (el) el.textContent = str;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // ----------------------------------------------------
+    // 4. TMUX Window Management (0–4)
+    // ----------------------------------------------------
+    const titles = [
+      "tmux: window [0: neofetch.sh] — Systems Dossier & Hardware Architecture",
+      "tmux: window [1: repos.tree] — Full 24+ Repository Filesystem Explorer",
+      "tmux: window [2: tryhard.repl] — Interactive Candidate Intelligence REPL",
+      "tmux: window [3: wave_solver.py] — 1D Hyperbolic Wave Equation Oscilloscope",
+      "tmux: window [4: kernel.zsh] — Interactive Solana SBF Kernel Terminal"
+    ];
+
+    function gotoWindow(index) {
+      playClick(800);
+      for (let i = 0; i <= 4; i++) {
+        const win = document.getElementById('win-' + i);
+        const tab = document.getElementById('tab-' + i);
+        if (i === index) {
+          win.classList.remove('hidden');
+          tab.className = "px-2.5 py-1 rounded bg-[#14f195] text-black font-bold transition flex items-center gap-1";
+          document.getElementById('pane-title').textContent = titles[i];
+          if (i === 3) initScope();
+          if (i === 4) initMatrix();
+        } else {
+          win.classList.add('hidden');
+          tab.className = "px-2.5 py-1 rounded text-slate-400 hover:text-white transition flex items-center gap-1";
+        }
+      }
+    }
+
+    // Hotkey listener for numbers 0-4
+    window.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT') return;
+      if (['0', '1', '2', '3', '4'].includes(e.key)) {
+        gotoWindow(parseInt(e.key));
+      }
     });
 
-    // --------------------------------------------------------
-    // 2. Synthesized Web Audio FX
-    // --------------------------------------------------------
-    let audioEnabled = true;
-    let audioCtx = null;
-    function playBlip(freq = 600, duration = 0.04) {
-      if (!audioEnabled) return;
-      try {
-        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        if (audioCtx.state === 'suspended') audioCtx.resume();
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-        gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.start();
-        osc.stop(audioCtx.currentTime + duration);
-      } catch (err) {}
-    }
-    function toggleAudio() {
-      audioEnabled = !audioEnabled;
-      document.getElementById('audio-toggle-btn').textContent = audioEnabled ? '🔊' : '🔇';
-      if (audioEnabled) playBlip(800);
-    }
+    // ----------------------------------------------------
+    // 5. Repository Filesystem Explorer Data (Window 1)
+    // ----------------------------------------------------
+    const repoDetails = {
+      solplay: {
+        file: "cat /var/git/solana_svm/solplay_escrow.rs",
+        meta: "Anchor PDA Escrow • Sub-1.2s Settlement",
+        desc: "Non-custodial sports wagering & copy-trading escrow programs authored in Rust (Anchor). User collateral locked in isolated Program Derived Addresses (PDAs) with zero reentrancy risks.<br><br>Features a multi-source consensus oracle verifying DraftKings, ESPN, and TheSportsDB SHA-256 state proofs within 1.2 seconds of official match termination, plus a 2.0% creator commission split redistribution on-chain.",
+        code: `#[program]
+pub mod solplay_escrow {
+    use super::*;
 
-    // --------------------------------------------------------
-    // 3. 3-Mode Switcher: Agent, Bento, Terminal
-    // --------------------------------------------------------
-    function switchDesign(mode) {
-      playBlip(700);
-      const modes = ['agent', 'bento', 'terminal'];
-      modes.forEach(m => {
-        const view = document.getElementById('view-' + m);
-        const btn = document.getElementById('nav-btn-' + m);
-        if (m === mode) {
-          view.classList.remove('hidden');
-          if (m === 'agent') {
-            btn.className = "px-3 py-1.5 rounded-lg font-bold transition flex items-center gap-1.5 bg-gradient-to-r from-[#14f195] to-[#00f2fe] text-black shadow-md";
-          } else if (m === 'bento') {
-            btn.className = "px-3 py-1.5 rounded-lg font-bold transition flex items-center gap-1.5 bg-[#00f2fe] text-black shadow-md";
-            initBentoWave();
-          } else {
-            btn.className = "px-3 py-1.5 rounded-lg font-bold transition flex items-center gap-1.5 bg-[#14f195] text-black shadow-md";
-            initMatrixRain();
-          }
-        } else {
-          view.classList.add('hidden');
-          btn.className = "px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-1.5 text-slate-400 hover:text-white";
+    pub fn initialize_wager(ctx: Context<InitializeWager>, amount: u64, match_id: String) -> Result<()> {
+        let wager = &mut ctx.accounts.wager;
+        wager.bettor = ctx.accounts.user.key();
+        wager.amount = amount;
+        wager.match_id = match_id;
+        wager.bump = ctx.bumps.wager;
+
+        // Non-custodial transfer into PDA vault with zero reentrancy risks
+        token::transfer(
+            ctx.accounts.into_transfer_to_pda_context(),
+            amount,
+        )?;
+        Ok(())
+    }
+}`
+      },
+      solwork: {
+        file: "cat /var/git/solana_svm/solwork_pbkdf2.ts",
+        meta: "Decentralized AI Microtasking • PBKDF2 Keys",
+        desc: "Trustless workforce protocol enabling African talent to bypass traditional banking rail failures (20-35% dropout). Workers authenticate with standard email while the client derives deterministic non-custodial Solana keypairs via PBKDF2/SHA-256 (150,000 iterations). Includes on-chain worker credential tier validation in Rust Anchor.",
+        code: `export async function deriveWorkerKeypair(email: string, salt: string): Promise<Keypair> {
+  const enc = new TextEncoder();
+  const keyMaterial = await crypto.subtle.importKey(
+    "raw", enc.encode(email.toLowerCase().trim()), "PBKDF2", false, ["deriveBits"]
+  );
+  const derivedBits = await crypto.subtle.deriveBits(
+    { name: "PBKDF2", salt: enc.encode(salt), iterations: 150_000, hash: "SHA-256" },
+    keyMaterial,
+    256
+  );
+  return Keypair.fromSeed(new Uint8Array(derivedBits));
+}`
+      },
+      geoclearance: {
+        file: "cat /var/git/solana_svm/geoclearance_nysc.rs",
+        meta: "Decentralized Biometrics • Anti-Spoofing GPS",
+        desc: "Next-gen decentralized clearance system for the Nigerian National Youth Service Corps (NYSC). Replaces manual queues and ghost-worker roll calls with cryptographic GPS anti-spoofing signatures, biometric hashing, and immutable on-chain clearance attestations on Solana.",
+        code: `pub fn verify_clearance_geofence(
+    ctx: Context<VerifyGeofence>, 
+    lat_e6: i32, 
+    lon_e6: i32, 
+    biometric_sig: [u8; 64]
+) -> Result<()> {
+    require!(is_within_camp_boundary(lat_e6, lon_e6), ClearanceError::OutOfBounds);
+    require!(verify_ed25519_biometric_attestation(&biometric_sig), ClearanceError::InvalidBiometric);
+    emit!(CorpsMemberClearedEvent { corps_id: ctx.accounts.corps.key(), timestamp: Clock::get()?.unix_timestamp });
+    Ok(())
+}`
+      },
+      lagos: {
+        file: "cat /var/git/solana_svm/lagos_on_chain.ts",
+        meta: "Dialect Solana Blinks • cNFTs",
+        desc: "Lagos On Chain (LOC) solves event POS payment failures in nightlife and underground events. Embeds 1-click Solana ticket purchasing inside Twitter/X feeds via Dialect Actions & Blinks, and issues Proof-of-Physical-Vibe compressed NFTs (cNFTs) for gate check-ins.",
+        code: `export const ticketingBlinkAction = {
+  icon: "https://lagosonchain.com/banner.png",
+  label: "Mint Underground Pass (1-Click)",
+  title: "Lagos On Chain — Boiler Room Access",
+  description: "Bypass venue card terminal decline. Instant cNFT issuance.",
+  links: { actions: [{ label: "Pay 0.2 SOL", href: "/api/actions/mint?tier=ga" }] }
+};`
+      },
+      cookiepay: {
+        file: "cat /var/git/solana_svm/cookiepay_svm.rs",
+        meta: "SVM Fast Micro-Tipping & Invoicing",
+        desc: "High-speed social micro-tipping and invoicing protocol on Cookie Chain (SVM). Features sub-cent transfer routing in SOL and SPL USDC with deterministic 3D fortune cookie claim receipts.",
+        code: `pub fn tip_creator(ctx: Context<TipCreator>, tip_amount: u64) -> Result<()> {
+    token::transfer(ctx.accounts.transfer_ctx(), tip_amount)?;
+    msg!("Tip routed. Fortune unlocked on-chain.");
+    Ok(())
+}`
+      },
+      aether: {
+        file: "cat /var/git/solana_svm/aether_dex_router.rs",
+        meta: "Sub-18ms Concurrent WebSocket Orderbook",
+        desc: "Concurrent multi-agent execution pipeline in Python and Rust Tokio. Listens to raw sub-second WebSocket streams across Raydium and Pump.fun DEX pools, cutting market data ingestion latency to <18ms with automated anti-rug exits.",
+        code: `async fn route_dex_pool_stream(mut stream: SplitStream<WebSocketStream<MaybeTlsStream<TcpStream>>>) {
+    while let Some(msg) = stream.next().await {
+        let update = parse_bonding_curve_packet(&msg.unwrap());
+        if update.slippage_exceeded() {
+            trigger_atomic_exit(update.pool_id).await;
         }
-      });
     }
+}`
+      },
+      omesham: {
+        file: "cat /var/git/subsurface_physics/omesham_wave_solver.py",
+        meta: "1D Wave Equation • $250k+ NPT Mitigated",
+        desc: "Models drillstring torsional vibrations using the 1D hyperbolic wave equation: ∂²u/∂t² = c² (∂²u/∂x²). Detects stick-slip resonance and bit stalls 30 minutes in advance, saving offshore operators $250k+ in non-productive rig downtime per campaign.",
+        code: `class DrillstringWaveSolver:
+    """1D Hyperbolic wave equation solver for drillstring torsional vibration."""
+    def __init__(self, length_m=3500, c_sound=3200.0, dt=0.001):
+        self.c, self.dx, self.dt = c_sound, 10.0, dt
+        self.u = np.zeros(int(length_m / self.dx))
+        self.u_prev = np.zeros_like(self.u)
 
-    // --------------------------------------------------------
-    // 4. Bento Wave Simulator
-    // --------------------------------------------------------
-    const waveCanvas = document.getElementById('bento-wave-canvas');
-    let wavePoints = [];
-    const numWavePoints = 120;
-    let waveW, waveH;
-    let waveInit = false;
-
-    function initBentoWave() {
-      if (!waveCanvas) return;
-      waveW = waveCanvas.parentElement.offsetWidth;
-      waveH = waveCanvas.offsetHeight || 110;
-      waveCanvas.width = waveW;
-      waveCanvas.height = waveH;
-      wavePoints = [];
-      for (let i = 0; i < numWavePoints; i++) wavePoints.push({ y: 0, vy: 0 });
-      if (!waveInit) {
-        waveInit = true;
-        animateBentoWave();
-      }
-    }
-    window.addEventListener('resize', initBentoWave);
-    initBentoWave();
-
-    if (waveCanvas) {
-      waveCanvas.addEventListener('mousemove', (e) => {
-        const rect = waveCanvas.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const idx = Math.floor((x / waveW) * numWavePoints);
-        if (idx >= 0 && idx < numWavePoints) wavePoints[idx].vy += 12;
-      });
-    }
-
-    function animateBentoWave() {
-      if (!waveCanvas) return;
-      const wCtx = waveCanvas.getContext('2d');
-      wCtx.clearRect(0, 0, waveW, waveH);
-      const tension = 0.035, damping = 0.985, midY = waveH / 2;
-
-      for (let i = 0; i < numWavePoints; i++) {
-        const left = i > 0 ? wavePoints[i - 1].y : 0;
-        const right = i < numWavePoints - 1 ? wavePoints[i + 1].y : 0;
-        const force = (left + right - 2 * wavePoints[i].y) * tension;
-        wavePoints[i].vy = (wavePoints[i].vy + force) * damping;
-        wavePoints[i].y += wavePoints[i].vy;
-      }
-
-      wCtx.beginPath();
-      wCtx.moveTo(0, midY + wavePoints[0].y);
-      for (let i = 1; i < numWavePoints; i++) {
-        wCtx.lineTo((i / (numWavePoints - 1)) * waveW, midY + wavePoints[i].y);
-      }
-      const grad = wCtx.createLinearGradient(0, 0, waveW, 0);
-      grad.addColorStop(0, '#14F195'); grad.addColorStop(0.5, '#00F2FE'); grad.addColorStop(1, '#9945FF');
-      wCtx.strokeStyle = grad; wCtx.lineWidth = 2.5; wCtx.shadowColor = 'rgba(20, 241, 149, 0.4)'; wCtx.shadowBlur = 8;
-      wCtx.stroke();
-
-      requestAnimationFrame(animateBentoWave);
-    }
-
-    // --------------------------------------------------------
-    // 5. Bento Category Filtering
-    // --------------------------------------------------------
-    function filterBento(cat) {
-      playBlip(700);
-      const btns = ['all', 'web3', 'physics', 'agents'];
-      btns.forEach(b => {
-        const el = document.getElementById('bento-filter-' + b);
-        if (b === cat) {
-          el.className = "px-3 py-1 rounded-lg bg-white text-black font-bold transition";
-        } else {
-          el.className = "px-3 py-1 rounded-lg text-slate-400 hover:text-white transition";
+    def step_forward(self, bit_torque_perturbation):
+        cfl = (self.c * self.dt / self.dx) ** 2
+        u_next = 2*self.u - self.u_prev + cfl * (np.roll(self.u, -1) - 2*self.u + np.roll(self.u, 1))
+        u_next[-1] += bit_torque_perturbation
+        self.u_prev, self.u = self.u, u_next
+        return self.u`
+      },
+      witsml: {
+        file: "cat /var/git/subsurface_physics/witsml_parser_rs.rs",
+        meta: "Rust Streaming Mud-Logging Parser",
+        desc: "High-performance streaming parser written in native Rust processing real-time WITSML XML and LAS mud-logging wellbore telemetry feeds at sub-millisecond rates with zero memory allocations.",
+        code: `pub fn stream_witsml_telemetry<R: BufRead>(reader: R) -> Result<Receiver<WellLogFrame>> {
+    let mut quick_xml = Reader::from_reader(reader);
+    let (tx, rx) = mpsc::channel(1000);
+    tokio::spawn(async move {
+        while let Ok(Event::Start(e)) = quick_xml.read_event() {
+            if e.name().as_ref() == b"logData" {
+                tx.send(parse_curve_points(&mut quick_xml)).await.unwrap();
+            }
         }
-      });
-
-      document.querySelectorAll('.bento-card').forEach(card => {
-        if (cat === 'all' || card.getAttribute('data-cat') === cat) {
-          card.classList.remove('hidden');
-        } else {
-          card.classList.add('hidden');
-        }
-      });
-    }
-
-    // --------------------------------------------------------
-    // 6. COMPREHENSIVE REPOSITORY INTELLIGENCE KNOWLEDGE BASE
-    // --------------------------------------------------------
-    const repoKnowledge = {
-      // 1. SOLPLAY
-      solplay: `<strong>[SOLPLAY PROTOCOL] Decentralized Social Sportsbook & Copy-Trading Escrow</strong><br>
-      • <strong>Smart Contract Architecture:</strong> Authored in Rust (Anchor framework). Wagers and pool liquidity are locked in Program Derived Addresses (PDAs) with zero reentrancy risks.<br>
-      • <strong>Multi-Source Sports Oracle:</strong> Resolves matches in &lt;1.2 seconds by verifying cryptographic SHA-256 state hashes against DraftKings, ESPN, and TheSportsDB APIs.<br>
-      • <strong>Syndicate Revenue Split:</strong> Automated 2.0% creator commission split mechanism that redistributes wagering turnover directly to syndicate leaders on-chain.`,
-
-      // 2. OMESHAM AI & DRILLSTRING
-      omesham: `<strong>[OMESHAM AI] Industrial Wellbore Dynamics & Predictive Telemetry</strong><br>
-      • <strong>Mathematical Formulation:</strong> Formulates drillstring torsional vibrations via the 1D hyperbolic wave equation: <code class="text-cyan-300">∂²u/∂t² = c² (∂²u/∂x²)</code>.<br>
-      • <strong>Financial & Rig Impact:</strong> Forecasts drill bit stalls and differential sticking 30 minutes in advance, mitigating potential $250,000+ Non-Productive Time (NPT) per deep offshore drilling campaign.<br>
-      • <strong>Rust Parser:</strong> Engineered <code class="text-cyan-300">witsml_parser_rs</code>, a high-throughput streaming parser processing real-time WITSML and LAS mud-logging feeds at sub-millisecond rates.`,
-
-      // 3. SOVEREIGN AGENT & MERMAIL
-      sovereign: `<strong>[SOVEREIGN AGENT v2.0 & MERMAIL SECURITY DESK]</strong><br>
-      • <strong>Autonomous AI Sentinel:</strong> Real-time autonomous co-pilot equipped with the Argus Security Shield and BlinkCraft 1-click Solana Actions generator.<br>
-      • <strong>Model Context Protocol (MCP):</strong> Implemented Anthropic MCP tool servers enabling LLMs to safely read repository trees, verify commits, and interact with on-chain contracts.<br>
-      • <strong>Zero-Trust Bug Bounty Quarantine:</strong> Sanitizes and isolates adversarial prompt injections in security vulnerability reports before triggering automated white-hat payouts via PayBox signers.`,
-
-      // 4. SOLWORK PROTOCOL
-      solwork: `<strong>[SOLWORK PROTOCOL] Trustless AI Microtasking & Escrows on Solana</strong><br>
-      • <strong>The African Banking Bottleneck:</strong> Traditional banking rails fail 20–35% of African cross-border payment settlements. SolWork provides sub-cent instant settlements in SPL USDC.<br>
-      • <strong>Client-Side Deterministic Keys:</strong> Workers sign up using email while the browser derives non-custodial Solana keypairs via PBKDF2/SHA-256 (150,000 iterations), preserving full self-custody.<br>
-      • <strong>On-Chain Worker Tiering:</strong> Smart contract enforces on-chain credential checks before unlocking high-value dataset annotation pools, cutting manual verification overhead by 80%.`,
-
-      // 5. GEOCLEARANCE NYSC
-      geoclearance: `<strong>[GEOCLEARANCE NYSC] Decentralized Biometric & Geofence Clearance</strong><br>
-      • <strong>Problem:</strong> Monthly physical clearance for Nigerian National Youth Service Corps (NYSC) suffers from massive congestion, ghost workers, and manual paperwork delays.<br>
-      • <strong>Decentralized Solution:</strong> Cryptographic GPS anti-spoofing paired with biometric hashing and Solana verification logs to prove corps members are genuinely physically on-site without manual sign-offs.`,
-
-      // 6. AETHER DEX & RUNTIME
-      aether: `<strong>[AETHER DEX RUNTIME & HIGH-SPEED BOTS]</strong><br>
-      • <strong>Sub-18ms Ingestion:</strong> Concurrent Tokio async runtime listening to raw WebSocket streams across Raydium, Pump.fun, and Solana DEX pools.<br>
-      • <strong>Automated Protection:</strong> Real-time bonding curve detection, anti-rug liquidity drain triggers, and dynamic slippage compensation.`,
-
-      // 7. PETRO.ONE & PETROSHIELD
-      petro: `<strong>[PETRO.ONE & PETROSHIELD AI] Subsurface Energy Valuation & Safety</strong><br>
-      • <strong>Integrated Valuation:</strong> Merges discounted cash flow (DCF) petroleum economic models with satellite orbital spectral imagery for hydrocarbon seepage detection.<br>
-      • <strong>GIS Resource Mapping:</strong> Interactive 37-state Nigerian mineral and hydrocarbon deposit geospatial dataset.<br>
-      • <strong>Safety Engineering:</strong> Blowout risk simulation and steady-state separation network modeling in Aspen HYSYS (conducted during NETCO engineering internship).`,
-
-      // 8. ACADEMIC CREDENTIALS
-      education: `<strong>[ACADEMIC CREDENTIALS & ENGINEERING HONORS]</strong><br>
-      • <strong>Degree:</strong> Bachelor of Engineering (B.Eng.), Petroleum Systems Engineering<br>
-      • <strong>Classification:</strong> First Class / Upper Division Honors (Top Tier Academic Classification)<br>
-      • <strong>Leadership:</strong> Society of Petroleum Engineers (SPE) Assistant Membership Lead, Technical Symposium Presenter.<br>
-      • <strong>Technical Foundations:</strong> Finite difference methods, wave propagation, multiphase fluid thermodynamics, HAZOP/HAZID process safety reviews.`,
-
-      // 9. HIRING / DISPATCH
-      hire: `<strong>[PRIORITY HIRING & CONTRACT DISPATCH]</strong><br>
-      • <strong>Availability:</strong> Available for remote contracts, Solana Anchor smart contract audits, and distributed runtime engineering.<br>
-      • <strong>X / Twitter:</strong> <a href="https://x.com/0xtryhardx0" target="_blank" class="text-[#14f195] underline">@0xtryhardx0</a> (DM open)<br>
-      • <strong>GitHub Repositories:</strong> <a href="https://github.com/0xtryhardx0" target="_blank" class="text-[#00f2fe] underline">github.com/0xtryhardx0</a> &amp; <a href="https://github.com/ayodejierioluwa" target="_blank" class="text-purple-300 underline">github.com/ayodejierioluwa</a>`
+    });
+    Ok(rx)
+}`
+      },
+      petro: {
+        file: "cat /var/git/subsurface_physics/petro_one_valuation.py",
+        meta: "DCF Modeling & Satellite Orbital GIS",
+        desc: "Petroleum asset valuation engine pairing discounted cash flow (DCF) models with satellite orbital spectral imagery for hydrocarbon seepage detection, backed by an interactive 37-state Nigerian mineral GIS database.",
+        code: `def calculate_asset_npv(production_profile, discount_rate=0.10, opex_per_bbl=18.5):
+    cash_flows = [bbl * (oil_price - opex_per_bbl) - capex for bbl in production_profile]
+    return np.npv(discount_rate, cash_flows)`
+      },
+      petroshield: {
+        file: "cat /var/git/subsurface_physics/petroshield_hazard.py",
+        meta: "Wellbore Integrity & Blowout Risk Simulation",
+        desc: "Subsurface well integrity diagnostic system simulating pore pressure, fracture gradients, and gas influx detection to safeguard drilling operations against catastrophic kicks and blowouts.",
+        code: `def evaluate_kick_margin(pore_pressure_psi, mud_weight_ppg, tvd_ft):
+    hydrostatic_psi = mud_weight_ppg * 0.052 * tvd_ft
+    return hydrostatic_psi - pore_pressure_psi`
+      },
+      netco: {
+        file: "cat /var/git/subsurface_physics/netco_aspen_hysys.hsc",
+        meta: "Aspen HYSYS Process Simulation • HAZOP",
+        desc: "Steady-state oil & gas separation facility network simulation in Aspen HYSYS conducted during NETCO engineering internship. Optimized gas compressor train throughput by +4.2% while verifying 14 pressure relief bottlenecks during HAZOP/HAZID safety sign-offs.",
+        code: `// Aspen HYSYS Process Simulation Output Summary:
+Stream: 3-Phase High-Pressure Separator V-101
+Operating Pressure: 42.5 bar(g) | Operating Temp: 68.4 °C
+Gas Throughput: +4.2% Optimized within ASME Pressure Vessel Safety Limits
+HAZID Bottlenecks Mitigated: 14 Relief Scenarios Verified.`
+      },
+      sovereign: {
+        file: "cat /var/git/autonomous_agents/sovereign_sentinel.py",
+        meta: "Autonomous Solana Alpha Sentinel",
+        desc: "Autonomous conversational co-pilot for Solana traders and developers. Incorporates the Argus Security Shield to detect malicious drainers, rug pulls, and anomalous liquidity burn events in real-time.",
+        code: `class SovereignSentinel:
+    async def analyze_pool_safety(self, pool_address):
+        liquidity_locked = await self.check_raydium_vault_lock(pool_address)
+        mint_authority_revoked = await self.verify_mint_disabled(pool_address)
+        return {"safe": liquidity_locked and mint_authority_revoked}`
+      },
+      mermail: {
+        file: "cat /var/git/autonomous_agents/mermail_mcp_server.ts",
+        meta: "Zero-Trust Bug Bounty Remittance (Anthropic MCP)",
+        desc: "Autonomous bug bounty desk implementing Anthropic Model Context Protocol (MCP) servers. Isolates and quarantines adversarial prompt injections in vulnerability submissions before authorizing automated white-hat payouts via PayBox signers.",
+        code: `export const payboxServer = new McpServer({ name: "mermail-paybox", version: "1.0.0" });
+payboxServer.tool("disburse_bounty", { researcher: z.string(), severity: z.enum(["low", "high", "critical"]) }, async ({ researcher, severity }) => {
+    return await executeOnChainRemittance(researcher, severity);
+});`
+      },
+      animus: {
+        file: "cat /var/git/autonomous_agents/animus_engine_v2.py",
+        meta: "Concurrent Multi-Agent Decision Engine",
+        desc: "High-performance concurrent multi-agent execution pipeline orchestrating independent subagents across market telemetry, code review, and automated task execution.",
+        code: `async def run_agent_swarm(tasks):
+    workers = [spawn_worker(t) for t in tasks]
+    return await asyncio.gather(*workers)`
+      },
+      opencode: {
+        file: "cat /var/git/autonomous_agents/opencode_memory_rag.py",
+        meta: "Vector Retrieval & Contextual Agent Memory",
+        desc: "Lightweight, zero-latency vector retrieval memory architecture enabling autonomous agents to persist state, learn codebase idioms, and retrieve past session insights deterministically.",
+        code: `def retrieve_codebase_context(query, top_k=5):
+    query_vector = embed_model.encode(query)
+    return vector_index.search(query_vector, k=top_k)`
+      }
     };
 
-    function askAgent(questionText) {
-      document.getElementById('agent-user-input').value = questionText;
-      handleAgentSubmit();
+    function selectRepo(key) {
+      playClick(700);
+      const data = repoDetails[key] || repoDetails['solplay'];
+      document.getElementById('repo-inspect-file').textContent = data.file;
+      document.getElementById('repo-inspect-meta').textContent = data.meta;
+      document.getElementById('repo-inspect-desc').innerHTML = data.desc;
+      document.getElementById('repo-inspect-code').textContent = data.code;
+    }
+    selectRepo('solplay');
+
+    // ----------------------------------------------------
+    // 6. Interactive REPL Agent (Window 2)
+    // ----------------------------------------------------
+    const replAnswers = {
+      solplay: `>>> tc.explain_solplay_security()
+[SOLPLAY SECURITY AUDIT VERIFICATION]
+• Program: Rust Anchor on Solana Sealevel Virtual Machine (SBF).
+• PDA Collateral Isolation: All wager collateral is routed into seeds [b"escrow", user.key().as_ref(), match_id.as_bytes()].
+• Zero Reentrancy: Solana's Sealevel engine executes instructions atomically; accounts are locked mutably during runtime. Reentrancy is structurally impossible.
+• Sports Oracle: SHA-256 state hashes verified against DraftKings, ESPN, and TheSportsDB APIs; settles in <1.2s.`,
+
+      omesham: `>>> tc.explain_omesham_wave_physics()
+[OMESHAM AI WAVE SOLVER & DOWNHOLE RIG IMPACT]
+• Equation: 1D hyperbolic wave PDE ∂²u/∂t² = c² (∂²u/∂x²) where c = 3,200 m/s (shear wave velocity in drill pipe steel).
+• Discretization: Finite-difference time-domain with Courant-Friedrichs-Lewy stability factor (c·Δt/Δx < 1).
+• Industrial Consequence: Predicts drill bit torsional stick-slip oscillations and drillstring fatigue 30 minutes in advance, saving $250k+ in rig Non-Productive Time (NPT).
+• Rust Engine: Built witsml_parser_rs for zero-allocation streaming of WITSML mud-logging feeds.`,
+
+      solwork: `>>> tc.explain_solwork_pbkdf2()
+[SOLWORK PROTOCOL & AFRICAN CROSS-BORDER REMITTANCE]
+• Banking Rail Friction: African banking cards suffer 20–35% failure rates on international remittances.
+• Client-Side Deterministic Derivation: Uses Web Crypto PBKDF2 with SHA-256 (150,000 iterations) to derive non-custodial Solana keypairs directly from worker emails.
+• On-Chain Worker Vetting: Anchor smart contract enforces skill credentials before unlocking high-value dataset annotation pools.`,
+
+      education: `>>> tc.verify_academic_credentials()
+[ACADEMIC CREDENTIALS & RIGOR]
+• Institution: Covenant University, Ota, Nigeria (2020 – 2025).
+• Degree: Bachelor of Engineering (B.Eng.), Petroleum Systems Engineering.
+• Classification: First Class / Upper Division Honors.
+• Positions: Society of Petroleum Engineers (SPE) Assistant Membership Lead, Technical Symposium Presenter.`,
+
+      hire: `>>> tc.get_contract_dispatch()
+[PRIORITY RECRUITING & CONTRACT ENGAGEMENT]
+• Candidate: @0xtryhardx0 (Pseudonymous Systems Architect).
+• Focus: Solana Core / Anchor, Low-Latency Rust (<18ms), Subsurface Physics Simulation.
+• Status: Available for remote contracts, protocol design, and high-throughput systems.
+• Direct Message: https://x.com/0xtryhardx0 (DMs Open).`
+    };
+
+    function runReplQuery(fnCall) {
+      document.getElementById('repl-input').value = fnCall;
+      handleReplSubmit();
     }
 
-    function handleAgentSubmit() {
-      const input = document.getElementById('agent-user-input');
-      const text = input.value.trim();
-      if (!text) return;
+    function handleReplSubmit(e) {
+      if (e) e.preventDefault();
+      const input = document.getElementById('repl-input');
+      const val = input.value.trim();
+      if (!val) return;
 
-      playBlip(800);
-      const feed = document.getElementById('agent-chat-feed');
+      playClick(850);
+      const stream = document.getElementById('repl-history');
+      const lower = val.toLowerCase();
 
-      // User Message
-      const userDiv = document.createElement('div');
-      userDiv.className = 'flex justify-end gap-2 text-xs md:text-sm';
-      userDiv.innerHTML = `
-        <div class="p-3.5 rounded-2xl rounded-tr-none bg-[#14f195]/20 text-[#14f195] border border-[#14f195]/30 max-w-lg font-mono">
-          ${text}
-        </div>
-      `;
-      feed.appendChild(userDiv);
+      let answer = `>>> ${val}\n[REPL OUTPUT] Query evaluated across 24 repositories. Try calling tc.explain_solplay_security(), tc.explain_omesham_wave_physics(), or tc.get_contract_dispatch().`;
+
+      if (lower.includes('solplay') || lower.includes('security') || lower.includes('reentrancy')) answer = replAnswers.solplay;
+      else if (lower.includes('omesham') || lower.includes('wave') || lower.includes('physics') || lower.includes('drill')) answer = replAnswers.omesham;
+      else if (lower.includes('solwork') || lower.includes('pbkdf2') || lower.includes('payroll') || lower.includes('microtask')) answer = replAnswers.solwork;
+      else if (lower.includes('education') || lower.includes('degree') || lower.includes('grade') || lower.includes('honors')) answer = replAnswers.education;
+      else if (lower.includes('hire') || lower.includes('contact') || lower.includes('dispatch') || lower.includes('rate')) answer = replAnswers.hire;
+
+      const block = document.createElement('div');
+      block.className = 'p-3 bg-black/90 rounded border border-slate-800 text-slate-200 whitespace-pre-wrap leading-relaxed font-mono text-xs';
+      block.innerHTML = `<span class="text-[#00f2fe] font-bold">&gt;&gt;&gt; ${val}</span>\n${answer.replace(/^>>> .*\n/, '')}`;
+      stream.appendChild(block);
       input.value = '';
-      feed.scrollTop = feed.scrollHeight;
+      stream.scrollTop = stream.scrollHeight;
+    }
 
-      // Intelligent Context Matcher
-      const q = text.toLowerCase();
-      let response = `[KNOWLEDGE NODE] @0xtryhardx0 specializes in Solana smart contracts (Anchor/SBF), low-latency Rust runtimes (&lt;18ms), and subsurface physics simulations (wave equations). Query specific projects like SolPlay, Omesham AI, Sovereign Agent, SolWork, or Petro.One for in-depth technical breakdowns.`;
+    // ----------------------------------------------------
+    // 7. Oscilloscope 1D Wave Physics Simulator (Window 3)
+    // ----------------------------------------------------
+    const scopeCanvas = document.getElementById('scope-canvas');
+    let scopeCtx = null;
+    let sPoints = [];
+    const numSPoints = 140;
+    let sW, sH;
+    let scopeRunning = false;
 
-      if (q.includes('solplay') || q.includes('reentrancy') || q.includes('betting') || q.includes('oracle')) {
-        response = repoKnowledge.solplay;
-      } else if (q.includes('omesham') || q.includes('wave') || q.includes('drill') || q.includes('250k') || q.includes('stick-slip')) {
-        response = repoKnowledge.omesham;
-      } else if (q.includes('sovereign') || q.includes('mermail') || q.includes('mcp') || q.includes('bounty') || q.includes('quarantine')) {
-        response = repoKnowledge.sovereign;
-      } else if (q.includes('solwork') || q.includes('microtask') || q.includes('pbkdf2') || q.includes('payroll')) {
-        response = repoKnowledge.solwork;
-      } else if (q.includes('geoclearance') || q.includes('nysc') || q.includes('gps') || q.includes('biometric')) {
-        response = repoKnowledge.geoclearance;
-      } else if (q.includes('aether') || q.includes('dex') || q.includes('18ms') || q.includes('bot') || q.includes('trading')) {
-        response = repoKnowledge.aether;
-      } else if (q.includes('petro') || q.includes('petroshield') || q.includes('hysys') || q.includes('gas') || q.includes('netco')) {
-        response = repoKnowledge.petro;
-      } else if (q.includes('education') || q.includes('degree') || q.includes('grade') || q.includes('honors') || q.includes('university') || q.includes('rigor')) {
-        response = repoKnowledge.education;
-      } else if (q.includes('hire') || q.includes('contact') || q.includes('dm') || q.includes('work') || q.includes('rate') || q.includes('availability')) {
-        response = repoKnowledge.hire;
+    function initScope() {
+      if (!scopeCanvas) return;
+      sW = scopeCanvas.parentElement.offsetWidth;
+      sH = scopeCanvas.offsetHeight || 200;
+      scopeCanvas.width = sW;
+      scopeCanvas.height = sH;
+      scopeCtx = scopeCanvas.getContext('2d');
+      sPoints = [];
+      for (let i = 0; i < numSPoints; i++) sPoints.push({ y: 0, vy: 0 });
+      if (!scopeRunning) {
+        scopeRunning = true;
+        animateScope();
+      }
+    }
+
+    function injectPulse(force = 20) {
+      playClick(600);
+      const mid = Math.floor(numSPoints / 2);
+      sPoints[mid].vy += force;
+      sPoints[mid - 1].vy += force * 0.7;
+      sPoints[mid + 1].vy += force * 0.7;
+    }
+
+    function resetWave() {
+      playClick(400);
+      for (let i = 0; i < numSPoints; i++) {
+        sPoints[i].y = 0;
+        sPoints[i].vy = 0;
+      }
+    }
+
+    if (scopeCanvas) {
+      scopeCanvas.addEventListener('mousemove', (e) => {
+        const rect = scopeCanvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const idx = Math.floor((x / sW) * numSPoints);
+        if (idx >= 0 && idx < numSPoints) sPoints[idx].vy += 14;
+      });
+    }
+
+    function animateScope() {
+      if (!scopeCanvas || !scopeCtx) return;
+      scopeCtx.fillStyle = '#020408';
+      scopeCtx.fillRect(0, 0, sW, sH);
+
+      // Oscilloscope grid lines
+      scopeCtx.strokeStyle = 'rgba(20, 241, 149, 0.08)';
+      scopeCtx.lineWidth = 1;
+      for (let x = 0; x < sW; x += 40) {
+        scopeCtx.beginPath(); scopeCtx.moveTo(x, 0); scopeCtx.lineTo(x, sH); scopeCtx.stroke();
+      }
+      for (let y = 0; y < sH; y += 30) {
+        scopeCtx.beginPath(); scopeCtx.moveTo(0, y); scopeCtx.lineTo(sW, y); scopeCtx.stroke();
       }
 
-      // Render streaming response
-      setTimeout(() => {
-        const agentDiv = document.createElement('div');
-        agentDiv.className = 'flex gap-3 text-xs md:text-sm';
-        agentDiv.innerHTML = `
-          <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#14f195] to-[#00f2fe] text-black flex items-center justify-center font-bold text-xs shrink-0 shadow font-mono">
-            AI
-          </div>
-          <div class="p-4 rounded-2xl rounded-tl-none bg-white/5 border border-white/10 text-slate-200 space-y-2 max-w-2xl leading-relaxed">
-            <div class="text-xs text-slate-200">${response}</div>
-            <div class="pt-2 flex flex-wrap gap-2 text-[10px] font-mono border-t border-white/10 text-slate-400">
-              <a href="https://x.com/0xtryhardx0" target="_blank" class="text-[#14f195] hover:underline">𝕏 DM @0xtryhardx0</a>
-              <span>•</span>
-              <a href="https://github.com/0xtryhardx0" target="_blank" class="text-[#00f2fe] hover:underline">💻 GitHub Org</a>
-              <span>•</span>
-              <span class="text-slate-500">Verified by tryhard-agent v3.0</span>
-            </div>
-          </div>
-        `;
-        feed.appendChild(agentDiv);
-        feed.scrollTop = feed.scrollHeight;
-      }, 250);
+      // Wave propagation physics
+      const tension = 0.038, damping = 0.988, midY = sH / 2;
+      for (let i = 0; i < numSPoints; i++) {
+        const left = i > 0 ? sPoints[i - 1].y : 0;
+        const right = i < numSPoints - 1 ? sPoints[i + 1].y : 0;
+        const force = (left + right - 2 * sPoints[i].y) * tension;
+        sPoints[i].vy = (sPoints[i].vy + force) * damping;
+        sPoints[i].y += sPoints[i].vy;
+      }
+
+      // Draw Oscilloscope Phosphor Wave
+      scopeCtx.beginPath();
+      scopeCtx.moveTo(0, midY + sPoints[0].y);
+      for (let i = 1; i < numSPoints; i++) {
+        scopeCtx.lineTo((i / (numSPoints - 1)) * sW, midY + sPoints[i].y);
+      }
+      scopeCtx.strokeStyle = '#14f195';
+      scopeCtx.lineWidth = 2.5;
+      scopeCtx.shadowColor = '#14f195';
+      scopeCtx.shadowBlur = 10;
+      scopeCtx.stroke();
+
+      requestAnimationFrame(animateScope);
     }
 
-    // --------------------------------------------------------
-    // 7. Kernel TTY Terminal Execution
-    // --------------------------------------------------------
-    const ttyResponses = {
-      'help': `Available System Commands:
-  • <span class="text-[#14f195]">whois</span>            : Executive candidate summary & verification
+    // ----------------------------------------------------
+    // 8. Kernel ZSH Terminal Shell (Window 4)
+    // ----------------------------------------------------
+    const zshResponses = {
+      'help': `Commands:
+  • <span class="text-[#14f195]">whois</span>            : Systems dossier for @0xtryhardx0
   • <span class="text-[#00f2fe]">projects --web3</span>  : Solana programs (SolPlay, SolWork, LOC, GeoClearance)
   • <span class="text-cyan-300">projects --petro</span> : Omesham AI, Petro.One, PetroShield, NETCO HYSYS
   • <span class="text-purple-300">projects --agents</span>: Sovereign Agent, Mermail MCP, Aether DEX
   • <span class="text-amber-300">education</span>        : Academic honors (B.Eng. Petroleum, First Class/Upper)
-  • <span class="text-green-400">matrix</span>           : Toggle green matrix digital rain canvas
-  • <span class="text-amber-300">sudo hire</span>        : Fast-track hiring sequence
-  • <span class="text-slate-500">clear</span>            : Flush terminal history`,
+  • <span class="text-green-400">matrix</span>           : Toggle Matrix digital rain
+  • <span class="text-amber-300">sudo hire</span>        : Direct recruitment dispatch
+  • <span class="text-slate-500">clear</span>            : Flush terminal`,
 
       'whois': `<span class="text-[#14f195] font-bold">whois @0xtryhardx0:</span>
 Systems Architect & Web3 Engineer specializing in low-latency distributed runtimes, high-throughput Rust smart contracts on Solana, and physics-informed computational engines. Holds a B.Eng. in Petroleum Systems Engineering (First Class / Upper Division Honors). Operates 24+ codebases across Solana, industrial physics, and autonomous agent systems.`,
@@ -954,194 +1008,65 @@ Status: Available for remote contracts, Solana Core development, and systems arc
 • GitHub: <a href="https://github.com/0xtryhardx0" target="_blank" class="text-[#00f2fe] underline">github.com/0xtryhardx0</a>`
     };
 
-    function execTTY(cmd) {
-      playBlip(600);
+    function execZsh(cmd) {
+      playClick(650);
       const clean = cmd.trim().toLowerCase();
-      const history = document.getElementById('tty-history');
-      const screen = document.getElementById('tty-screen');
-
-      if (clean === 'clear') {
-        history.innerHTML = '';
-        return;
-      }
-
-      if (clean === 'matrix') {
-        toggleMatrixRain();
-      }
+      const out = document.getElementById('zsh-output');
+      if (clean === 'clear') { out.innerHTML = ''; return; }
+      if (clean === 'matrix') toggleMatrix();
 
       const userLine = document.createElement('div');
       userLine.innerHTML = `<span class="text-[#14f195] font-bold">0xtryhardx0@node:~$</span> <span class="text-white">${cmd}</span>`;
-      history.appendChild(userLine);
+      out.appendChild(userLine);
 
       const respLine = document.createElement('div');
       respLine.className = 'text-xs text-slate-300 pl-2 border-l border-white/20 my-1 leading-relaxed';
-
-      if (ttyResponses[clean]) {
-        respLine.innerHTML = ttyResponses[clean];
-      } else {
-        respLine.innerHTML = `<span class="text-red-400">zsh: command not found: ${cmd}</span>. Type <span class="text-[#14f195]">help</span> for valid commands.`;
-      }
-
-      history.appendChild(respLine);
-      screen.scrollTop = screen.scrollHeight;
+      respLine.innerHTML = zshResponses[clean] || `<span class="text-red-400">zsh: command not found: ${cmd}</span>. Type <span class="text-[#14f195]">help</span>.`;
+      out.appendChild(respLine);
+      out.parentElement.scrollTop = out.parentElement.scrollHeight;
     }
 
-    function handleTTYSubmit(e) {
+    function handleZshSubmit(e) {
       e.preventDefault();
-      const input = document.getElementById('tty-input');
+      const input = document.getElementById('zsh-input');
       const val = input.value.trim();
       if (!val) return;
-      execTTY(val);
+      execZsh(val);
       input.value = '';
     }
 
-    // Matrix Rain Effect
-    let matrixInterval = null;
-    function initMatrixRain() {
-      const canvas = document.getElementById('matrix-canvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      canvas.width = canvas.parentElement.offsetWidth;
-      canvas.height = canvas.parentElement.offsetHeight;
-
+    // Matrix Digital Rain
+    let mInterval = null;
+    function initMatrix() {
+      const mCanvas = document.getElementById('term-matrix-canvas');
+      if (!mCanvas) return;
+      const mCtx = mCanvas.getContext('2d');
+      mCanvas.width = mCanvas.parentElement.offsetWidth;
+      mCanvas.height = mCanvas.parentElement.offsetHeight;
       const letters = '01TRYHARDX0SOLANARUSTTOKENANCHORWAVE10';
-      const fontSize = 13;
-      const columns = Math.floor(canvas.width / fontSize);
-      const drops = Array(columns).fill(1);
+      const fSize = 13, cols = Math.floor(mCanvas.width / fSize), drops = Array(cols).fill(1);
 
       function draw() {
-        ctx.fillStyle = 'rgba(5, 7, 12, 0.08)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#14f195';
-        ctx.font = fontSize + 'px monospace';
-
+        mCtx.fillStyle = 'rgba(3, 5, 9, 0.08)';
+        mCtx.fillRect(0, 0, mCanvas.width, mCanvas.height);
+        mCtx.fillStyle = '#14f195';
+        mCtx.font = fSize + 'px monospace';
         for (let i = 0; i < drops.length; i++) {
-          const text = letters.charAt(Math.floor(Math.random() * letters.length));
-          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+          const txt = letters.charAt(Math.floor(Math.random() * letters.length));
+          mCtx.fillText(txt, i * fSize, drops[i] * fSize);
+          if (drops[i] * fSize > mCanvas.height && Math.random() > 0.975) drops[i] = 0;
           drops[i]++;
         }
       }
-
-      if (matrixInterval) clearInterval(matrixInterval);
-      matrixInterval = setInterval(draw, 40);
+      if (mInterval) clearInterval(mInterval);
+      mInterval = setInterval(draw, 40);
     }
 
-    function toggleMatrixRain() {
-      const canvas = document.getElementById('matrix-canvas');
-      if (canvas.style.display === 'none') {
-        canvas.style.display = 'block';
-        initMatrixRain();
-      } else {
-        canvas.style.display = 'none';
-        if (matrixInterval) clearInterval(matrixInterval);
-      }
-    }
-
-    // --------------------------------------------------------
-    // 8. Code Modal
-    // --------------------------------------------------------
-    const snippets = {
-      solplay: `#[program]
-pub mod solplay_escrow {
-    use super::*;
-
-    pub fn initialize_wager(ctx: Context<InitializeWager>, amount: u64, match_id: String) -> Result<()> {
-        let wager = &mut ctx.accounts.wager;
-        wager.bettor = ctx.accounts.user.key();
-        wager.amount = amount;
-        wager.match_id = match_id;
-        wager.bump = ctx.bumps.wager;
-
-        // Non-custodial transfer into isolated PDA vault with zero reentrancy risks
-        token::transfer(
-            ctx.accounts.into_transfer_to_pda_context(),
-            amount,
-        )?;
-        Ok(())
-    }
-}`,
-      omesham: `class DrillstringWaveSolver:
-    """1D Hyperbolic wave equation solver for drillstring torsional vibration."""
-    def __init__(self, length_m=3500, c_sound=3200.0, dt=0.001):
-        self.c = c_sound  # Shear wave velocity in API drill pipe steel (m/s)
-        self.dx = 10.0    # Spatial resolution (10m discretizations)
-        self.dt = dt      # Courant-Friedrichs-Lewy stability condition: c*dt/dx < 1
-        self.u = np.zeros(int(length_m / self.dx))
-        self.u_prev = np.zeros_like(self.u)
-
-    def step_forward(self, bit_torque_perturbation):
-        # Finite-difference time-domain wave propagation step
-        cfl = (self.c * self.dt / self.dx) ** 2
-        u_next = 2*self.u - self.u_prev + cfl * (np.roll(self.u, -1) - 2*self.u + np.roll(self.u, 1))
-        u_next[-1] += bit_torque_perturbation  # Downhole rock-bit boundary condition
-        self.u_prev, self.u = self.u, u_next
-        return self.u`,
-
-      mermail: `// Anthropic Model Context Protocol (MCP) Tool Declaration
-export const payboxToolDefinition = {
-  name: "solana_paybox_remittance",
-  description: "Disburse verified white-hat bug bounty reward in SPL USDC",
-  inputSchema: {
-    type: "object",
-    properties: {
-      researcher_address: { type: "string", description: "Solana wallet public key" },
-      severity: { type: "string", enum: ["low", "medium", "high", "critical"] },
-      amount_usdc: { type: "number" }
-    },
-    required: ["researcher_address", "severity", "amount_usdc"]
-  }
-};`,
-
-      solwork: `// Client-side PBKDF2/SHA-256 Non-Custodial Key Derivation
-export async function deriveWorkerKeypair(email: string, salt: string): Promise<Keypair> {
-  const enc = new TextEncoder();
-  const keyMaterial = await crypto.subtle.importKey(
-    "raw", enc.encode(email.toLowerCase().trim()), "PBKDF2", false, ["deriveBits"]
-  );
-  const derivedBits = await crypto.subtle.deriveBits(
-    { name: "PBKDF2", salt: enc.encode(salt), iterations: 150_000, hash: "SHA-256" },
-    keyMaterial,
-    256
-  );
-  return Keypair.fromSeed(new Uint8Array(derivedBits));
-}`
-    };
-
-    function openCodeModal(key) {
-      playBlip(700);
-      const modal = document.getElementById('code-modal');
-      const title = document.getElementById('modal-title');
-      const badge = document.getElementById('modal-badge');
-      const code = document.getElementById('modal-code');
-
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-
-      if (key === 'solplay') {
-        badge.textContent = "RUST ANCHOR";
-        title.textContent = "solplay_escrow.rs (PDA Risk Architecture)";
-        code.textContent = snippets.solplay;
-      } else if (key === 'omesham') {
-        badge.textContent = "PYTHON / NUMPY";
-        title.textContent = "wave_equation_solver.py (Drillstring Telemetry)";
-        code.textContent = snippets.omesham;
-      } else if (key === 'mermail') {
-        badge.textContent = "MCP SERVER / TYPESCRIPT";
-        title.textContent = "mermail_mcp_signer.ts (Zero-Trust Remittance)";
-        code.textContent = snippets.mermail;
-      } else {
-        badge.textContent = "TYPESCRIPT / WEB CRYPTO";
-        title.textContent = "keypair_derivation.ts (PBKDF2 Key Derivation)";
-        code.textContent = snippets.solwork;
-      }
-    }
-
-    function closeCodeModal() {
-      playBlip(400);
-      const modal = document.getElementById('code-modal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
+    function toggleMatrix() {
+      const mCanvas = document.getElementById('term-matrix-canvas');
+      mCanvas.style.display = (mCanvas.style.display === 'none') ? 'block' : 'none';
+      if (mCanvas.style.display === 'block') initMatrix();
+      else if (mInterval) clearInterval(mInterval);
     }
   </script>
 </body>
