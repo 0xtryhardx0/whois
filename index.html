@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>whois @0xtryhardx0 — Systems Architect & Web3 Rust Engineer</title>
+  <meta name="description" content="whois @0xtryhardx0 — Interactive Dev CV & Autonomous Agent. Solana Anchor smart contracts, high-throughput Rust runtimes, and computational physics.">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+
+  <!-- PWA & Mobile Web App Meta -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#070a12">
+
+  <style>
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.05); }
+    }
+    .glow-dot {
+      animation: pulseGlow 3s infinite ease-in-out;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.6);
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: rgba(148, 163, 184, 0.25);
+      border-radius: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb:hover {
+      background: rgba(20, 241, 149, 0.4);
+    }
+    .matrix-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0.15;
+      z-index: 0;
+    }
+    .glass-panel {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(51, 65, 85, 0.6);
+    }
+  </style>
+</head>
+<body class="bg-[#070a12] text-slate-200 font-sans antialiased m-0 p-0 selection:bg-[#14f195] selection:text-black min-h-screen flex flex-col justify-between">
+
+  <!-- ========================================== -->
+  <!-- TOP HEADER & PERSISTENT MODE SWITCHER      -->
+  <!-- ========================================== -->
+  <header class="sticky top-0 z-50 glass-panel border-b border-slate-800/80 px-4 py-3">
+    <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      
+      <!-- Brand & Anon Status -->
+      <div class="flex items-center gap-3">
+        <div class="relative flex items-center justify-center">
+          <div class="w-3 h-3 rounded-full bg-[#14f195]"></div>
+          <div class="absolute w-5 h-5 rounded-full bg-[#14f195]/40 glow-dot"></div>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-sm font-black tracking-wider text-slate-100 font-mono">@0xtryhardx0</h1>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[#14f195]/10 text-[#14f195] border border-[#14f195]/30 font-mono font-bold">PSEUDONYMOUS</span>
+          </div>
+          <p class="text-[11px] text-slate-400 font-mono">Rust • Solana Anchor • Subsurface Physics</p>
+        </div>
+      </div>
+
+      <!-- Mode Switcher Tabs -->
+      <nav class="flex items-center bg-slate-950/80 p-1 rounded-xl border border-slate-800 text-xs shadow-inner">
+        <button id="tab-agent" onclick="switchMode('agent')" class="px-3 py-1.5 rounded-lg font-medium transition-all flex items-center gap-1.5 bg-gradient-to-r from-[#14f195] to-[#00f2fe] text-black font-bold shadow-md">
+          <span>🤖</span> <span>Ask @0xtryhardx0</span>
+        </button>
+        <button id="tab-bento" onclick="switchMode('bento')" class="px-3 py-1.5 rounded-lg font-medium transition-all flex items-center gap-1.5 text-slate-400 hover:text-slate-200">
+          <span>⚡</span> <span>Cyber-Bento</span>
+        </button>
+        <button id="tab-terminal" onclick="switchMode('terminal')" class="px-3 py-1.5 rounded-lg font-medium transition-all flex items-center gap-1.5 text-slate-400 hover:text-slate-200 font-mono">
+          <span>&gt;_</span> <span>whois</span>
+        </button>
+      </nav>
+
+      <!-- Quick Action CTA -->
+      <div class="hidden sm:flex items-center gap-2">
+        <a href="https://x.com/0xtryhardx0" target="_blank" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition flex items-center gap-1.5 font-medium">
+          <span>𝕏</span> DM @0xtryhardx0
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ========================================== -->
+  <!-- MAIN CONTAINER                             -->
+  <!-- ========================================== -->
+  <main class="max-w-6xl mx-auto w-full p-4 md:p-6 flex-1">
+
+    <!-- ======================================================== -->
+    <!-- MODE 3 (HERO): AGENTIC "TALK TO MY RESUME"               -->
+    <!-- ======================================================== -->
+    <section id="section-agent" class="space-y-4">
+      
+      <!-- Subhead -->
+      <div class="flex flex-wrap items-center justify-between gap-2 pb-1 border-b border-slate-800/80 text-xs font-mono">
+        <div class="flex items-center gap-2 text-slate-400">
+          <span class="text-[#00f2fe]">● REASONING NODE</span>
+          <span>// AUTONOMOUS CANDIDATE DOSSIER: whois @0xtryhardx0</span>
+        </div>
+        <div class="text-[#14f195]">READY FOR X (TWITTER) QUERIES</div>
+      </div>
+
+      <div class="rounded-2xl border border-slate-800 bg-[#090d16] shadow-2xl overflow-hidden flex flex-col lg:flex-row min-h-[580px]">
+        
+        <!-- Left: Agent Dossier & "Grill Me" Prompts -->
+        <div class="w-full lg:w-80 bg-slate-900/60 p-5 border-b lg:border-b-0 lg:border-r border-slate-800 flex flex-col justify-between space-y-4">
+          <div class="space-y-4">
+            
+            <!-- Agent Avatar Card -->
+            <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-950 border border-slate-800">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-[#14f195] via-[#00f2fe] to-purple-600 flex items-center justify-center text-black font-black text-xl shadow-lg">
+                0x
+              </div>
+              <div>
+                <h3 class="font-bold text-sm text-slate-100 flex items-center gap-1.5">
+                  TryHard-Bot v2.4
+                  <span class="w-2 h-2 rounded-full bg-[#14f195] inline-block"></span>
+                </h3>
+                <p class="text-[11px] text-slate-400 font-mono">@0xtryhardx0 Agent</p>
+                <p class="text-[10px] text-[#00f2fe] font-mono mt-0.5">Solana Core • ASTs • Telemetry</p>
+              </div>
+            </div>
+
+            <!-- Description -->
+            <div class="text-xs text-slate-400 leading-relaxed">
+              Trained on @0xtryhardx0's production smart contracts, low-latency runtimes, and engineering physics papers. Tap a <span class="text-amber-400 font-semibold">Grill Me</span> prompt below.
+            </div>
+
+            <!-- Spicy Prompts Section -->
+            <div class="space-y-2 pt-2 border-t border-slate-800">
+              <div class="text-[11px] font-mono text-amber-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
+                <span>🔥</span> GRILL ME ON X (TAP TO TEST)
+              </div>
+              
+              <button onclick="askPreset('Grill his Rust & Anchor security: How does @0xtryhardx0 prevent reentrancy and account spoofing in SolPlay?')" 
+                class="w-full text-left p-2.5 rounded-xl bg-slate-950 hover:bg-slate-800/90 hover:border-[#14f195]/50 border border-slate-800/80 text-slate-300 text-xs transition space-y-0.5 group">
+                <div class="font-semibold text-slate-200 group-hover:text-[#14f195]">🛡️ SolPlay Security & Reentrancy</div>
+                <div class="text-[10px] text-slate-400">Anchor PDAs & sports oracle consensus logic</div>
+              </button>
+
+              <button onclick="askPreset('Explain how his petroleum physics background translates into distributed systems and simulation engines.')" 
+                class="w-full text-left p-2.5 rounded-xl bg-slate-950 hover:bg-slate-800/90 hover:border-[#00f2fe]/50 border border-slate-800/80 text-slate-300 text-xs transition space-y-0.5 group">
+                <div class="font-semibold text-slate-200 group-hover:text-[#00f2fe]">🛢️ Subsurface Physics ➔ Systems Code</div>
+                <div class="text-[10px] text-slate-400">Wave equation models & $250k NPT prevention</div>
+              </button>
+
+              <button onclick="askPreset('How does SOLWORK solve international payroll and AI microtasking for global talent?')" 
+                class="w-full text-left p-2.5 rounded-xl bg-slate-950 hover:bg-slate-800/90 hover:border-amber-400/50 border border-slate-800/80 text-slate-300 text-xs transition space-y-0.5 group">
+                <div class="font-semibold text-slate-200 group-hover:text-amber-300">⚡ SolWork Microtasking Protocol</div>
+                <div class="text-[10px] text-slate-400">Deterministic keys & Anchor milestone escrows</div>
+              </button>
+
+              <button onclick="askPreset('What are @0xtryhardx0 credentials and academic engineering standing?')" 
+                class="w-full text-left p-2.5 rounded-xl bg-slate-950 hover:bg-slate-800/90 hover:border-purple-400/50 border border-slate-800/80 text-slate-300 text-xs transition space-y-0.5 group">
+                <div class="font-semibold text-slate-200 group-hover:text-purple-300">🎓 Academic & Engineering Rigor</div>
+                <div class="text-[10px] text-slate-400">B.Eng. Petroleum (1st Class / Upper Division Honors)</div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Direct Dispatch Box -->
+          <div class="pt-3 border-t border-slate-800 text-center">
+            <a href="https://x.com/0xtryhardx0" target="_blank" class="block w-full py-2 px-3 rounded-lg bg-[#14f195] hover:bg-[#12d683] text-black text-xs font-bold transition shadow">
+              DM @0xtryhardx0 on X ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Conversational Agent Chat Window -->
+        <div class="flex-1 flex flex-col justify-between bg-[#070a12] relative">
+          
+          <!-- Message Feed -->
+          <div id="chat-messages" class="p-4 md:p-6 space-y-4 overflow-y-auto max-h-[460px] custom-scroll flex-1">
+            
+            <!-- Agent Welcome -->
+            <div class="flex gap-3 text-xs md:text-sm">
+              <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#14f195] to-[#00f2fe] text-black flex items-center justify-center font-bold text-xs shrink-0 shadow font-mono">
+                0x
+              </div>
+              <div class="p-4 rounded-2xl rounded-tl-none bg-slate-900 border border-slate-800 text-slate-200 space-y-2 max-w-xl">
+                <p class="font-medium text-slate-100 font-mono">
+                  [NODE ACTIVATED] whois @0xtryhardx0
+                </p>
+                <p class="text-slate-300 text-xs leading-relaxed">
+                  I represent <strong>@0xtryhardx0</strong>—Systems Architect and Web3 Rust Engineer. I have verified access to his technical portfolio: <strong>Solana Anchor smart contracts</strong> (SolPlay, SolWork), <strong>low-latency runtimes</strong> (&lt;18ms WebSocket latency), and <strong>industrial telemetry simulation engines</strong>.
+                </p>
+                <p class="text-xs text-[#14f195] font-mono">
+                  Tap any "Grill Me" prompt on the left, or ask your own question below!
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Question Input Field -->
+          <div class="p-3 md:p-4 bg-slate-900/80 border-t border-slate-800 flex items-center gap-2">
+            <input id="user-chat-input" type="text" placeholder="Ask anything about @0xtryhardx0's code, stack, or experience..." 
+              onkeydown="if(event.key === 'Enter') sendUserChat()"
+              class="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-xs md:text-sm text-slate-100 outline-none focus:border-[#14f195] transition placeholder:text-slate-600 font-sans" />
+            <button onclick="sendUserChat()" class="px-5 py-2.5 bg-[#14f195] hover:bg-[#12d683] text-black font-bold text-xs rounded-xl transition flex items-center gap-1.5 shadow">
+              <span>Send</span> <span>➔</span>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ======================================================== -->
+    <!-- MODE 2: CYBER-BENTO TELEMETRY UI                        -->
+    <!-- ======================================================== -->
+    <section id="section-bento" class="hidden space-y-6">
+      
+      <!-- Bento Profile Header -->
+      <div class="flex flex-wrap items-center justify-between gap-4 p-6 rounded-2xl bg-gradient-to-r from-slate-900 via-slate-900 to-slate-950 border border-slate-800 shadow-xl">
+        <div class="space-y-1.5">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-mono text-[#00f2fe] uppercase tracking-widest">SYSTEM ARCHITECT // DOSSIER</span>
+            <span class="text-slate-600">•</span>
+            <span class="text-xs font-mono text-[#14f195]">GLOBAL REMOTE</span>
+          </div>
+          <h2 class="text-2xl md:text-3xl font-black text-slate-100 tracking-tight font-mono">@0xtryhardx0</h2>
+          <p class="text-xs md:text-sm text-slate-400 max-w-2xl leading-relaxed">
+            Rust smart contracts on Solana, distributed concurrency engines, and computational physics. 
+            Combines rigorous engineering fundamentals (B.Eng. Petroleum, First Class / Upper Division) with production systems.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap gap-2">
+          <a href="https://x.com/0xtryhardx0" target="_blank" class="px-4 py-2 rounded-xl bg-[#14f195] hover:bg-[#12d683] text-black text-xs font-bold transition shadow flex items-center gap-1.5">
+            <span>𝕏</span> Follow @0xtryhardx0
+          </a>
+          <a href="https://github.com/0xtryhardx0" target="_blank" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-mono border border-slate-700 transition flex items-center gap-1">
+            GitHub ↗
+          </a>
+        </div>
+      </div>
+
+      <!-- Bento Key Metric Cards -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 shadow space-y-1">
+          <div class="text-[11px] font-mono text-slate-400 uppercase">Settlement Finality</div>
+          <div class="text-2xl font-black text-[#14f195] font-mono">&lt; 400ms</div>
+          <p class="text-[11px] text-slate-400">Solana Anchor escrows with zero reentrancy risks</p>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 shadow space-y-1">
+          <div class="text-[11px] font-mono text-slate-400 uppercase">Quant Ingestion</div>
+          <div class="text-2xl font-black text-[#00f2fe] font-mono">&lt; 18ms</div>
+          <p class="text-[11px] text-slate-400">Sub-second WebSocket orderbook (Raydium / Pump.fun)</p>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 shadow space-y-1">
+          <div class="text-[11px] font-mono text-slate-400 uppercase">Downhole Safety</div>
+          <div class="text-2xl font-black text-amber-400 font-mono">$250K+</div>
+          <p class="text-[11px] text-slate-400">Mitigated deep drilling rig downtime (Omesham AI)</p>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 shadow space-y-1">
+          <div class="text-[11px] font-mono text-slate-400 uppercase">Engineering Honors</div>
+          <div class="text-2xl font-black text-purple-400 font-mono">1st / Upper</div>
+          <p class="text-[11px] text-slate-400">B.Eng. Petroleum Systems Engineering</p>
+        </div>
+      </div>
+
+      <!-- Filterable Project Dossiers (Web3, Petroleum, General) -->
+      <div class="space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <h3 class="text-xs font-mono text-slate-400 uppercase tracking-wider">Targeted Track Portfolios</h3>
+          <div class="flex gap-1.5 text-xs font-mono">
+            <button onclick="filterProjects('all')" id="filter-all" class="px-2.5 py-1 rounded bg-[#14f195] text-black font-bold">ALL</button>
+            <button onclick="filterProjects('web3')" id="filter-web3" class="px-2.5 py-1 rounded bg-slate-800 text-slate-400 hover:text-white">WEB3 &amp; SOLANA</button>
+            <button onclick="filterProjects('physics')" id="filter-physics" class="px-2.5 py-1 rounded bg-slate-800 text-slate-400 hover:text-white">PETROLEUM &amp; PHYSICS</button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          
+          <!-- Project 1: SOLPLAY -->
+          <div class="project-card p-5 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-[#14f195]/40 transition space-y-3" data-cat="web3">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-[#14f195] border border-emerald-500/20 font-bold">SOLANA MAINNET / DEVNET</span>
+              <span class="text-xs text-slate-500 font-mono">Rust • Anchor</span>
+            </div>
+            <div>
+              <h4 class="text-lg font-bold text-slate-100">SOLPLAY — Decentralized Prediction Protocol</h4>
+              <p class="text-xs text-slate-400 mt-1">Non-custodial sports betting and copy-trading escrow programs locking collateral in Program-Derived Accounts (PDAs).</p>
+            </div>
+            <ul class="text-xs text-slate-300 space-y-1.5 border-t border-slate-800 pt-3">
+              <li class="flex items-start gap-2">
+                <span class="text-[#14f195] font-bold">▸</span>
+                <span>Sub-1.2s settlement oracle ingesting live ESPN and DraftKings state hashes.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-[#14f195] font-bold">▸</span>
+                <span>On-chain 2.0% creator commission split redistribution to syndicate leaders.</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Project 2: OMESHAM AI -->
+          <div class="project-card p-5 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-[#00f2fe]/40 transition space-y-3" data-cat="physics">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-500/10 text-[#00f2fe] border border-cyan-500/20 font-bold">TELEMETRY &amp; INDUSTRIAL AI</span>
+              <span class="text-xs text-slate-500 font-mono">Python • Rust • Physics</span>
+            </div>
+            <div>
+              <h4 class="text-lg font-bold text-slate-100">Omesham AI — Wellbore Dynamics Co-pilot</h4>
+              <p class="text-xs text-slate-400 mt-1">Digital twin engine modeling drillstring torsional vibrations and rock shear stresses using mechanical wave equations.</p>
+            </div>
+            <ul class="text-xs text-slate-300 space-y-1.5 border-t border-slate-800 pt-3">
+              <li class="flex items-start gap-2">
+                <span class="text-[#00f2fe] font-bold">▸</span>
+                <span>30-minute advance forecast for drill bit stalls, preventing $250k+ rig downtime.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-[#00f2fe] font-bold">▸</span>
+                <span>High-performance streaming parser (<code class="text-cyan-300">witsml_parser_rs</code>) for sub-ms WITSML logs.</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Project 3: SOLWORK -->
+          <div class="project-card p-5 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-amber-400/40 transition space-y-3" data-cat="web3">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20 font-bold">DECENTRALIZED WORKFORCE</span>
+              <span class="text-xs text-slate-500 font-mono">Anchor • USDC Escrows</span>
+            </div>
+            <div>
+              <h4 class="text-lg font-bold text-slate-100">SOLWORK — AI Microtasking Protocol</h4>
+              <p class="text-xs text-slate-400 mt-1">Trustless gig distribution and instant USDC milestone payouts bypassing cross-border banking restrictions.</p>
+            </div>
+            <ul class="text-xs text-slate-300 space-y-1.5 border-t border-slate-800 pt-3">
+              <li class="flex items-start gap-2">
+                <span class="text-amber-400 font-bold">▸</span>
+                <span>Client-side deterministic keypair derivation (PBKDF2/SHA-256) via email.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-amber-400 font-bold">▸</span>
+                <span>On-chain worker qualification in Rust cutting manual vetting costs by 80%.</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Project 4: PETRO SYSTEMS SIMULATION -->
+          <div class="project-card p-5 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-purple-400/40 transition space-y-3" data-cat="physics">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-500/10 text-purple-300 border border-purple-500/20 font-bold">INDUSTRIAL SIMULATION</span>
+              <span class="text-xs text-slate-500 font-mono">Aspen HYSYS • HAZOP</span>
+            </div>
+            <div>
+              <h4 class="text-lg font-bold text-slate-100">Petroleum Process &amp; Asset Valuation</h4>
+              <p class="text-xs text-slate-400 mt-1">Offshore process systems simulation, compressor network optimization, and satellite GIS hydrocarbon valuation.</p>
+            </div>
+            <ul class="text-xs text-slate-300 space-y-1.5 border-t border-slate-800 pt-3">
+              <li class="flex items-start gap-2">
+                <span class="text-purple-400 font-bold">▸</span>
+                <span>Optimized separation compressor throughput +4.2% within safety margins.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-purple-400 font-bold">▸</span>
+                <span>Identified 14 critical pressure bottlenecks during senior P&ID HAZOP reviews.</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ======================================================== -->
+    <!-- MODE 1: TERMINAL / WHOIS CONSOLE                         -->
+    <!-- ======================================================== -->
+    <section id="section-terminal" class="hidden space-y-4">
+      <div class="flex items-center justify-between text-xs font-mono text-slate-400 pb-1">
+        <span>MODE 1 // RECEPTIVE TTY v2.40</span>
+        <span class="text-[#14f195]">whois @0xtryhardx0</span>
+      </div>
+
+      <div class="rounded-2xl border border-slate-800 bg-[#05070c] shadow-2xl overflow-hidden font-mono text-xs md:text-sm relative">
+        <canvas id="matrix-bg" class="matrix-canvas"></canvas>
+
+        <!-- Top Bar -->
+        <div class="bg-slate-900/90 px-4 py-2.5 border-b border-slate-800 flex items-center justify-between relative z-10">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
+            <span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
+            <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
+            <span class="ml-2 text-xs text-slate-400">anon@0xtryhardx0-node: ~/whois</span>
+          </div>
+          <span class="text-[11px] text-slate-500">tokio-async • zsh</span>
+        </div>
+
+        <!-- Terminal Output -->
+        <div id="term-screen" class="p-4 md:p-6 space-y-3 min-h-[380px] max-h-[500px] overflow-y-auto custom-scroll text-slate-300 relative z-10">
+          <div class="text-slate-500">
+            [KERNEL INITIALIZED] @0xtryhardx0 Systems Runtime Loaded.<br>
+            Type <span class="text-[#14f195] font-bold">help</span> or click any command below:
+          </div>
+          <div id="term-history" class="space-y-3"></div>
+        </div>
+
+        <!-- Quick Tap Bar -->
+        <div class="bg-slate-950/90 px-4 py-2 border-t border-slate-800 flex flex-wrap gap-1.5 items-center text-xs relative z-10">
+          <span class="text-slate-500 mr-1 font-mono">Quick:</span>
+          <button onclick="execTerm('whois')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-[#14f195] transition">whois</button>
+          <button onclick="execTerm('skills')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-[#00f2fe] transition">skills</button>
+          <button onclick="execTerm('projects')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-emerald-400 transition">projects</button>
+          <button onclick="execTerm('education')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-purple-300 transition">education</button>
+          <button onclick="execTerm('matrix')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-green-400 transition font-mono">matrix</button>
+          <button onclick="execTerm('sudo hire')" class="px-2.5 py-1 rounded bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 font-bold transition">sudo hire</button>
+          <button onclick="execTerm('clear')" class="px-2 py-1 rounded bg-slate-800/60 text-slate-500 hover:text-white ml-auto">clear</button>
+        </div>
+
+        <!-- Command Input Form -->
+        <form onsubmit="handleTermSubmit(event)" class="bg-[#070a12] px-4 py-3 border-t border-slate-800 flex items-center gap-2 relative z-10">
+          <span class="text-[#14f195] font-bold">0xtryhardx0@node:~$</span>
+          <input id="term-input" type="text" placeholder="Type a command (whois, skills, projects, contact, sudo hire)..." 
+            class="flex-1 bg-transparent text-slate-100 outline-none border-none font-mono text-xs md:text-sm placeholder:text-slate-600" autocomplete="off" />
+          <button type="submit" class="text-xs bg-[#14f195] hover:bg-[#12d683] text-black font-bold px-3 py-1.5 rounded transition">RUN</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================== -->
+  <!-- FOOTER                                     -->
+  <!-- ========================================== -->
+  <footer class="border-t border-slate-800/80 py-4 px-4 text-center text-xs text-slate-500 font-mono">
+    <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div>whois @0xtryhardx0 • Systems &amp; Web3 Engineer • Pseudonymous</div>
+      <div class="flex items-center gap-3">
+        <a href="https://x.com/0xtryhardx0" target="_blank" class="text-[#14f195] hover:underline">𝕏 @0xtryhardx0</a>
+        <span>•</span>
+        <a href="https://github.com/0xtryhardx0" target="_blank" class="hover:text-slate-300">GitHub: 0xtryhardx0</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================== -->
+  <!-- JAVASCRIPT LOGIC                           -->
+  <!-- ========================================== -->
+  <script>
+    // 1. Mode Switching
+    function switchMode(mode) {
+      const modes = ['agent', 'bento', 'terminal'];
+      modes.forEach(m => {
+        const sec = document.getElementById('section-' + m);
+        const tab = document.getElementById('tab-' + m);
+        if (m === mode) {
+          sec.classList.remove('hidden');
+          if (m === 'agent') {
+            tab.className = "px-3 py-1.5 rounded-lg font-medium transition-all flex items-center gap-1.5 bg-gradient-to-r from-[#14f195] to-[#00f2fe] text-black font-bold shadow-md";
+          } else if (m === 'bento') {
+            tab.className = "px-3 py-1.5 rounded-lg font-medium transition-all flex items-center gap-1.5 bg-[#00f2fe] text-black font-bold shadow-md";
+          } else {
+            tab.className = "px-3 py-1.5 rounded-lg font-medium transition-all flex items-center gap-1.5 bg-[#14f195] text-black font-bold shadow-md font-mono";
+            initMatrix();
+          }
+        } else {
+          sec.classList.add('hidden');
+          tab.className = "px-3 py-1.5 rounded-lg font-medium transition-all flex items-center gap-1.5 text-slate-400 hover:text-slate-200" + (m === 'terminal' ? ' font-mono' : '');
+        }
+      });
+    }
+
+    // 2. Bento Project Filtering
+    function filterProjects(cat) {
+      const cards = document.querySelectorAll('.project-card');
+      const btns = ['all', 'web3', 'physics'];
+      btns.forEach(b => {
+        const btn = document.getElementById('filter-' + b);
+        if (b === cat) {
+          btn.className = "px-2.5 py-1 rounded bg-[#14f195] text-black font-bold";
+        } else {
+          btn.className = "px-2.5 py-1 rounded bg-slate-800 text-slate-400 hover:text-white";
+        }
+      });
+
+      cards.forEach(card => {
+        if (cat === 'all' || card.getAttribute('data-cat') === cat) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    // 3. Agent Conversational Engine
+    const agentKnowledge = {
+      reentrancy: `<strong>🛡️ SolPlay Security Architecture:</strong><br>
+      @0xtryhardx0 engineered SolPlay's non-custodial betting escrow in <strong>Rust (Anchor)</strong> using strict Program Derived Accounts (PDAs) with zero reentrancy risks.<br>
+      • Collateral remains in isolated user PDAs until settlement.<br>
+      • Oracle consensus checks ESPN and DraftKings feeds with SHA-256 state proofs.<br>
+      • Settlements resolve deterministically in &lt;1.2 seconds, with an automated 2.0% creator commission split.`,
+
+      physics: `<strong>🛢️ Subsurface Physics ➔ Systems Engineering:</strong><br>
+      @0xtryhardx0 holds a <strong>B.Eng. in Petroleum Systems Engineering (First Class / Upper Division Honors)</strong>.<br>
+      In <em>Omesham AI</em>, he translated mechanical wave equations into high-performance Python and Rust (<code class="text-cyan-300">witsml_parser_rs</code>) to simulate drillstring torsional vibration and rock stress dynamics.<br>
+      • Early-warning model forecasts drill bit stalls 30 minutes in advance.<br>
+      • Mitigated $250,000+ in potential Non-Productive Time (NPT) per deep drilling campaign.`,
+
+      solwork: `<strong>⚡ SOLWORK Microtasking Protocol:</strong><br>
+      Built on Solana to bypass international banking rail bottlenecks for global talent.<br>
+      • <strong>PBKDF2/SHA-256 Keypair Derivation:</strong> Onboards workers via standard email login while generating non-custodial Solana keys on client device.<br>
+      • <strong>On-Chain Worker Tiering:</strong> Smart contract enforces skill credentials before unlocking high-value annotation batches, cutting manual verification costs by 80%.`,
+
+      education: `<strong>🎓 Academic & Engineering Rigor:</strong><br>
+      • <strong>Degree:</strong> Bachelor of Engineering (B.Eng.), Petroleum Systems Engineering<br>
+      • <strong>Honors:</strong> First Class / Upper Division (Top Tier Academic Classification)<br>
+      • <strong>Technical Focus:</strong> Finite difference methods, wave propagation dynamics, Aspen HYSYS, and real-time SCADA/DAS telemetry.`,
+
+      hire: `<strong>🚀 Priority Dispatch:</strong><br>
+      @0xtryhardx0 is open for high-throughput Systems Engineer, Solana Core / Anchor Developer, and Distributed Computing roles.<br>
+      • <strong>X / Twitter:</strong> <a href="https://x.com/0xtryhardx0" target="_blank" class="text-[#14f195] underline">@0xtryhardx0</a><br>
+      • <strong>GitHub:</strong> <a href="https://github.com/0xtryhardx0" target="_blank" class="text-[#00f2fe] underline">github.com/0xtryhardx0</a>`
+    };
+
+    function askPreset(promptText) {
+      const input = document.getElementById('user-chat-input');
+      input.value = promptText;
+      sendUserChat();
+    }
+
+    function sendUserChat() {
+      const input = document.getElementById('user-chat-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const container = document.getElementById('chat-messages');
+      const userDiv = document.createElement('div');
+      userDiv.className = 'flex justify-end gap-2 text-xs md:text-sm';
+      userDiv.innerHTML = `
+        <div class="p-3.5 rounded-2xl rounded-tr-none bg-[#14f195]/20 text-[#14f195] border border-[#14f195]/30 max-w-lg">
+          ${text}
+        </div>
+      `;
+      container.appendChild(userDiv);
+      input.value = '';
+      container.scrollTop = container.scrollHeight;
+
+      const lower = text.toLowerCase();
+      let response = `@0xtryhardx0 is a Systems Architect and Web3 Rust engineer specializing in Solana Anchor smart contracts, high-throughput data pipelines (&lt;18ms latency), and industrial simulation. DM on X at <a href="https://x.com/0xtryhardx0" target="_blank" class="text-[#14f195] underline">@0xtryhardx0</a>.`;
+
+      if (lower.includes('reentrancy') || lower.includes('solplay') || lower.includes('security') || lower.includes('anchor')) {
+        response = agentKnowledge.reentrancy;
+      } else if (lower.includes('physics') || lower.includes('petroleum') || lower.includes('omesham') || lower.includes('wave')) {
+        response = agentKnowledge.physics;
+      } else if (lower.includes('solwork') || lower.includes('microtask') || lower.includes('global') || lower.includes('payroll')) {
+        response = agentKnowledge.solwork;
+      } else if (lower.includes('education') || lower.includes('degree') || lower.includes('grade') || lower.includes('academic')) {
+        response = agentKnowledge.education;
+      } else if (lower.includes('hire') || lower.includes('contact') || lower.includes('interview') || lower.includes('dm')) {
+        response = agentKnowledge.hire;
+      }
+
+      setTimeout(() => {
+        const agentDiv = document.createElement('div');
+        agentDiv.className = 'flex gap-3 text-xs md:text-sm';
+        agentDiv.innerHTML = `
+          <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#14f195] to-[#00f2fe] text-black flex items-center justify-center font-bold text-xs shrink-0 shadow font-mono">
+            0x
+          </div>
+          <div class="p-4 rounded-2xl rounded-tl-none bg-slate-900 border border-slate-800 text-slate-200 space-y-2 max-w-xl">
+            <p class="leading-relaxed text-xs md:text-sm">${response}</p>
+            <div class="pt-2 flex flex-wrap gap-2 text-[11px] font-mono border-t border-slate-800/80">
+              <a href="https://x.com/0xtryhardx0" target="_blank" class="text-[#14f195] hover:underline">𝕏 DM @0xtryhardx0</a>
+              <span class="text-slate-600">•</span>
+              <a href="https://github.com/0xtryhardx0" target="_blank" class="text-[#00f2fe] hover:underline">💻 GitHub</a>
+            </div>
+          </div>
+        `;
+        container.appendChild(agentDiv);
+        container.scrollTop = container.scrollHeight;
+      }, 350);
+    }
+
+    // 4. Terminal Commands
+    const termResponses = {
+      'help': `Available Commands:
+  • <span class="text-[#14f195]">whois</span>         : Identity & executive summary of @0xtryhardx0
+  • <span class="text-[#00f2fe]">skills</span>        : Full technical matrix (Rust, Solana, Python, Physics)
+  • <span class="text-emerald-400">projects</span>      : Flagship deployments (SolPlay, Omesham, SolWork)
+  • <span class="text-purple-300">education</span>     : Academic rigor (B.Eng. Petroleum, First Class/Upper)
+  • <span class="text-green-400">matrix</span>        : Toggle Matrix digital rain animation
+  • <span class="text-amber-300">sudo hire</span>     : Direct hiring & contract dispatch
+  • <span class="text-slate-400">clear</span>         : Reset screen`,
+
+      'whois': `<span class="text-[#14f195] font-bold">whois @0xtryhardx0:</span>
+Systems Architect & Web3 Engineer specializing in low-latency distributed runtimes, high-throughput Rust smart contracts on Solana, and physics-informed computational engines. Holds a B.Eng. in Petroleum Systems Engineering (First Class / Upper Division Honors). Pseudonymous & global remote.`,
+
+      'skills': `<span class="text-[#00f2fe] font-bold">TECHNICAL MATRIX:</span>
+Languages:     Rust (Anchor, SBF, Tokio), Python (NumPy, SciPy), Go, C++, SQL
+Web3 Stack:    Solana Smart Contracts, Non-Custodial PDAs, PBKDF2/SHA-256 Keypairs, SPL Tokens
+Concurrency:   WebSocket Orderbook Ingestion (<18ms), Multi-Agent Runtimes, AST Lexer/Parser
+Engineering:   Mechanical Wave Equations, Finite Difference, Aspen HYSYS, HAZOP/HAZID Reviews`,
+
+      'projects': `<span class="text-emerald-400 font-bold">FLAGSHIP CODEBASES:</span>
+1. <span class="text-white font-bold">SOLPLAY:</span> Rust Anchor sports prediction escrow & oracle consensus (<1.2s settlement).
+2. <span class="text-white font-bold">OMESHAM AI:</span> Wellbore drillstring dynamics; mitigated $250k+ non-productive rig downtime.
+3. <span class="text-white font-bold">SOLWORK:</span> Decentralized microtasking protocol with deterministic client key derivation.
+4. <span class="text-white font-bold">AETHER:</span> Sub-18ms concurrent WebSocket routing across Raydium & Pump.fun.`,
+
+      'education': `<span class="text-purple-300 font-bold">ACADEMIC RIGOR:</span>
+Degree: Bachelor of Engineering (B.Eng.), Petroleum Systems Engineering
+Classification: First Class / Upper Division Honors
+Technical Focus: Wave propagation, drillstring vibration dynamics, process simulation.`,
+
+      'sudo hire': `<span class="text-amber-300 font-bold">⚡ [FAST-TRACK CANDIDATE ACCESS GRANTED]</span>
+Contact Dispatch:
+• X (Twitter): <a href="https://x.com/0xtryhardx0" target="_blank" class="text-[#14f195] underline">@0xtryhardx0</a>
+• GitHub: <a href="https://github.com/0xtryhardx0" target="_blank" class="text-[#00f2fe] underline">github.com/0xtryhardx0</a>
+• Status: Available for Solana Core, Rust systems, and distributed contracts.`
+    };
+
+    function execTerm(cmd) {
+      const clean = cmd.trim().toLowerCase();
+      const history = document.getElementById('term-history');
+      const screen = document.getElementById('term-screen');
+
+      if (clean === 'clear') {
+        history.innerHTML = '';
+        return;
+      }
+
+      if (clean === 'matrix') {
+        toggleMatrixEffect();
+      }
+
+      const userLine = document.createElement('div');
+      userLine.innerHTML = `<span class="text-[#14f195] font-bold">0xtryhardx0@node:~$</span> <span class="text-slate-100">${cmd}</span>`;
+      history.appendChild(userLine);
+
+      const respLine = document.createElement('div');
+      respLine.className = 'text-xs text-slate-300 pl-2 border-l border-slate-700 my-1 leading-relaxed';
+
+      if (termResponses[clean]) {
+        respLine.innerHTML = termResponses[clean];
+      } else {
+        respLine.innerHTML = `<span class="text-red-400">zsh: command not found: ${cmd}</span>. Type <span class="text-[#14f195]">help</span>.`;
+      }
+
+      history.appendChild(respLine);
+      screen.scrollTop = screen.scrollHeight;
+    }
+
+    function handleTermSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('term-input');
+      const val = input.value.trim();
+      if (!val) return;
+      execTerm(val);
+      input.value = '';
+    }
+
+    // 5. Matrix Rain
+    let matrixInterval = null;
+
+    function initMatrix() {
+      const canvas = document.getElementById('matrix-bg');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      canvas.width = canvas.parentElement.offsetWidth;
+      canvas.height = canvas.parentElement.offsetHeight;
+
+      const letters = '01TRYHARDX0SOLANARUSTTOKENANCHORWAVE10';
+      const fontSize = 13;
+      const columns = Math.floor(canvas.width / fontSize);
+      const drops = Array(columns).fill(1);
+
+      function draw() {
+        ctx.fillStyle = 'rgba(7, 10, 18, 0.08)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#14f195';
+        ctx.font = fontSize + 'px monospace';
+
+        for (let i = 0; i < drops.length; i++) {
+          const text = letters.charAt(Math.floor(Math.random() * letters.length));
+          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
+          }
+          drops[i]++;
+        }
+      }
+
+      if (matrixInterval) clearInterval(matrixInterval);
+      matrixInterval = setInterval(draw, 40);
+    }
+
+    function toggleMatrixEffect() {
+      const canvas = document.getElementById('matrix-bg');
+      if (canvas.style.display === 'none') {
+        canvas.style.display = 'block';
+        initMatrix();
+      } else {
+        canvas.style.display = 'none';
+        if (matrixInterval) clearInterval(matrixInterval);
+      }
+    }
+  </script>
+</body>
+</html>
